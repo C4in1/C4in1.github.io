@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html 
+	lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		
+<link rel="stylesheet" href="/css/layout.css">
+
+		
+		<title> grid-drag自定义布局制作 -  C4iN&#39;s Caprice</title>
+		<!-- <link rel="stylesheet" href="https://unpkg.com/mdui@1.0.2/dist/css/mdui.min.css" /> -->
+		<!-- <script src="https://unpkg.com/mdui@1.0.2/dist/js/mdui.min.js"></script> -->
+		
+<link rel="stylesheet" href="/lib/mdui/mdui.min.css">
+
+		
+<script src="/lib/mdui/mdui.min.js"></script>
+
+		<!-- lazyload -->
+		
+<script src="/lib/lazysizes.js"></script>
+
+		<!-- smooth-scrolling -->
+		
+<script src="/lib/smooth-scrolling.js"></script>
+
+		<!-- highlight -->
+		
+<link rel="stylesheet" href="/lib/highlight/atom-one-dark.min.css">
+
+		
+<script src="/lib/highlight/highlight.min.js"></script>
+
+		<!-- 预置 kiraicon -->
+		
+<link rel="stylesheet" href="/lib/iconfont/iconfont.css">
+
+		
+		<link
+			rel="shortcut icon"
+			href="https://pic.imgdb.cn/item/6693875ad9c307b7e98b4288.gif"
+			type="image/gif"
+		/>
+		
+<link rel="stylesheet" href="/deps/css/APlayer.min.css">
+
+		
+		
+<script src="/deps/js/APlayer.min.js"></script>
+<script src="/deps/js/Meting.min.js"></script>
+
+	<meta name="generator" content="Hexo 6.3.0"></head>
+
+	<body>
+		<div
+			class="kira-background"
+			style="background-image: url('https://pic.imgdb.cn/item/66b458ffd9c307b7e9aadb03.png')"
+		></div>
+		<div class="kira-header">
+    <a
+        class="kira-drawer-button mdui-ripple"
+        title="导航栏"
+        onclick="document.querySelector('.kira-sidebar-modal').classList.add('show');document.querySelector('.kira-sidebar#sidebar').classList.add('show');"
+    >
+        <i class="kirafont icon-menu"></i>
+    </a>
+    <a href="/" title="C4iN&#39;s Caprice">
+        <img
+			src="https://pic.imgdb.cn/item/66b45933d9c307b7e9ab0715.png"
+			alt="破酥 | C4iN"
+		/>
+    </a>
+</div>
+		<div class="kira-body">
+			<div class="kira-sidebar" id="sidebar">
+	<div class="kira-avatar mdui-ripple">
+		<a target="_blank" rel="noopener" href="https://pic.imgdb.cn/item/66b45933d9c307b7e9ab0715.png" title="破酥 | C4iN">
+			<img
+				src="https://pic.imgdb.cn/item/66b45933d9c307b7e9ab0715.png"
+				alt="破酥 | C4iN"
+			/>
+		</a>
+	</div>
+	<div class="kira-count">
+		<div><span>文章</span>5</div>
+		<div><span>标签</span>7</div>
+		<div><span>分类</span>4</div>
+	</div>
+	<div class="kira-list">
+		
+		<a
+			class="kira-list-item mdui-ripple false"
+			href="/"
+			title="回到首页"
+		>
+			<i
+				class="kirafont
+					
+						icon-home
+					"
+			></i>
+			<div class="kira-list-item-content">
+				回到首页
+			</div>
+		</a>
+		
+		<a
+			class="kira-list-item mdui-ripple false"
+			href="/archive"
+			title="文章归档"
+		>
+			<i
+				class="kirafont
+					
+						icon-container
+					"
+			></i>
+			<div class="kira-list-item-content">
+				文章归档
+			</div>
+		</a>
+		
+		<a
+			class="kira-list-item mdui-ripple false"
+			href="/about"
+			title="关于本人"
+		>
+			<i
+				class="kirafont
+					
+						icon-user
+					"
+			></i>
+			<div class="kira-list-item-content">
+				关于本人
+			</div>
+		</a>
+		
+		<a
+			class="kira-list-item mdui-ripple false"
+			href="/friends"
+			title="我的朋友"
+		>
+			<i
+				class="kirafont
+					
+						icon-team
+					"
+			></i>
+			<div class="kira-list-item-content">
+				我的朋友
+			</div>
+		</a>
+		
+	</div>
+	<aside id="kira-sidebar">
+		
+			<div class="kira-widget-wrap">
+	<div class="kira-widget kira-social">
+		
+			<a
+				class="mdui-ripple"
+				href="tencent://AddContact/?fromId=45&fromSubId=1&subcmd=all&uin=2405544030&website=www.oicqzone.com"
+				target="_blank"
+				mdui-tooltip="{content: 'QQ'}"
+				style="color: rgb(49, 174, 255); background-color: rgba(49, 174, 255, .1);"
+			>
+				<i
+					class="kirafont
+					
+						icon-QQ
+					"
+				></i>
+			</a>
+		
+			<a
+				class="mdui-ripple"
+				href="https://github.com/C4in1/"
+				target="_blank"
+				mdui-tooltip="{content: 'GitHub'}"
+				style="color: rgb(25, 23, 23); background-color: rgba(25, 23, 23, .15);"
+			>
+				<i
+					class="kirafont
+					
+						icon-github
+					"
+				></i>
+			</a>
+		
+	</div>
+</div>
+
+		
+			
+  <div class="kira-widget-wrap">
+    <h3 class="kira-widget-title">分类</h3>
+    <div class="kira-widget">
+      <ul class="category-list">
+        
+        
+
+        
+          <li class="category-list-item">
+            <a class="category-list-link" href="/categories/TypeScript/">
+              TypeScript
+            </a>
+            <span class="category-list-count">1</span>
+          </li>
+        
+          <li class="category-list-item">
+            <a class="category-list-link" href="/categories/project/">
+              project
+            </a>
+            <span class="category-list-count">1</span>
+          </li>
+        
+          <li class="category-list-item">
+            <a class="category-list-link" href="/categories/vitepress/">
+              vitepress
+            </a>
+            <span class="category-list-count">2</span>
+          </li>
+        
+          <li class="category-list-item">
+            <a class="category-list-link" href="/categories/vue3/">
+              vue3
+            </a>
+            <span class="category-list-count">1</span>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+		
+			
+	<div class="kira-widget-wrap">
+		<div id="randomtagcloud" class="kira-widget tagcloud kira-rainbow">
+			<a href="/tags/ES6/" style="font-size: 10px;">ES6</a> <a href="/tags/TypeScript/" style="font-size: 20px;">TypeScript</a> <a href="/tags/Vitepress/" style="font-size: 13.33px;">Vitepress</a> <a href="/tags/theme-censored/" style="font-size: 13.33px;">theme-censored</a> <a href="/tags/vue3/" style="font-size: 16.67px;">vue3</a> <a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 20px;">前端</a> <a href="/tags/%E7%97%9B%E8%8B%A6%E7%9A%84%E9%85%8D%E7%BD%AE%E9%97%AE%E9%A2%98/" style="font-size: 13.33px;">痛苦的配置问题</a>
+		</div>
+		
+	</div>
+
+
+		
+			
+	<div class="kira-widget-wrap">
+		<h3 class="kira-widget-title">
+			Archive
+		</h3>
+		<div class="kira-widget">
+			<ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/">2024</a><span class="archive-list-count">5</span></li></ul>
+		</div>
+	</div>
+
+
+		
+	</aside>
+	<div class="kira-copyright">
+		&copy; 2024
+		<a href="/">破酥 | C4iN</a>
+		Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> &
+		<a href="https://github.com/ch1ny/kira-hexo/" target="_blank">Kira-Hexo</a>
+		<br />
+		
+		
+	</div>
+</div>
+<div
+	class="kira-sidebar-modal"
+	id="sidebar-modal"
+	onclick="(function(self) {
+		self.classList.remove('show');
+		document.querySelector('.kira-sidebar.show#sidebar').classList.remove('show');
+	})(this)"
+></div>
+			<div class="kira-content">
+				<div id="kira-top-header"></div>
+				<div class="kira-main-content">
+					
+<link rel="stylesheet" href="/css/kira-image.css">
+
+
+<script src="/js/kira-image.js"></script>
+
+<div class="kira-image">
+    <div class="kira-image-modal">
+        <div class="kira-image-header">
+            <div class="kira-image-counter"></div>
+            <div class="kira-image-title"></div>
+            <div class="kira-image-operation">
+                <div class="kira-image-operation-button" id="kira-image-operation-button-zoom">
+                    <i class="kirafont icon-zoom-in"></i>
+                </div>
+                <div class="kira-image-operation-button" id="kira-image-operation-button-close">
+                    <i class="kirafont icon-close"></i>
+                </div>
+            </div>
+        </div>
+        <div class="kira-image-container">
+            <div class="kira-image-prev-button-panel">
+                <div class="kira-image-exchange-button">
+                    <i class="kirafont icon-left"></i>
+                </div>
+            </div>
+            <div class="kira-image-list">
+                <div class="kira-image-prev">
+                    <img />
+                </div>
+                <div class="kira-image-now">
+                    <img />
+                </div>
+                <div class="kira-image-next">
+                    <img />
+                </div>
+            </div>
+            <div class="kira-image-next-button-panel">
+                <div class="kira-image-exchange-button">
+                    <i class="kirafont icon-right"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+	
+<link rel="stylesheet" href="/css/kira-code-copy.css">
+
+	
+<script src="/js/kira-code-copy.js"></script>
+
+
+<div class="kira-post">
+	<article>
+		
+		<div class="kira-post-cover">
+			<img
+				data-src="https://pic.imgdb.cn/item/66b356f1d9c307b7e9117788.png"
+				data-sizes="auto"
+				alt="grid-drag自定义布局制作"
+				class="lazyload kira-post-cover-image disabled-kira-image"
+			/>
+			<h1>grid-drag自定义布局制作</h1>
+		</div>
+		
+		<div class="kira-post-meta kira-rainbow" style="margin:10px 0!important;">
+			<a><i class="kirafont icon-calendar-fill"></i>2024年08月07日</a>
+			<a><i class="kirafont icon-edit-fill"></i>2.5k 字</a>
+			<a><i class="kirafont icon-time-circle-fill"></i>大概 12 分钟</a>
+		</div>
+		<p>之前看大佬的博客（<a target="_blank" rel="noopener" href="https://www.imalun.com/gird_layout/">白云苍狗的小站-手撸 Grid 拖拽布局</a>）看到的，想着还挺有意思，试着学一下，写一个随想页面🥰</p>
+<blockquote>
+<p>源码：<a target="_blank" rel="noopener" href="https://github.com/CainHappyfish/grid-drag">CainHappyfish&#x2F;grid-drag (github.com)</a></p>
+</blockquote>
+<span id="more"></span>
+
+<h1><span id="拖曳api">拖曳API</span></h1><p>拖拽中主要使用到的事件如下</p>
+<ul>
+<li>被拖拽元素事件：</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>事件</th>
+<th>触发时刻</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>dragstart</td>
+<td>当用户开始拖拽一个元素或选中的文本时触发。</td>
+</tr>
+<tr>
+<td>drag</td>
+<td>当拖拽元素或选中的文本时触发。</td>
+</tr>
+<tr>
+<td>dragend</td>
+<td>当拖拽操作结束时触发</td>
+</tr>
+</tbody></table>
+<ul>
+<li>放置容器事件：</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>事件</th>
+<th>触发时刻</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>dragenter</td>
+<td>当拖拽元素或选中的文本到一个可释放目标时触发。</td>
+</tr>
+<tr>
+<td>dragleave</td>
+<td>当拖拽元素或选中的文本离开一个可释放目标时触发。</td>
+</tr>
+<tr>
+<td>dragover</td>
+<td>当元素或选中的文本被拖到一个可释放目标上时触发。</td>
+</tr>
+<tr>
+<td>drop</td>
+<td>当元素或选中的文本在可释放目标上被释放时触发。</td>
+</tr>
+</tbody></table>
+<p>让一个元素能够拖拽只需要给元素设置<code>draggable=”true”</code>即可拖拽，拖拽事件 API 提供了<code>DataTransfer</code>对象，可以用于设置拖拽数据信息，但是仅仅只能<code>drop</code>事件中获取到。因为我们需要在拖拽中就需要获取到拖拽信息，用来显示拖拽时样式，所以需要自己处理这些信息存储起来，以便读取。我们需要告诉浏览器当前区域是可以放置的，只需要在元素监听拖曳事件即可，然后通过<code>preventDefault</code>来阻止浏览器默认行为。可以在这三个事件中处理判断当前位置是否可以放置等等。</p>
+<h1><span id="网格布局生成">网格布局生成</span></h1><p>首先来制作网格布局，这里我们没有使用CSS的<code>display: grid</code><del>（其实是忘了）</del></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs vue">&lt;div class=&quot;drag-board&quot; id=&quot;board&quot; :key=&quot;boardKey&quot;&gt;<br>  &lt;div class=&quot;drag-row&quot; v-for=&quot;indexX in row&quot; :key=&quot;indexX&quot;&gt;<br>    &lt;CapDragGridItem v-for=&quot;indexY in column&quot; :key=&quot;indexY&quot;<br>                 :row=&quot;row&quot;<br>                 :column=&quot;column&quot;<br>                 :canvasX=&quot;CanvasWidth&quot;<br>                 :canvasY=&quot;CanvasHeight&quot;<br>                 @dragover=&quot;onDragOver&quot;<br>                 @drop=&quot;onDrop&quot;<br>    /&gt;<br>  &lt;/div&gt;<br>&lt;/div&gt;<br></code></pre></td></tr></table></figure>
+
+<p>这里我们可以根据用户输入的行列信息来生成表格，在组件挂载时，获取整个网格画布的大小，并存入变量中：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-keyword">const</span> <span class="hljs-title function_">handleSize</span> = (<span class="hljs-params"></span>) =&gt; &#123;<br>  <span class="hljs-keyword">const</span> board = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">getElementById</span>(<span class="hljs-string">&quot;board&quot;</span>)<br>  <span class="hljs-keyword">if</span> (board) &#123;<br>    <span class="hljs-title class_">CanvasWidth</span>.<span class="hljs-property">value</span> = board.<span class="hljs-property">offsetWidth</span> - <span class="hljs-number">40</span><br>    <span class="hljs-title class_">CanvasHeight</span>.<span class="hljs-property">value</span> = board.<span class="hljs-property">offsetHeight</span> - <span class="hljs-number">40</span><br>    boardKey.<span class="hljs-property">value</span>++ <span class="hljs-comment">// 增加 key 值，触发重新挂载</span><br>  &#125;<br>&#125;<br><br><span class="hljs-title function_">onMounted</span>(<span class="hljs-function">() =&gt;</span> &#123;<br>  <span class="hljs-title function_">handleSize</span>()<br>&#125;)<br></code></pre></td></tr></table></figure>
+
+<p>效果如下：</p>
+<p><img data-fancybox="gallery" data-sizes="auto" data-src="https://pic.imgdb.cn/item/66b45d60d9c307b7e9ae6b2f.png" alt="网格效果" class="lazyload"></p>
+<h1><span id="卡片制作-amp-拖曳事件处理">卡片制作 &amp; 拖曳事件处理</span></h1><p>我们根据画布信息来生成拖曳卡片，并处理拖曳事件。</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-keyword">const</span> props = defineProps&lt;&#123;<br>  <span class="hljs-attr">row</span>: <span class="hljs-built_in">number</span>,<br>  <span class="hljs-attr">column</span>: <span class="hljs-built_in">number</span>,<br>  <span class="hljs-attr">canvasX</span>: <span class="hljs-built_in">number</span>,<br>  <span class="hljs-attr">canvasY</span>: <span class="hljs-built_in">number</span>,<br>  <span class="hljs-attr">isDroppable</span>: <span class="hljs-built_in">boolean</span><br>&#125;&gt;()<br><br><span class="hljs-keyword">const</span> emit = defineEmits&lt;&#123;<br>  <span class="hljs-attr">size</span>: [<span class="hljs-attr">width</span>: <span class="hljs-built_in">number</span>, <span class="hljs-attr">height</span>: <span class="hljs-built_in">number</span>, <span class="hljs-attr">figured</span>: <span class="hljs-built_in">boolean</span>];<br>  <span class="hljs-attr">position</span>: [<span class="hljs-attr">left</span>: <span class="hljs-built_in">string</span>, <span class="hljs-attr">top</span>: <span class="hljs-built_in">string</span>]<br>&#125;&gt;()<br></code></pre></td></tr></table></figure>
+
+<p>我们从父组件（也就是画布）获得行列信息和画布信息以及当前拖曳位置是否能够被放置，向父组件传递当前卡片的大小和位置。将卡片设置为<code>draggable=&quot;true&quot;</code>，效果如下：</p>
+<p><img data-fancybox="gallery" data-sizes="auto" data-src="https://pic.imgdb.cn/item/66b45d60d9c307b7e9ae6b41.png" alt="卡片效果" class="lazyload"></p>
+<h2><span id="拖曳事件处理">拖曳事件处理</span></h2><p>接下来我们着重介绍拖曳事件的处理。</p>
+<h3><span id="dragstart"><code>dragstart</code></span></h3><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-keyword">const</span> <span class="hljs-title function_">onDragStart</span> = (<span class="hljs-params"><span class="hljs-attr">event</span>: <span class="hljs-title class_">DragEvent</span></span>) =&gt; &#123;<br>  <span class="hljs-keyword">const</span> id = (event.<span class="hljs-property">target</span> <span class="hljs-keyword">as</span> <span class="hljs-title class_">HTMLElement</span>).<span class="hljs-property">id</span><br>  <span class="hljs-keyword">if</span> (event.<span class="hljs-property">dataTransfer</span>) &#123;<br><br>    event.<span class="hljs-property">dataTransfer</span>.<span class="hljs-title function_">setData</span>(<span class="hljs-string">&quot;dragging&quot;</span>, id)<br>    <span class="hljs-comment">// 需要延时，否则会出错</span><br>    <span class="hljs-built_in">setTimeout</span>(<span class="hljs-function">() =&gt;</span> &#123;<br>      <span class="hljs-title class_">BackGroundOpacity</span>.<span class="hljs-property">value</span> = <span class="hljs-number">0</span><br>      previewStyle.<span class="hljs-property">value</span> = <span class="hljs-string">&quot;translate(-99999px, -99999px)&quot;</span><br>    &#125;)<br>    <span class="hljs-title function_">emit</span>(<span class="hljs-string">&#x27;size&#x27;</span>, <span class="hljs-title class_">FinWidth</span>.<span class="hljs-property">value</span>, <span class="hljs-title class_">FinHeight</span>.<span class="hljs-property">value</span>, <span class="hljs-literal">true</span>);<br>    <span class="hljs-title function_">emit</span>(<span class="hljs-string">&#x27;position&#x27;</span>, <span class="hljs-title class_">PositionX</span>.<span class="hljs-property">value</span>, <span class="hljs-title class_">PositionY</span>.<span class="hljs-property">value</span>)<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>当鼠标点击可拖曳卡片时，就会触发<code>dragstart</code>事件。我们获取触发事件卡片的id，并存入<code>event.dataTransfer</code>中。<code>previewStyle.value = &quot;translate(-99999px, -99999px)&quot;</code>解决了卡片拖曳时<code>drop</code>位置被自身覆盖无法放置问题。这里延时设置卡片的透明度和位移是为了避免拖曳时鼠标处卡片预览消失以及拖曳失效。</p>
+<h3><span id="dragend"><code>dragend</code></span></h3><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-keyword">const</span> <span class="hljs-title function_">onDragEnd</span> = (<span class="hljs-params"></span>) =&gt; &#123;<br>  <span class="hljs-comment">// console.log(&quot;drag end&quot;)</span><br>  <span class="hljs-title class_">BackGroundColor</span>.<span class="hljs-property">value</span> = <span class="hljs-string">&quot;&quot;</span><br>  <span class="hljs-title class_">BackGroundOpacity</span>.<span class="hljs-property">value</span> = <span class="hljs-number">0.6</span><br>  <span class="hljs-title class_">BackGroundOpacity</span>.<span class="hljs-property">value</span> = <span class="hljs-number">0.6</span><br>  <span class="hljs-title class_">Border</span>.<span class="hljs-property">value</span> = <span class="hljs-string">&quot;&quot;</span><br>  <span class="hljs-keyword">if</span> (props.<span class="hljs-property">isDroppable</span>) &#123;<br>    <span class="hljs-title class_">DefaultPosition</span>.<span class="hljs-property">value</span> = <span class="hljs-string">&quot;&quot;</span><br>  &#125;<br>  previewStyle.<span class="hljs-property">value</span> = <span class="hljs-string">&quot;&quot;</span><br>  <span class="hljs-comment">// console.log(&quot;drag end&quot;)</span><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>拖曳结束时（鼠标触发开），注意这里不一定会触发<code>drop</code>，因为结束位置的元素不一定可放置或者不会响应<code>drop</code>事件。这里恢复卡片拖曳前的样式。</p>
+<h3><span id="dragover"><code>dragover</code></span></h3><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-keyword">const</span> <span class="hljs-title function_">onDragOver</span> = (<span class="hljs-params"><span class="hljs-attr">event</span>: <span class="hljs-title class_">DragEvent</span></span>) =&gt; &#123;<br>  event.<span class="hljs-title function_">preventDefault</span>();<br>  <span class="hljs-keyword">const</span> <span class="hljs-title class_">CardRight</span> = <span class="hljs-title function_">computed</span>(<span class="hljs-function">() =&gt;</span> (<span class="hljs-title class_">PreviewData</span>.<span class="hljs-property">value</span>.<span class="hljs-property">Left</span> + <span class="hljs-title class_">PreviewData</span>.<span class="hljs-property">value</span>.<span class="hljs-property">Width</span> - <span class="hljs-number">15</span>))<br>  <span class="hljs-keyword">const</span> <span class="hljs-title class_">CardBottom</span> = <span class="hljs-title function_">computed</span>(<span class="hljs-function">() =&gt;</span> (<span class="hljs-title class_">PreviewData</span>.<span class="hljs-property">value</span>.<span class="hljs-property">Top</span> + <span class="hljs-title class_">PreviewData</span>.<span class="hljs-property">value</span>.<span class="hljs-property">Height</span> - <span class="hljs-number">15</span>))<br>  <br>  previewStore.<span class="hljs-property">isPreviewed</span> = <span class="hljs-literal">false</span><br>  isDroppable.<span class="hljs-property">value</span> = !(<span class="hljs-title class_">CardRight</span>.<span class="hljs-property">value</span> &gt; <span class="hljs-title class_">CanvasWidth</span>.<span class="hljs-property">value</span> || <span class="hljs-title class_">CardBottom</span>.<span class="hljs-property">value</span> &gt; <span class="hljs-title class_">CanvasHeight</span>.<span class="hljs-property">value</span>);<br><br>  <span class="hljs-title class_">PreviewData</span>.<span class="hljs-property">value</span>.<span class="hljs-property">X</span> = ( (event.<span class="hljs-property">target</span> <span class="hljs-keyword">as</span> <span class="hljs-title class_">HTMLElement</span>).<span class="hljs-property">offsetLeft</span> - <span class="hljs-number">25</span> ) / <span class="hljs-title class_">ItemWidth</span>.<span class="hljs-property">value</span><br>  <span class="hljs-title class_">PreviewData</span>.<span class="hljs-property">value</span>.<span class="hljs-property">Y</span> = ( (event.<span class="hljs-property">target</span> <span class="hljs-keyword">as</span> <span class="hljs-title class_">HTMLElement</span>).<span class="hljs-property">offsetTop</span> - <span class="hljs-number">25</span> ) / <span class="hljs-title class_">ItemHeight</span>.<span class="hljs-property">value</span><br><br>  <span class="hljs-title class_">PreviewData</span>.<span class="hljs-property">value</span>.<span class="hljs-property">Left</span> = (event.<span class="hljs-property">target</span> <span class="hljs-keyword">as</span> <span class="hljs-title class_">HTMLElement</span>).<span class="hljs-property">offsetLeft</span><br>  <span class="hljs-title class_">PreviewData</span>.<span class="hljs-property">value</span>.<span class="hljs-property">Top</span> = (event.<span class="hljs-property">target</span> <span class="hljs-keyword">as</span> <span class="hljs-title class_">HTMLElement</span>).<span class="hljs-property">offsetTop</span><br><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>拖曳过程触发<code>dragover</code>事件。这里<code>event.preventDefault()</code>阻止默认事件允许当前拖曳元素被放置到监听元素。在拖曳过程中我们需要获取预览卡片信息，并根据该信息生成预览卡片，效果如下：</p>
+<p><img data-fancybox="gallery" data-sizes="auto" data-src="https://pic.imgdb.cn/item/66b45d60d9c307b7e9ae6b56.png" alt="拖曳预览效果" class="lazyload"></p>
+<p>同时我们还需要判断目标位置是否能够被放置，判断方法很简单，只需要计算卡片右侧相对画布左侧的距离是否大于画布大小即可，注意要减掉margin。</p>
+<p><img data-fancybox="gallery" data-sizes="auto" data-src="/grid-drag%E8%87%AA%E5%AE%9A%E4%B9%89%E5%B8%83%E5%B1%80%E5%88%B6%E4%BD%9C.assets/image-20240806153002382.png" alt="image-20240806153002382" class="lazyload"></p>
+<p>最后效果如下</p>
+<p><img data-fancybox="gallery" data-sizes="auto" data-src="https://pic.imgdb.cn/item/66b45d60d9c307b7e9ae6b1c.png" alt="不可放置效果" class="lazyload"></p>
+<h3><span id="ondrop"><code>ondrop</code></span></h3><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-keyword">const</span> <span class="hljs-title function_">onDrop</span> = (<span class="hljs-params"><span class="hljs-attr">event</span>: <span class="hljs-title class_">DragEvent</span></span>) =&gt; &#123;<br>  event.<span class="hljs-title function_">preventDefault</span>()<br>  previewStore.<span class="hljs-property">isPreviewed</span> = <span class="hljs-literal">true</span><br><br>  <span class="hljs-keyword">if</span> (event.<span class="hljs-property">dataTransfer</span>) &#123;<br>    <span class="hljs-keyword">const</span> id = event.<span class="hljs-property">dataTransfer</span>.<span class="hljs-title function_">getData</span>(<span class="hljs-string">&quot;dragging&quot;</span>)<br>    <span class="hljs-keyword">const</span> <span class="hljs-title class_">GridItem</span> = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">getElementById</span>(id)<br>    <span class="hljs-keyword">if</span> (<span class="hljs-title class_">GridItem</span> &amp;&amp; isDroppable.<span class="hljs-property">value</span>) &#123;<br>      (event.<span class="hljs-property">target</span> <span class="hljs-keyword">as</span> <span class="hljs-title class_">HTMLElement</span>).<span class="hljs-title function_">appendChild</span>(<span class="hljs-title class_">GridItem</span>);<br>    &#125; <span class="hljs-keyword">else</span> &#123;<br>      <span class="hljs-title class_">PreviewData</span>.<span class="hljs-property">value</span>.<span class="hljs-property">Left</span> = <span class="hljs-built_in">parseInt</span>(<span class="hljs-title class_">CardPosition</span>.<span class="hljs-property">value</span>.<span class="hljs-property">X</span>)<br>      <span class="hljs-title class_">PreviewData</span>.<span class="hljs-property">value</span>.<span class="hljs-property">Top</span> = <span class="hljs-built_in">parseInt</span>(<span class="hljs-title class_">CardPosition</span>.<span class="hljs-property">value</span>.<span class="hljs-property">Y</span>)<br>    &#125;<br><br>  &#125;<br><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>当拖曳结束且当前位置元素允许放置时，触发<code>drop</code>事件。我们从<code>data.Transfer</code>获取触发<code>dragstart</code>元素的id，将其添加到目标元素的子元素中。注意，如果当前位置不允许放置，则需要将预览位置设置为卡片拖曳前的位置。</p>
+<h2><span id="卡片缩放">卡片缩放</span></h2><p>当我们点击右下角缩放图标时，触发卡片缩放。卡片缩放有两种方式：</p>
+<ul>
+<li>通过<code>ResizeObserver API</code>监听，但是这个 API 还会监听到其他因数引起变动，比如窗口大小变动，导致元素变动等等。</li>
+<li>使用监听鼠标事件，但是这个会存在与拖放事件同时触发问题。</li>
+</ul>
+<p>这里我使用第二种方法实现缩放。</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-keyword">const</span> <span class="hljs-title class_">CurrentCard</span> = (event.<span class="hljs-property">currentTarget</span> <span class="hljs-keyword">as</span> <span class="hljs-title class_">HTMLElement</span>).<span class="hljs-property">parentElement</span><br><span class="hljs-keyword">const</span> <span class="hljs-title function_">mouseMoveHandler</span> = (<span class="hljs-params"><span class="hljs-attr">e</span>: <span class="hljs-title class_">MouseEvent</span></span>) =&gt; &#123;<br>    <span class="hljs-keyword">if</span> (<span class="hljs-title class_">CurrentCard</span>) &#123;<br>      <span class="hljs-title class_">ResizeWidth</span>.<span class="hljs-property">value</span> = e.<span class="hljs-property">pageX</span> - <span class="hljs-title class_">CurrentCard</span>.<span class="hljs-title function_">getBoundingClientRect</span>().<span class="hljs-property">x</span>;<br>      <span class="hljs-title class_">ResizeHeight</span>.<span class="hljs-property">value</span> = e.<span class="hljs-property">pageY</span> - (<span class="hljs-title class_">CurrentCard</span>.<span class="hljs-title function_">getBoundingClientRect</span>().<span class="hljs-property">y</span> + <span class="hljs-variable language_">window</span>.<span class="hljs-property">scrollY</span>);<br>      <span class="hljs-comment">// 这一大坨的if应该可以优化，但我懒</span><br>      <span class="hljs-comment">// 长宽超过最大值</span><br>      <span class="hljs-keyword">if</span> (<span class="hljs-title class_">ResizeWidth</span>.<span class="hljs-property">value</span> &gt; props.<span class="hljs-property">canvasX</span>) &#123;<br>        <span class="hljs-title class_">FinWidth</span>.<span class="hljs-property">value</span> = props.<span class="hljs-property">canvasX</span> - <span class="hljs-number">10</span><br>      &#125;<br>      <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (<span class="hljs-title class_">ResizeHeight</span>.<span class="hljs-property">value</span> &gt; props.<span class="hljs-property">canvasY</span>) &#123;<br>        <span class="hljs-title class_">FinHeight</span>.<span class="hljs-property">value</span> = props.<span class="hljs-property">canvasY</span> - <span class="hljs-number">10</span><br>      &#125;<br>      <span class="hljs-comment">// 缩放时超出容器</span><br>      <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (<span class="hljs-title class_">CurrentCard</span>.<span class="hljs-property">offsetLeft</span> + <span class="hljs-title class_">ResizeWidth</span>.<span class="hljs-property">value</span> - <span class="hljs-number">15</span>&gt; props.<span class="hljs-property">canvasX</span> ||<br>          <span class="hljs-title class_">CurrentCard</span>.<span class="hljs-property">offsetTop</span> + <span class="hljs-title class_">ResizeHeight</span>.<span class="hljs-property">value</span> - <span class="hljs-number">10</span>&gt; props.<span class="hljs-property">canvasY</span>) &#123;<br>          <span class="hljs-comment">// 什么也不干</span><br>      &#125;<br>      <span class="hljs-keyword">else</span> &#123;<br>        <span class="hljs-keyword">if</span> (<span class="hljs-title class_">ResizeWidth</span>.<span class="hljs-property">value</span> &gt; <span class="hljs-title class_">MinWidth</span>) &#123;<br>          resizeCol.<span class="hljs-property">value</span> = <span class="hljs-title class_">Math</span>.<span class="hljs-title function_">ceil</span>(<span class="hljs-title class_">ResizeWidth</span>.<span class="hljs-property">value</span> / (<span class="hljs-title class_">ItemWidth</span>.<span class="hljs-property">value</span> + <span class="hljs-number">10</span>))<br>          <span class="hljs-title class_">CurrentCard</span>.<span class="hljs-property">style</span>.<span class="hljs-property">width</span> = <span class="hljs-title class_">ResizeWidth</span>.<span class="hljs-property">value</span> + <span class="hljs-string">&#x27;px&#x27;</span>;<br>          <span class="hljs-title class_">FinWidth</span>.<span class="hljs-property">value</span> = resizeCol.<span class="hljs-property">value</span> * <span class="hljs-title class_">ItemWidth</span>.<span class="hljs-property">value</span> - <span class="hljs-number">10</span><br>        &#125; <span class="hljs-keyword">else</span> &#123;<br>          <span class="hljs-title class_">CurrentCard</span>.<span class="hljs-property">style</span>.<span class="hljs-property">width</span> = <span class="hljs-title class_">MinWidth</span> + <span class="hljs-string">&#x27;px&#x27;</span>;<br>          <span class="hljs-title class_">FinWidth</span>.<span class="hljs-property">value</span> = <span class="hljs-title class_">MinWidth</span><br>        &#125;<br><br>        <span class="hljs-keyword">if</span> (<span class="hljs-title class_">ResizeHeight</span>.<span class="hljs-property">value</span> &gt; <span class="hljs-title class_">MinHeight</span>) &#123;<br>          resizeRow.<span class="hljs-property">value</span> = <span class="hljs-title class_">Math</span>.<span class="hljs-title function_">ceil</span>(<span class="hljs-title class_">ResizeHeight</span>.<span class="hljs-property">value</span> / (<span class="hljs-title class_">ItemHeight</span>.<span class="hljs-property">value</span> + <span class="hljs-number">10</span>))<br>          <span class="hljs-title class_">CurrentCard</span>.<span class="hljs-property">style</span>.<span class="hljs-property">height</span> = <span class="hljs-title class_">ResizeHeight</span>.<span class="hljs-property">value</span> + <span class="hljs-string">&#x27;px&#x27;</span>;<br>          <span class="hljs-title class_">FinHeight</span>.<span class="hljs-property">value</span> = resizeRow.<span class="hljs-property">value</span> * <span class="hljs-title class_">ItemHeight</span>.<span class="hljs-property">value</span> - <span class="hljs-number">10</span><br>        &#125; <span class="hljs-keyword">else</span> &#123;<br>          <span class="hljs-title class_">CurrentCard</span>.<span class="hljs-property">style</span>.<span class="hljs-property">height</span> = <span class="hljs-title class_">MinHeight</span> + <span class="hljs-string">&#x27;px&#x27;</span>;<br>          <span class="hljs-title class_">FinHeight</span>.<span class="hljs-property">value</span> = <span class="hljs-title class_">MinHeight</span>;<br>        &#125;<br><br>      &#125;<br><br>      <span class="hljs-title function_">emit</span>(<span class="hljs-string">&#x27;size&#x27;</span>, <span class="hljs-title class_">FinWidth</span>.<span class="hljs-property">value</span>, <span class="hljs-title class_">FinHeight</span>.<span class="hljs-property">value</span>, <span class="hljs-literal">true</span>);<br>      previewStore.<span class="hljs-property">isPreviewed</span> = <span class="hljs-literal">false</span><br><br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>我们用当前鼠标相对画布的位置减去卡片左上角的位置来获取缩放后的卡片大小：</p>
+<p><img data-fancybox="gallery" data-sizes="auto" data-src="https://pic.imgdb.cn/item/66b45dafd9c307b7e9aea823.png" alt="卡片缩放计算" class="lazyload"></p>
+<p>同样的，在缩放的同时我们也要检测是否超出画布，并使缩放后的大小不超过画布大小，也不小于网格大小。</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-keyword">const</span> <span class="hljs-title function_">mouseUpHandler</span> = (<span class="hljs-params"></span>) =&gt; &#123;<br>    <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">removeEventListener</span>(<span class="hljs-string">&#x27;mousemove&#x27;</span>, mouseMoveHandler);<br>    <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">removeEventListener</span>(<span class="hljs-string">&#x27;mouseup&#x27;</span>, mouseUpHandler);<br>    <span class="hljs-keyword">if</span> (<span class="hljs-title class_">CurrentCard</span>) &#123;<br><br>      <span class="hljs-title class_">CurrentCard</span>.<span class="hljs-property">style</span>.<span class="hljs-property">width</span> = <span class="hljs-title class_">FinWidth</span>.<span class="hljs-property">value</span> + <span class="hljs-string">&#x27;px&#x27;</span><br>      <span class="hljs-title class_">CurrentCard</span>.<span class="hljs-property">style</span>.<span class="hljs-property">height</span> = <span class="hljs-title class_">FinHeight</span>.<span class="hljs-property">value</span> + <span class="hljs-string">&#x27;px&#x27;</span><br><br>    &#125;<br>    <span class="hljs-title function_">emit</span>(<span class="hljs-string">&#x27;size&#x27;</span>, <span class="hljs-title class_">FinWidth</span>.<span class="hljs-property">value</span>, <span class="hljs-title class_">FinHeight</span>.<span class="hljs-property">value</span>, <span class="hljs-literal">false</span>);<br>    previewStore.<span class="hljs-property">isPreviewed</span> = <span class="hljs-literal">true</span><br><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>当松开鼠标时，将卡片大小设置为缩放后的大小，并将数据传给父组件。</p>
+<h1><span id="多个卡片">多个卡片</span></h1><p>现在我们基本实现了单个卡片的拖曳和缩放功能，接下来实现多个卡片对应的功能。</p>
+<p>首先我们需要给每一个卡片一个对应的id，以便我们区分。我们创建<code>drag.ts</code>文件定义数据结构：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-keyword">export</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">ItemData</span> &#123;<br>  <span class="hljs-attr">id</span>: <span class="hljs-built_in">string</span><br>  <span class="hljs-comment">/**</span><br><span class="hljs-comment">   * 卡片位置</span><br><span class="hljs-comment">   * */</span><br>  <span class="hljs-attr">position</span>: &#123;<br>    <span class="hljs-attr">X</span>: <span class="hljs-built_in">number</span>,<br>    <span class="hljs-attr">Y</span>: <span class="hljs-built_in">number</span>,<br>  &#125;<br>  <span class="hljs-comment">/**</span><br><span class="hljs-comment">   * 卡片大小</span><br><span class="hljs-comment">   * */</span><br>  <span class="hljs-attr">size</span>: &#123;<br>    <span class="hljs-attr">width</span>: <span class="hljs-built_in">number</span>,<br>    <span class="hljs-attr">height</span>: <span class="hljs-built_in">number</span>,<br>  &#125;<br>  <span class="hljs-comment">/**</span><br><span class="hljs-comment">   * 卡片内容</span><br><span class="hljs-comment">   * */</span><br>  <span class="hljs-attr">content</span>: &#123;<br>    <span class="hljs-attr">title</span>: <span class="hljs-built_in">string</span>,<br>    <span class="hljs-attr">text</span>: <span class="hljs-built_in">string</span>,<br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 链接信息</span><br><span class="hljs-comment">     * */</span><br>    <span class="hljs-attr">url</span>: <span class="hljs-built_in">string</span>,<br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 图片url</span><br><span class="hljs-comment">     * */</span><br>    <span class="hljs-title class_">IMGurl</span>: <span class="hljs-built_in">string</span><br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>定义<code>DragCards</code>对象：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">class DragCards &lt;T extends ItemData&gt;  &#123;<br>  cards = new Map&lt;string, ItemData&gt;();<br><br>  set(key: string, data: T): void &#123;<br>    this.cards.set(key, data);<br>  &#125;<br><br>  remove(key: string): void &#123;<br>    this.cards.delete(key);<br>  &#125;<br><br>  get(key: string): ItemData | undefined &#123;<br>    return this.cards.get(key)<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>然后使用<code>Map</code>来存数据：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">export const dragCards = new DragCards&lt;ItemData&gt;()<br></code></pre></td></tr></table></figure>
+
+<p>使用<code>v-for</code>即可，效果如下：</p>
+<p><img data-fancybox="gallery" data-sizes="auto" data-src="https://pic.imgdb.cn/item/66b45db0d9c307b7e9aea839.png" alt="多卡片效果" class="lazyload"></p>
+<h2><span id="卡片碰撞">卡片碰撞</span></h2><h3><span id="拖曳碰撞">拖曳碰撞</span></h3><p>拖曳碰撞比较简单，只要判断鼠标位置元素是不是也是卡片就行了。</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs typescript">isDroppable.<span class="hljs-property">value</span> = !(<span class="hljs-title class_">CardRight</span>.<span class="hljs-property">value</span> &gt; <span class="hljs-title class_">CanvasWidth</span>.<span class="hljs-property">value</span> ||<br>  <span class="hljs-title class_">CardBottom</span>.<span class="hljs-property">value</span> &gt; <span class="hljs-title class_">CanvasHeight</span>.<span class="hljs-property">value</span> ||<br>  <span class="hljs-title class_">CurrentElement</span>.<span class="hljs-property">classList</span>.<span class="hljs-title function_">contains</span>(<span class="hljs-string">&#x27;item-container&#x27;</span>) <span class="hljs-comment">// 判断碰撞</span><br>)<br></code></pre></td></tr></table></figure>
+
+<p>当然我这里其实有点不友好，拖曳放置的判断鼠标位置而不是根据预览卡片的位置来放置的。比起单个卡片，我们需要修改预览卡片的位置信息：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-keyword">const</span> <span class="hljs-attr">board</span>: <span class="hljs-title class_">HTMLElement</span> | <span class="hljs-literal">null</span> = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">querySelector</span>(<span class="hljs-string">&quot;.drag-board&quot;</span>)<br> <span class="hljs-keyword">if</span> (board) &#123;<br>   <span class="hljs-title class_">PreviewData</span>.<span class="hljs-property">value</span>.<span class="hljs-property">X</span> = <span class="hljs-title class_">Math</span>.<span class="hljs-title function_">floor</span>((event.<span class="hljs-property">clientX</span> - board.<span class="hljs-title function_">getBoundingClientRect</span>().<span class="hljs-property">x</span> - <span class="hljs-number">25</span>) / <span class="hljs-title class_">ItemWidth</span>.<span class="hljs-property">value</span>)<br>   <span class="hljs-title class_">PreviewData</span>.<span class="hljs-property">value</span>.<span class="hljs-property">Y</span> = <span class="hljs-title class_">Math</span>.<span class="hljs-title function_">floor</span>((event.<span class="hljs-property">clientY</span> - board.<span class="hljs-title function_">getBoundingClientRect</span>().<span class="hljs-property">y</span> - <span class="hljs-number">25</span>) / <span class="hljs-title class_">ItemHeight</span>.<span class="hljs-property">value</span>)<br> &#125;<br><br> <span class="hljs-title class_">PreviewData</span>.<span class="hljs-property">value</span>.<span class="hljs-property">Left</span> = <span class="hljs-title class_">PreviewData</span>.<span class="hljs-property">value</span>.<span class="hljs-property">X</span> * (<span class="hljs-title class_">ItemWidth</span>.<span class="hljs-property">value</span>) + <span class="hljs-number">25</span><br> <span class="hljs-title class_">PreviewData</span>.<span class="hljs-property">value</span>.<span class="hljs-property">Top</span> = <span class="hljs-title class_">PreviewData</span>.<span class="hljs-property">value</span>.<span class="hljs-property">Y</span> * (<span class="hljs-title class_">ItemHeight</span>.<span class="hljs-property">value</span>) + <span class="hljs-number">25</span><br></code></pre></td></tr></table></figure>
+
+<p>如果存在碰撞，我们这里触发事件的元素是碰撞卡片而不是网格，所以我们要用坐标来确定预览卡片的位置，最后效果如下：</p>
+<p><img data-fancybox="gallery" data-sizes="auto" data-src="https://pic.imgdb.cn/item/66b45d60d9c307b7e9ae6b1c.png" alt="多卡片拖曳碰撞效果" class="lazyload"></p>
+<h3><span id="缩放碰撞">缩放碰撞</span></h3><p><img data-fancybox="gallery" data-sizes="auto" data-src="https://pic.imgdb.cn/item/66b45db0d9c307b7e9aea862.png" alt="缩放碰撞计算" class="lazyload"></p>
+<p>由于我们是向右下方缩放的，所以只需要判断右下方的元素是否重叠即可。知道这回事就很简单了：如果卡片元素的右侧距离大于其他卡片某一元素的左侧且底部距离大于某一元素的顶部距离，则判断为碰撞。注意这里只有一个方向满足条件不会碰撞（<del>我是StarBeat</del>）。</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-keyword">const</span> cards = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">querySelectorAll</span>(<span class="hljs-string">&#x27;.item-container&#x27;</span>)<br><span class="hljs-keyword">if</span> (cards) &#123;<br>cards.<span class="hljs-title function_">forEach</span>(<span class="hljs-function">(<span class="hljs-params">e</span>) =&gt;</span> &#123;<br>      <span class="hljs-keyword">if</span> (e.<span class="hljs-property">id</span> !== <span class="hljs-title class_">CurrentCard</span>.<span class="hljs-property">id</span>) &#123;<br>        resizable.<span class="hljs-property">value</span> = !(( (<span class="hljs-title class_">CurrentCard</span>.<span class="hljs-title function_">getBoundingClientRect</span>().<span class="hljs-property">right</span> &gt;= e.<span class="hljs-title function_">getBoundingClientRect</span>().<span class="hljs-property">left</span> ) &amp;&amp;<br>             <span class="hljs-title class_">CurrentCard</span>.<span class="hljs-title function_">getBoundingClientRect</span>().<span class="hljs-property">bottom</span> &gt;= e.<span class="hljs-title function_">getBoundingClientRect</span>().<span class="hljs-property">top</span><br>            ) &amp;&amp;<br>            (<span class="hljs-title class_">CurrentCard</span>.<span class="hljs-title function_">getBoundingClientRect</span>().<span class="hljs-property">left</span> &lt;= e.<span class="hljs-title function_">getBoundingClientRect</span>().<span class="hljs-property">left</span> &amp;&amp;<br>             <span class="hljs-title class_">CurrentCard</span>.<span class="hljs-title function_">getBoundingClientRect</span>().<span class="hljs-property">top</span> &lt;= e.<span class="hljs-title function_">getBoundingClientRect</span>().<span class="hljs-property">top</span><br>            ))<br>      &#125;<br>	&#125;)<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>最后效果如下：</p>
+<p><img data-fancybox="gallery" data-sizes="auto" data-src="https://pic.imgdb.cn/item/66b45e69d9c307b7e9af4557.png" alt="缩放碰撞效果" class="lazyload"></p>
+<h1><span id="grid拖曳布局最终效果">Grid拖曳布局最终效果</span></h1><p>至此我们基本完成了Grid拖曳布局，效果如下：</p>
+<p><img data-fancybox="gallery" data-sizes="auto" data-src="https://pic.imgdb.cn/item/66b45e50d9c307b7e9af2da1.png" alt="最终效果" class="lazyload"></p>
+
+	</article>
+
+	 
+    <div class="kira-post-copyright">
+        <strong>Author：</strong>破酥 | C4iN<br>
+        <strong>Link：</strong><a href="https://c4in1.github.io/2024/08/07/grid-drag%E8%87%AA%E5%AE%9A%E4%B9%89%E5%B8%83%E5%B1%80%E5%88%B6%E4%BD%9C/" title="https:&#x2F;&#x2F;c4in1.github.io&#x2F;2024&#x2F;08&#x2F;07&#x2F;grid-drag自定义布局制作&#x2F;" target="_blank" rel="noopener">https:&#x2F;&#x2F;c4in1.github.io&#x2F;2024&#x2F;08&#x2F;07&#x2F;grid-drag自定义布局制作&#x2F;</a><br>
+        
+            <strong>版权声明：</strong>本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/deed.zh" target="_blank">CC BY-NC-SA 3.0 CN</a> 协议进行许可
+        
+    </div>
+
+  
+	<div class="kira-post-nav">
+		<nav class="post-nav">
+			  
+			<!-- 先找到与当前文字相同的目录 -->
+			   
+			<!-- 在找到当前文章所在的 index -->
+			                      
+		</nav>
+	</div>
+	
+	<div class="kira-post-meta kira-rainbow">
+		
+			<a class="kirafont icon-container-fill -link" href="/categories/project/">project</a>
+		
+		
+			<a class="kirafont icon-tag-fill -none-link" href="/tags/TypeScript/" rel="tag">TypeScript</a> <a class="kirafont icon-tag-fill -none-link" href="/tags/vue3/" rel="tag">vue3</a> <a class="kirafont icon-tag-fill -none-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a>
+		
+	</div>
+	
+	<div class="kira-post-footer">
+		
+	<link rel="stylesheet" href="https://unpkg.com/gitalk@latest/dist/gitalk.css" />
+	<div id="gitalk"></div>
+	<script src="https://unpkg.com/gitalk@latest/dist/gitalk.min.js"></script>
+	<script type="text/javascript">
+		const gitalk = new Gitalk({
+			clientID: '-Ov23liGkU1nEuhYzsjGK-',
+			clientSecret: '-9ebaa7fcba010da47b73c112294e8c958c122ff4-',
+			id: 'grid-drag自定义布局制作',
+			repo: '-BlogGitTalk-',
+			owner: '-C4in1-',
+			admin: '-C4in1-',
+			title: '&#39;C4in&#39;s blog Comments',
+		});
+		gitalk.render('gitalk');
+	</script>
+
+
+		
+	</div>
+	
+</div>
+
+				</div>
+			</div>
+			<div class="kira-right-column">
+	<a onclick="document.querySelector('#kira-top-header').scrollIntoView({behavior: 'smooth'});" class="kira-backtotop" aria-label="回到顶部" title="回到顶部">
+		<button class="mdui-fab mdui-ripple">
+			<i class="kirafont icon-caret-up"></i>
+		</button>
+	</a>
+</div>
+
+		</div>
+	</body>
+</html>

@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html 
+	lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		
+<link rel="stylesheet" href="/css/layout.css">
+
+		
+		<title> Vue3中的响应式丢失问题 -  C4iN&#39;s Caprice</title>
+		<!-- <link rel="stylesheet" href="https://unpkg.com/mdui@1.0.2/dist/css/mdui.min.css" /> -->
+		<!-- <script src="https://unpkg.com/mdui@1.0.2/dist/js/mdui.min.js"></script> -->
+		
+<link rel="stylesheet" href="/lib/mdui/mdui.min.css">
+
+		
+<script src="/lib/mdui/mdui.min.js"></script>
+
+		<!-- lazyload -->
+		
+<script src="/lib/lazysizes.js"></script>
+
+		<!-- smooth-scrolling -->
+		
+<script src="/lib/smooth-scrolling.js"></script>
+
+		<!-- highlight -->
+		
+<link rel="stylesheet" href="/lib/highlight/atom-one-dark.min.css">
+
+		
+<script src="/lib/highlight/highlight.min.js"></script>
+
+		<!-- 预置 kiraicon -->
+		
+<link rel="stylesheet" href="/lib/iconfont/iconfont.css">
+
+		
+		<link
+			rel="shortcut icon"
+			href="https://pic.imgdb.cn/item/6693875ad9c307b7e98b4288.gif"
+			type="image/gif"
+		/>
+		
+<link rel="stylesheet" href="/deps/css/APlayer.min.css">
+
+		
+		
+<script src="/deps/js/APlayer.min.js"></script>
+<script src="/deps/js/Meting.min.js"></script>
+
+	<meta name="generator" content="Hexo 6.3.0"></head>
+
+	<body>
+		<div
+			class="kira-background"
+			style="background-image: url('https://pic.imgdb.cn/item/66b458ffd9c307b7e9aadb03.png')"
+		></div>
+		<div class="kira-header">
+    <a
+        class="kira-drawer-button mdui-ripple"
+        title="导航栏"
+        onclick="document.querySelector('.kira-sidebar-modal').classList.add('show');document.querySelector('.kira-sidebar#sidebar').classList.add('show');"
+    >
+        <i class="kirafont icon-menu"></i>
+    </a>
+    <a href="/" title="C4iN&#39;s Caprice">
+        <img
+			src="https://pic.imgdb.cn/item/66b45933d9c307b7e9ab0715.png"
+			alt="破酥 | C4iN"
+		/>
+    </a>
+</div>
+		<div class="kira-body">
+			<div class="kira-sidebar" id="sidebar">
+	<div class="kira-avatar mdui-ripple">
+		<a target="_blank" rel="noopener" href="https://pic.imgdb.cn/item/66b45933d9c307b7e9ab0715.png" title="破酥 | C4iN">
+			<img
+				src="https://pic.imgdb.cn/item/66b45933d9c307b7e9ab0715.png"
+				alt="破酥 | C4iN"
+			/>
+		</a>
+	</div>
+	<div class="kira-count">
+		<div><span>文章</span>5</div>
+		<div><span>标签</span>7</div>
+		<div><span>分类</span>4</div>
+	</div>
+	<div class="kira-list">
+		
+		<a
+			class="kira-list-item mdui-ripple false"
+			href="/"
+			title="回到首页"
+		>
+			<i
+				class="kirafont
+					
+						icon-home
+					"
+			></i>
+			<div class="kira-list-item-content">
+				回到首页
+			</div>
+		</a>
+		
+		<a
+			class="kira-list-item mdui-ripple false"
+			href="/archive"
+			title="文章归档"
+		>
+			<i
+				class="kirafont
+					
+						icon-container
+					"
+			></i>
+			<div class="kira-list-item-content">
+				文章归档
+			</div>
+		</a>
+		
+		<a
+			class="kira-list-item mdui-ripple false"
+			href="/about"
+			title="关于本人"
+		>
+			<i
+				class="kirafont
+					
+						icon-user
+					"
+			></i>
+			<div class="kira-list-item-content">
+				关于本人
+			</div>
+		</a>
+		
+		<a
+			class="kira-list-item mdui-ripple false"
+			href="/friends"
+			title="我的朋友"
+		>
+			<i
+				class="kirafont
+					
+						icon-team
+					"
+			></i>
+			<div class="kira-list-item-content">
+				我的朋友
+			</div>
+		</a>
+		
+	</div>
+	<aside id="kira-sidebar">
+		
+			<div class="kira-widget-wrap">
+	<div class="kira-widget kira-social">
+		
+			<a
+				class="mdui-ripple"
+				href="tencent://AddContact/?fromId=45&fromSubId=1&subcmd=all&uin=2405544030&website=www.oicqzone.com"
+				target="_blank"
+				mdui-tooltip="{content: 'QQ'}"
+				style="color: rgb(49, 174, 255); background-color: rgba(49, 174, 255, .1);"
+			>
+				<i
+					class="kirafont
+					
+						icon-QQ
+					"
+				></i>
+			</a>
+		
+			<a
+				class="mdui-ripple"
+				href="https://github.com/C4in1/"
+				target="_blank"
+				mdui-tooltip="{content: 'GitHub'}"
+				style="color: rgb(25, 23, 23); background-color: rgba(25, 23, 23, .15);"
+			>
+				<i
+					class="kirafont
+					
+						icon-github
+					"
+				></i>
+			</a>
+		
+	</div>
+</div>
+
+		
+			
+  <div class="kira-widget-wrap">
+    <h3 class="kira-widget-title">分类</h3>
+    <div class="kira-widget">
+      <ul class="category-list">
+        
+        
+
+        
+          <li class="category-list-item">
+            <a class="category-list-link" href="/categories/TypeScript/">
+              TypeScript
+            </a>
+            <span class="category-list-count">1</span>
+          </li>
+        
+          <li class="category-list-item">
+            <a class="category-list-link" href="/categories/project/">
+              project
+            </a>
+            <span class="category-list-count">1</span>
+          </li>
+        
+          <li class="category-list-item">
+            <a class="category-list-link" href="/categories/vitepress/">
+              vitepress
+            </a>
+            <span class="category-list-count">2</span>
+          </li>
+        
+          <li class="category-list-item">
+            <a class="category-list-link" href="/categories/vue3/">
+              vue3
+            </a>
+            <span class="category-list-count">1</span>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+		
+			
+	<div class="kira-widget-wrap">
+		<div id="randomtagcloud" class="kira-widget tagcloud kira-rainbow">
+			<a href="/tags/ES6/" style="font-size: 10px;">ES6</a> <a href="/tags/TypeScript/" style="font-size: 20px;">TypeScript</a> <a href="/tags/Vitepress/" style="font-size: 13.33px;">Vitepress</a> <a href="/tags/theme-censored/" style="font-size: 13.33px;">theme-censored</a> <a href="/tags/vue3/" style="font-size: 16.67px;">vue3</a> <a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 20px;">前端</a> <a href="/tags/%E7%97%9B%E8%8B%A6%E7%9A%84%E9%85%8D%E7%BD%AE%E9%97%AE%E9%A2%98/" style="font-size: 13.33px;">痛苦的配置问题</a>
+		</div>
+		
+	</div>
+
+
+		
+			
+	<div class="kira-widget-wrap">
+		<h3 class="kira-widget-title">
+			Archive
+		</h3>
+		<div class="kira-widget">
+			<ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/">2024</a><span class="archive-list-count">5</span></li></ul>
+		</div>
+	</div>
+
+
+		
+	</aside>
+	<div class="kira-copyright">
+		&copy; 2024
+		<a href="/">破酥 | C4iN</a>
+		Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> &
+		<a href="https://github.com/ch1ny/kira-hexo/" target="_blank">Kira-Hexo</a>
+		<br />
+		
+		
+	</div>
+</div>
+<div
+	class="kira-sidebar-modal"
+	id="sidebar-modal"
+	onclick="(function(self) {
+		self.classList.remove('show');
+		document.querySelector('.kira-sidebar.show#sidebar').classList.remove('show');
+	})(this)"
+></div>
+			<div class="kira-content">
+				<div id="kira-top-header"></div>
+				<div class="kira-main-content">
+					
+<link rel="stylesheet" href="/css/kira-image.css">
+
+
+<script src="/js/kira-image.js"></script>
+
+<div class="kira-image">
+    <div class="kira-image-modal">
+        <div class="kira-image-header">
+            <div class="kira-image-counter"></div>
+            <div class="kira-image-title"></div>
+            <div class="kira-image-operation">
+                <div class="kira-image-operation-button" id="kira-image-operation-button-zoom">
+                    <i class="kirafont icon-zoom-in"></i>
+                </div>
+                <div class="kira-image-operation-button" id="kira-image-operation-button-close">
+                    <i class="kirafont icon-close"></i>
+                </div>
+            </div>
+        </div>
+        <div class="kira-image-container">
+            <div class="kira-image-prev-button-panel">
+                <div class="kira-image-exchange-button">
+                    <i class="kirafont icon-left"></i>
+                </div>
+            </div>
+            <div class="kira-image-list">
+                <div class="kira-image-prev">
+                    <img />
+                </div>
+                <div class="kira-image-now">
+                    <img />
+                </div>
+                <div class="kira-image-next">
+                    <img />
+                </div>
+            </div>
+            <div class="kira-image-next-button-panel">
+                <div class="kira-image-exchange-button">
+                    <i class="kirafont icon-right"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+	
+<link rel="stylesheet" href="/css/kira-code-copy.css">
+
+	
+<script src="/js/kira-code-copy.js"></script>
+
+
+<div class="kira-post">
+	<article>
+		
+		<div class="kira-post-cover">
+			<img
+				data-src="https://ts1.cn.mm.bing.net/th/id/R-C.5193680c61d71d4a772ba86940564de7?rik=%2fdTEI80yPMDIFQ&riu=http%3a%2f%2fsoftsupplier.com%2fwp-content%2fuploads%2f2022%2f09%2fdinh-nghia-ve-vuejs.jpg&ehk=E5JHTvLXkIMHnKEAM2tRpb5nv0Alqb%2bMvCNwqYn3QMo%3d&risl=&pid=ImgRaw&r=0"
+				data-sizes="auto"
+				alt="Vue3中的响应式丢失问题"
+				class="lazyload kira-post-cover-image disabled-kira-image"
+			/>
+			<h1>Vue3中的响应式丢失问题</h1>
+		</div>
+		
+		<div class="kira-post-meta kira-rainbow" style="margin:10px 0!important;">
+			<a><i class="kirafont icon-calendar-fill"></i>2024年08月02日</a>
+			<a><i class="kirafont icon-edit-fill"></i>987 字</a>
+			<a><i class="kirafont icon-time-circle-fill"></i>大概 4 分钟</a>
+		</div>
+		<p>最近在写一个自定义首页的小玩意，写的过程中遇到子组件根据父组件传递的props来确定大小无法正确使用的问题，稍微研究了一下是DOM的加载问题，在这里记录下。</p>
+<span id="more"></span>
+
+<p><del>突然发现好久没改博客了orz</del></p>
+<h1><span id="问题描述">问题描述</span></h1><p>vue3使用<code>querySelector</code>等获取元素只能在<code>onMounted</code>之类DOM挂载时获取</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-keyword">const</span> <span class="hljs-title function_">handleSize</span> = (<span class="hljs-params"></span>) =&gt; &#123;<br>  <span class="hljs-keyword">const</span> board = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">getElementById</span>(<span class="hljs-string">&quot;board&quot;</span>)<br>  <span class="hljs-keyword">if</span> (board) &#123;<br>    <span class="hljs-title class_">CanvasWidth</span>.<span class="hljs-property">value</span> = board.<span class="hljs-property">offsetWidth</span> - <span class="hljs-number">40</span><br>    <span class="hljs-title class_">CanvasHeight</span>.<span class="hljs-property">value</span> = board.<span class="hljs-property">offsetHeight</span> - <span class="hljs-number">40</span><br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;boardX: &quot;</span>, <span class="hljs-title class_">CanvasWidth</span>.<span class="hljs-property">value</span>, <span class="hljs-string">&quot;boardY: &quot;</span>, <span class="hljs-title class_">CanvasHeight</span>.<span class="hljs-property">value</span>)<br>  &#125;<br>&#125;<br><br><span class="hljs-title function_">onMounted</span>(<span class="hljs-function">() =&gt;</span> &#123;<br>  <span class="hljs-title function_">handleSize</span>()<br>  <span class="hljs-comment">// console.log(&quot;boardX: &quot;, CanvasWidth.value, &quot;boardY: &quot;, CanvasHeight.value)</span><br>&#125;)<br></code></pre></td></tr></table></figure>
+
+<p>但是这种情况下子组件已经被挂载到DOM中，我们知道<code>onMounted</code> 钩子用来在组件完成初始渲染并创建 DOM 节点<strong>后</strong>运行代码，此时传递给子组件的参数并不会起作用。也就是说，当子组件接收到父组件传来的props的时候，DOM已经挂载完了，且数据更新时子组件没有响应。</p>
+<h1><span id="问题分析">问题分析</span></h1><p>怎么想还是很奇怪，既然我们父组件传给子组件的值是响应式的，那么这个值改变的时候子组件应该也会触发重新挂载DOM。顺藤摸瓜，<code>defineProps</code>是不是有之前没注意过的事情呢。通过在工作台中输出props的值，我们会发现父组件传入的数据变化时，props的值并没有响应数据变化，说明可能存在响应式丢失的问题。</p>
+<p>子组件：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><code class="hljs vue">&lt;script setup lang=&quot;ts&quot;&gt;<br>import &#123; ref, toRef &#125; from &quot;vue&quot;;<br><br>const props = defineProps&lt;&#123;<br>  row: number,<br>  column: number,<br>  canvasX: number,<br>  canvasY: number,<br>  test: string<br>&#125;&gt;()<br><br>const ItemWidth = ref(props.canvasX / props.column)<br>const ItemHeight = ref(props.canvasY / props.row)<br><br>console.log(&quot;row &quot;, props.row, &quot;column &quot;, props.column)<br>console.log(&quot;X: &quot;, props.canvasX, &quot;Y: &quot;, props.canvasY)<br>console.log(&quot;itemX: &quot;, ItemWidth.value, &quot;itemY: &quot;, ItemHeight.value)<br><br>const msg = toRef(props, &#x27;data&#x27;);<br>&lt;/script&gt;<br><br>&lt;template&gt;<br>  &#123;&#123; canvasX &#125;&#125;<br>  &#123;&#123; ItemWidth &#125;&#125;<br>  &lt;div class=&quot;item-container&quot; :style=&quot;&#123;width: ItemWidth - 10 + &#x27;px&#x27;, height: ItemHeight - 10 + &#x27;px&#x27;&#125;&quot;&gt;<br><br>  &lt;/div&gt;<br>&lt;/template&gt;<br><br>&lt;style scoped&gt;<br>.item-container &#123;<br>  margin: 5px;<br>  border-radius: 10px;<br>  background: #242424;<br>&#125;<br>&lt;/style&gt;<br></code></pre></td></tr></table></figure>
+
+<p>输出结果：</p>
+<p><img src="https://pic.imgdb.cn/item/66b45d22d9c307b7e9ae3c73.png"></p>
+<p>我们可以看到props是更新的，但是我们的<code>ItemWidth, ItemHeight</code>。等等，这里好像哪里不对</p>
+<p>解决方法之一就是强制重新挂载DOM：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-keyword">const</span> <span class="hljs-title function_">handleSize</span> = (<span class="hljs-params"></span>) =&gt; &#123;<br>  <span class="hljs-keyword">const</span> board = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">getElementById</span>(<span class="hljs-string">&quot;board&quot;</span>)<br>  <span class="hljs-keyword">if</span> (board) &#123;<br>    <span class="hljs-title class_">CanvasWidth</span>.<span class="hljs-property">value</span> = board.<span class="hljs-property">offsetWidth</span> - <span class="hljs-number">40</span><br>    <span class="hljs-title class_">CanvasHeight</span>.<span class="hljs-property">value</span> = board.<span class="hljs-property">offsetHeight</span> - <span class="hljs-number">40</span><br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;boardX: &quot;</span>, <span class="hljs-title class_">CanvasWidth</span>.<span class="hljs-property">value</span>, <span class="hljs-string">&quot;boardY: &quot;</span>, <span class="hljs-title class_">CanvasHeight</span>.<span class="hljs-property">value</span>)<br>    boardKey.<span class="hljs-property">value</span>++ <span class="hljs-comment">// 增加 key 值，触发重新挂载</span><br>  &#125;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs vue">&lt;div class=&quot;drag-board&quot; id=&quot;board&quot; :key=&quot;boardKey&quot;&gt;<br>  &lt;div class=&quot;drag-row&quot; v-for=&quot;indexX in row&quot; :key=&quot;indexX&quot;&gt;<br>    &lt;CapDragGridItem v-for=&quot;indexY in column&quot; :key=&quot;indexY&quot;<br>                 :row=&quot;row&quot;<br>                 :column=&quot;column&quot;<br>                 :canvasX=&quot;CanvasWidth&quot;<br>                 :canvasY=&quot;CanvasHeight&quot;/&gt;<br>  &lt;/div&gt;<br>&lt;/div&gt;<br></code></pre></td></tr></table></figure>
+
+<p>我们回过头来看刚才不对的地方：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-keyword">const</span> <span class="hljs-title class_">ItemWidth</span> = <span class="hljs-title function_">ref</span>(props.<span class="hljs-property">canvasX</span> / props.<span class="hljs-property">column</span>)<br><span class="hljs-keyword">const</span> <span class="hljs-title class_">ItemHeight</span> = <span class="hljs-title function_">ref</span>(props.<span class="hljs-property">canvasY</span> / props.<span class="hljs-property">row</span>)<br></code></pre></td></tr></table></figure>
+
+<p><code>ItemWidth</code> 和 <code>ItemHeight</code> 不会自动更新。如果 <code>props.canvasX</code> 或 <code>props.column</code> 发生变化，这两个值不会自动改变，除非手动更新它们。哈哈，这就是问题所在。当需要手动更新某个值，并且希望它是响应式的时，可以使用 <code>ref</code>。而在我们需求下是希望自动更新的。某个值是自动计算得出，并且在依赖的响应式数据变化时自动更新时，可以使用 <code>computed</code>。</p>
+<p>修改后的代码：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-keyword">const</span> <span class="hljs-title class_">ItemWidth</span> = <span class="hljs-title function_">computed</span>(<span class="hljs-function">()=&gt;</span> props.<span class="hljs-property">canvasX</span> / props.<span class="hljs-property">column</span>)<br><span class="hljs-keyword">const</span> <span class="hljs-title class_">ItemHeight</span> = <span class="hljs-title function_">computed</span>(<span class="hljs-function">() =&gt;</span> props.<span class="hljs-property">canvasY</span> / props.<span class="hljs-property">row</span>)<br></code></pre></td></tr></table></figure>
+
+<p>或者</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs vue">&lt;template&gt;<br>  &lt;div class=&quot;item-container&quot; :style=&quot;&#123;width: canvasX / column - 10 + &#x27;px&#x27;, height: canvasY / row - 10 + &#x27;px&#x27;&#125;&quot;&gt;<br><br>  &lt;/div&gt;<br>&lt;/template&gt;<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>PS</p>
+<p>如果我们在CSS中使用100%之类的来给定容器大小，要注意DOM加载时的大小不一定就是最后的大小</p>
+</blockquote>
+<p><del>总结：我是傻逼</del>。不过还是学了点东西的orz</p>
+
+	</article>
+
+	 
+    <div class="kira-post-copyright">
+        <strong>Author：</strong>破酥 | C4iN<br>
+        <strong>Link：</strong><a href="https://c4in1.github.io/2024/08/02/vue/Vue3%E4%B8%AD%E7%9A%84DOM%E9%97%AE%E9%A2%98/" title="https:&#x2F;&#x2F;c4in1.github.io&#x2F;2024&#x2F;08&#x2F;02&#x2F;vue&#x2F;Vue3中的DOM问题&#x2F;" target="_blank" rel="noopener">https:&#x2F;&#x2F;c4in1.github.io&#x2F;2024&#x2F;08&#x2F;02&#x2F;vue&#x2F;Vue3中的DOM问题&#x2F;</a><br>
+        
+            <strong>版权声明：</strong>本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/deed.zh" target="_blank">CC BY-NC-SA 3.0 CN</a> 协议进行许可
+        
+    </div>
+
+  
+	<div class="kira-post-nav">
+		<nav class="post-nav">
+			          
+			<!-- 先找到与当前文字相同的目录 -->
+			   
+			<!-- 在找到当前文章所在的 index -->
+			              
+		</nav>
+	</div>
+	
+	<div class="kira-post-meta kira-rainbow">
+		
+			<a class="kirafont icon-container-fill -link" href="/categories/vue3/">vue3</a>
+		
+		
+			<a class="kirafont icon-tag-fill -none-link" href="/tags/TypeScript/" rel="tag">TypeScript</a> <a class="kirafont icon-tag-fill -none-link" href="/tags/vue3/" rel="tag">vue3</a> <a class="kirafont icon-tag-fill -none-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a>
+		
+	</div>
+	
+	<div class="kira-post-footer">
+		
+	<link rel="stylesheet" href="https://unpkg.com/gitalk@latest/dist/gitalk.css" />
+	<div id="gitalk"></div>
+	<script src="https://unpkg.com/gitalk@latest/dist/gitalk.min.js"></script>
+	<script type="text/javascript">
+		const gitalk = new Gitalk({
+			clientID: '-Ov23liGkU1nEuhYzsjGK-',
+			clientSecret: '-9ebaa7fcba010da47b73c112294e8c958c122ff4-',
+			id: 'Vue3中的响应式丢失问题',
+			repo: '-BlogGitTalk-',
+			owner: '-C4in1-',
+			admin: '-C4in1-',
+			title: '&#39;C4in&#39;s blog Comments',
+		});
+		gitalk.render('gitalk');
+	</script>
+
+
+		
+	</div>
+	
+</div>
+
+				</div>
+			</div>
+			<div class="kira-right-column">
+	<a onclick="document.querySelector('#kira-top-header').scrollIntoView({behavior: 'smooth'});" class="kira-backtotop" aria-label="回到顶部" title="回到顶部">
+		<button class="mdui-fab mdui-ripple">
+			<i class="kirafont icon-caret-up"></i>
+		</button>
+	</a>
+</div>
+
+		</div>
+	</body>
+</html>
