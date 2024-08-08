@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="/css/layout.css">
 
 		
-		<title> Tags：vue3 -  C4iN&#39;s Caprice</title>
+		<title> MVVM原理及简单实现 -  C4iN&#39;s Caprice</title>
 		<!-- <link rel="stylesheet" href="https://unpkg.com/mdui@1.0.2/dist/css/mdui.min.css" /> -->
 		<!-- <script src="https://unpkg.com/mdui@1.0.2/dist/js/mdui.min.js"></script> -->
 		
@@ -287,175 +287,175 @@
 			<div class="kira-content">
 				<div id="kira-top-header"></div>
 				<div class="kira-main-content">
-					<div class="kira-posts">
-    
-        <div class="kira-post">
-            <a href="/2024/08/07/grid-drag%E8%87%AA%E5%AE%9A%E4%B9%89%E5%B8%83%E5%B1%80%E5%88%B6%E4%BD%9C/">
-                
-                <div
-                    class="kira-post-cover mdui-ripple"
-                    style="padding-bottom: '56.25%'"
-                >
-                    <img
-                        data-src="https://pic.imgdb.cn/item/66b356f1d9c307b7e9117788.png"
-                        data-sizes="auto"
-                        alt="grid-drag自定义布局制作"
-                        class="lazyload kira-post-cover-image"
-                    />
-                    <h1>grid-drag自定义布局制作</h1>
-                </div>
-                
-            </a>
+					
+<link rel="stylesheet" href="/css/kira-image.css">
 
-            <div class="kira-post-meta kira-rainbow">
-                <a>
-                    <i class="kirafont icon-calendar-fill"></i>
-                    2024年08月07日
-                </a>
-                <a>
-                    <i class="kirafont icon-edit-fill"></i>
-                    2.5k 字
-                </a>
-                <a>
-                    <i class="kirafont icon-time-circle-fill"></i>大概
-                    12 分钟
-                </a>
+
+<script src="/js/kira-image.js"></script>
+
+<div class="kira-image">
+    <div class="kira-image-modal">
+        <div class="kira-image-header">
+            <div class="kira-image-counter"></div>
+            <div class="kira-image-title"></div>
+            <div class="kira-image-operation">
+                <div class="kira-image-operation-button" id="kira-image-operation-button-zoom">
+                    <i class="kirafont icon-zoom-in"></i>
+                </div>
+                <div class="kira-image-operation-button" id="kira-image-operation-button-close">
+                    <i class="kirafont icon-close"></i>
+                </div>
             </div>
-    
-            
-                <article>
-                    <p>之前看大佬的博客（<a target="_blank" rel="noopener" href="https://www.imalun.com/gird_layout/">白云苍狗的小站-手撸 Grid 拖拽布局</a>）看到的，想着还挺有意思，试着学一下，写一个随想页面🥰</p>
-<blockquote>
-<p>源码：<a target="_blank" rel="noopener" href="https://github.com/CainHappyfish/grid-drag">CainHappyfish&#x2F;grid-drag (github.com)</a></p>
+        </div>
+        <div class="kira-image-container">
+            <div class="kira-image-prev-button-panel">
+                <div class="kira-image-exchange-button">
+                    <i class="kirafont icon-left"></i>
+                </div>
+            </div>
+            <div class="kira-image-list">
+                <div class="kira-image-prev">
+                    <img />
+                </div>
+                <div class="kira-image-now">
+                    <img />
+                </div>
+                <div class="kira-image-next">
+                    <img />
+                </div>
+            </div>
+            <div class="kira-image-next-button-panel">
+                <div class="kira-image-exchange-button">
+                    <i class="kirafont icon-right"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+	
+<link rel="stylesheet" href="/css/kira-code-copy.css">
+
+	
+<script src="/js/kira-code-copy.js"></script>
+
+
+<div class="kira-post">
+	<article>
+		
+		<div class="kira-post-cover">
+			<img
+				data-src="https://pic.imgdb.cn/item/66b47385d9c307b7e9d0b377.png"
+				data-sizes="auto"
+				alt="MVVM原理及简单实现"
+				class="lazyload kira-post-cover-image disabled-kira-image"
+			/>
+			<h1>MVVM原理及简单实现</h1>
+		</div>
+		
+		<div class="kira-post-meta kira-rainbow" style="margin:10px 0!important;">
+			<a><i class="kirafont icon-calendar-fill"></i>2024年08月08日</a>
+			<a><i class="kirafont icon-edit-fill"></i>475 字</a>
+			<a><i class="kirafont icon-time-circle-fill"></i>大概 2 分钟</a>
+		</div>
+		<h1><span id="mvvm原理和实现">MVVM原理和实现</span></h1><p>了解vue的底层和实现一个简单的MVVM</p>
+<p>这部分主要介绍MVVM的基本概念</p>
+<h1><span id="几个模型">几个模型</span></h1><h2><span id="mvc">MVC</span></h2><p>MVC：所有通信都是单向的。</p>
+<ul>
+<li>视图（View）：用户界面。</li>
+<li>控制器（Controller）：业务逻辑</li>
+<li>模型（Model）：数据保存</li>
+</ul>
+<p><img data-fancybox="gallery" data-sizes="auto" data-src="https://www.ruanyifeng.com/blogimg/asset/2015/bg2015020105.png" alt="img" class="lazyload"></p>
+<p>接受用户指令时，MVC 可以分成两种方式：</p>
+<ul>
+<li>通过 View 接受指令，传递给 Controller。</li>
+<li>接通过controller接受指令。</li>
+</ul>
+<p>Controller 非常薄，只起到路由的作用，而 View 非常厚，业务逻辑都部署在 View。</p>
+<p><img data-fancybox="gallery" data-sizes="auto" data-src="https://www.ruanyifeng.com/blogimg/asset/2015/bg2015020108.png" alt="img" class="lazyload"></p>
+<h2><span id="mvp">MVP</span></h2><p>MVP 模式将 Controller 改名为 Presenter，同时改变了通信方向。</p>
+<p><img data-fancybox="gallery" data-sizes="auto" data-src="https://www.ruanyifeng.com/blogimg/asset/2015/bg2015020109.png" alt="img" class="lazyload"></p>
+<ul>
+<li>各部分之间的通信，都是双向的。</li>
+<li>View 与 Model 不发生联系，都通过 Presenter 传递。</li>
+<li>View 非常薄，不部署任何业务逻辑，称为”被动视图”（Passive View），即没有任何主动性，而 Presenter非常厚，所有逻辑都部署在那里。</li>
+</ul>
+<h2><span id="mvvm">MVVM</span></h2><p>MVVM 模式将 Presenter 改名为 ViewModel，基本上与 MVP 模式完全一致。唯一的区别是，它采用双向绑定（data-binding）：View的变动，自动反映在 ViewModel，反之亦然。</p>
+<p><img data-fancybox="gallery" data-sizes="auto" data-src="https://www.ruanyifeng.com/blogimg/asset/2015/bg2015020110.png" alt="img" class="lazyload"></p>
+<h1><span id="mvvm">MVVM</span></h1><p>mvvm 的核心是数据劫持、数据代理、数据编译和”发布订阅模式”。</p>
+<ul>
+<li>数据层（Model）：应用的数据及业务逻辑</li>
+<li>视图层（View）：应用的展示效果，各类UI组件</li>
+<li>业务逻辑层（ViewModel）：框架封装的核心，它负责将数据与视图关联起来</li>
+</ul>
+<p>数据双向绑定真正实现其实靠的也是ES5中提供的<code>Object.defineProperty</code>。</p>
+<h2><span id="数据劫持">数据劫持</span></h2><p>按照vue的方法，vue会将所有的data挂载在ViewModel上，进行数据劫持简单说就是为对象增加get和set方法</p>
+<h2><span id="数据编译">数据编译</span></h2><h2><span id="发布订阅模式">发布订阅模式</span></h2><blockquote>
+<p>参考：</p>
+<p><a target="_blank" rel="noopener" href="https://www.ruanyifeng.com/blog/2015/02/mvcmvp_mvvm.html">MVC，MVP 和 MVVM 的图示 - 阮一峰的网络日志 (ruanyifeng.com)</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/joyco773/p/14768877.html">mvvm的概念、原理及实现 - 神奇的小胖子 - 博客园 (cnblogs.com)</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.yuque.com/makabaka-bn1pq/sg17tu/auwwfdrt08lpifvo?singleDoc#">Mvvm框架复写 (yuque.com)</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.ituring.com.cn/book/2953">Vue.js设计与实现 (ituring.com.cn)</a></p>
 </blockquote>
-                </article>
-            
-        </div>
-        <div class="kira-hr"></div>
-    
-        <div class="kira-post">
-            <a href="/2024/08/02/vue/Vue3%E4%B8%AD%E7%9A%84DOM%E9%97%AE%E9%A2%98/">
-                
-                <div
-                    class="kira-post-cover mdui-ripple"
-                    style="padding-bottom: '56.25%'"
-                >
-                    <img
-                        data-src="https://ts1.cn.mm.bing.net/th/id/R-C.5193680c61d71d4a772ba86940564de7?rik=%2fdTEI80yPMDIFQ&riu=http%3a%2f%2fsoftsupplier.com%2fwp-content%2fuploads%2f2022%2f09%2fdinh-nghia-ve-vuejs.jpg&ehk=E5JHTvLXkIMHnKEAM2tRpb5nv0Alqb%2bMvCNwqYn3QMo%3d&risl=&pid=ImgRaw&r=0"
-                        data-sizes="auto"
-                        alt="Vue3中的响应式丢失问题"
-                        class="lazyload kira-post-cover-image"
-                    />
-                    <h1>Vue3中的响应式丢失问题</h1>
-                </div>
-                
-            </a>
 
-            <div class="kira-post-meta kira-rainbow">
-                <a>
-                    <i class="kirafont icon-calendar-fill"></i>
-                    2024年08月02日
-                </a>
-                <a>
-                    <i class="kirafont icon-edit-fill"></i>
-                    987 字
-                </a>
-                <a>
-                    <i class="kirafont icon-time-circle-fill"></i>大概
-                    4 分钟
-                </a>
-            </div>
-    
-            
-                <article>
-                    <p>最近在写一个自定义首页的小玩意，写的过程中遇到子组件根据父组件传递的props来确定大小无法正确使用的问题，稍微研究了一下是DOM的加载问题，在这里记录下。</p>
-                </article>
-            
-        </div>
-        <div class="kira-hr"></div>
-    
-        <div class="kira-post">
-            <a href="/2024/07/18/vitepress/Vitepress%E4%B8%BB%E9%A2%98%E5%88%B6%E4%BD%9C%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-2/">
-                
-                <div
-                    class="kira-post-cover mdui-ripple"
-                    style="padding-bottom: '56.25%'"
-                >
-                    <img
-                        data-src="https://pic.imgdb.cn/item/66938d79d9c307b7e995e9b9.jpg"
-                        data-sizes="auto"
-                        alt="Vitepress主题制作学习笔记-2"
-                        class="lazyload kira-post-cover-image"
-                    />
-                    <h1>Vitepress主题制作学习笔记-2</h1>
-                </div>
-                
-            </a>
+	</article>
 
-            <div class="kira-post-meta kira-rainbow">
-                <a>
-                    <i class="kirafont icon-calendar-fill"></i>
-                    2024年07月18日
-                </a>
-                <a>
-                    <i class="kirafont icon-edit-fill"></i>
-                    4.8k 字
-                </a>
-                <a>
-                    <i class="kirafont icon-time-circle-fill"></i>大概
-                    23 分钟
-                </a>
-            </div>
-    
-            
-                <article>
-                    <p>这里写制作主题中用到的Typescript。</p>
-                </article>
-            
-        </div>
-        <div class="kira-hr"></div>
-    
-        <div class="kira-post">
-            <a href="/2024/07/16/vitepress/Vitepress%E4%B8%BB%E9%A2%98%E5%88%B6%E4%BD%9C%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-1/">
-                
-                <div
-                    class="kira-post-cover mdui-ripple"
-                    style="padding-bottom: '56.25%'"
-                >
-                    <img
-                        data-src="https://pic.imgdb.cn/item/66938d79d9c307b7e995e9b9.jpg"
-                        data-sizes="auto"
-                        alt="Vitepress主题制作学习笔记-1"
-                        class="lazyload kira-post-cover-image"
-                    />
-                    <h1>Vitepress主题制作学习笔记-1</h1>
-                </div>
-                
-            </a>
+	 
+    <div class="kira-post-copyright">
+        <strong>Author：</strong>破酥 | C4iN<br>
+        <strong>Link：</strong><a href="https://c4in1.github.io/2024/08/08/MVVM%E5%8E%9F%E7%90%86%E5%8F%8A%E7%AE%80%E5%8D%95%E5%AE%9E%E7%8E%B0/" title="https:&#x2F;&#x2F;c4in1.github.io&#x2F;2024&#x2F;08&#x2F;08&#x2F;MVVM原理及简单实现&#x2F;" target="_blank" rel="noopener">https:&#x2F;&#x2F;c4in1.github.io&#x2F;2024&#x2F;08&#x2F;08&#x2F;MVVM原理及简单实现&#x2F;</a><br>
+        
+            <strong>版权声明：</strong>本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/deed.zh" target="_blank">CC BY-NC-SA 3.0 CN</a> 协议进行许可
+        
+    </div>
 
-            <div class="kira-post-meta kira-rainbow">
-                <a>
-                    <i class="kirafont icon-calendar-fill"></i>
-                    2024年07月16日
-                </a>
-                <a>
-                    <i class="kirafont icon-edit-fill"></i>
-                    2.9k 字
-                </a>
-                <a>
-                    <i class="kirafont icon-time-circle-fill"></i>大概
-                    14 分钟
-                </a>
-            </div>
-    
-            
-                <article>
-                    <p>记录我在搭建这个博客主题遇到的问题以及学到的东西。这里写最基本的配置问题，包括vitepress的基础使用，以及ts配置文件的编写与使用。</p>
-                </article>
-            
-        </div>
-        <div class="kira-hr"></div>
-    
+  
+	<div class="kira-post-nav">
+		<nav class="post-nav">
+			                  
+			<!-- 先找到与当前文字相同的目录 -->
+			   
+			<!-- 在找到当前文章所在的 index -->
+			          
+		</nav>
+	</div>
+	
+	<div class="kira-post-meta kira-rainbow">
+		
+			<a class="kirafont icon-container-fill -link" href="/categories/MVVM/">MVVM</a>
+		
+		
+			<a class="kirafont icon-tag-fill -none-link" href="/tags/MVVM/" rel="tag">MVVM</a> <a class="kirafont icon-tag-fill -none-link" href="/tags/Vue/" rel="tag">Vue</a> <a class="kirafont icon-tag-fill -none-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a>
+		
+	</div>
+	
+	<div class="kira-post-footer">
+		
+
+		
+	<div class="giscus"></div>
+  
+    <script src="https://giscus.app/client.js"
+      data-repo="C4in1/BlogGitTalk"
+      data-repo-id="R_kgDOMgx61Q"
+      data-category="General"
+      data-category-id="DIC_kwDOMgx61c4Chec4"
+      data-mapping="pathname"
+      data-strict="0"
+      data-reactions-enabled="1"
+      data-emit-metadata="0"
+      data-input-position="top"
+      data-theme="light"
+      data-lang="en"
+      data-loading="lazy"
+      crossorigin="anonymous"
+      async  
+    ></script>
+  
+
+	</div>
+	
 </div>
 
 				</div>
