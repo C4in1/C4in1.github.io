@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html 
+	lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		
+<link rel="stylesheet" href="/css/layout.css">
+
+		
+		<title> 实现一个简单的MVVM-1 -  C4iN&#39;s Caprice</title>
+		<!-- <link rel="stylesheet" href="https://unpkg.com/mdui@1.0.2/dist/css/mdui.min.css" /> -->
+		<!-- <script src="https://unpkg.com/mdui@1.0.2/dist/js/mdui.min.js"></script> -->
+		
+<link rel="stylesheet" href="/lib/mdui/mdui.min.css">
+
+		
+<script src="/lib/mdui/mdui.min.js"></script>
+
+		<!-- lazyload -->
+		
+<script src="/lib/lazysizes.js"></script>
+
+		<!-- smooth-scrolling -->
+		
+<script src="/lib/smooth-scrolling.js"></script>
+
+		<!-- highlight -->
+		
+<link rel="stylesheet" href="/lib/highlight/atom-one-dark.min.css">
+
+		
+<script src="/lib/highlight/highlight.min.js"></script>
+
+		<!-- 预置 kiraicon -->
+		
+<link rel="stylesheet" href="/lib/iconfont/iconfont.css">
+
+		
+		<link
+			rel="shortcut icon"
+			href="https://pic.imgdb.cn/item/6693875ad9c307b7e98b4288.gif"
+			type="image/gif"
+		/>
+		
+<link rel="stylesheet" href="/deps/css/APlayer.min.css">
+
+		
+		
+<script src="/deps/js/APlayer.min.js"></script>
+<script src="/deps/js/Meting.min.js"></script>
+
+	<meta name="generator" content="Hexo 6.3.0"></head>
+
+	<body>
+		<div
+			class="kira-background"
+			style="background-image: url('https://pic.imgdb.cn/item/66b458ffd9c307b7e9aadb03.png')"
+		></div>
+		<div class="kira-header">
+    <a
+        class="kira-drawer-button mdui-ripple"
+        title="导航栏"
+        onclick="document.querySelector('.kira-sidebar-modal').classList.add('show');document.querySelector('.kira-sidebar#sidebar').classList.add('show');"
+    >
+        <i class="kirafont icon-menu"></i>
+    </a>
+    <a href="/" title="C4iN&#39;s Caprice">
+        <img
+			src="https://pic.imgdb.cn/item/66b45933d9c307b7e9ab0715.png"
+			alt="破酥 | C4iN"
+		/>
+    </a>
+</div>
+		<div class="kira-body">
+			<div class="kira-sidebar" id="sidebar">
+	<div class="kira-avatar mdui-ripple">
+		<a target="_blank" rel="noopener" href="https://pic.imgdb.cn/item/66b45933d9c307b7e9ab0715.png" title="破酥 | C4iN">
+			<img
+				src="https://pic.imgdb.cn/item/66b45933d9c307b7e9ab0715.png"
+				alt="破酥 | C4iN"
+			/>
+		</a>
+	</div>
+	<div class="kira-count">
+		<div><span>文章</span>9</div>
+		<div><span>标签</span>13</div>
+		<div><span>分类</span>6</div>
+	</div>
+	<div class="kira-list">
+		
+		<a
+			class="kira-list-item mdui-ripple false"
+			href="/"
+			title="回到首页"
+		>
+			<i
+				class="kirafont
+					
+						icon-home
+					"
+			></i>
+			<div class="kira-list-item-content">
+				回到首页
+			</div>
+		</a>
+		
+		<a
+			class="kira-list-item mdui-ripple false"
+			href="/archive"
+			title="文章归档"
+		>
+			<i
+				class="kirafont
+					
+						icon-container
+					"
+			></i>
+			<div class="kira-list-item-content">
+				文章归档
+			</div>
+		</a>
+		
+		<a
+			class="kira-list-item mdui-ripple false"
+			href="/about"
+			title="关于本人"
+		>
+			<i
+				class="kirafont
+					
+						icon-user
+					"
+			></i>
+			<div class="kira-list-item-content">
+				关于本人
+			</div>
+		</a>
+		
+		<a
+			class="kira-list-item mdui-ripple false"
+			href="/friends"
+			title="我的朋友"
+		>
+			<i
+				class="kirafont
+					
+						icon-team
+					"
+			></i>
+			<div class="kira-list-item-content">
+				我的朋友
+			</div>
+		</a>
+		
+	</div>
+	<aside id="kira-sidebar">
+		
+			<div class="kira-widget-wrap">
+	<div class="kira-widget kira-social">
+		
+			<a
+				class="mdui-ripple"
+				href="tencent://AddContact/?fromId=45&fromSubId=1&subcmd=all&uin=2405544030&website=www.oicqzone.com"
+				target="_blank"
+				mdui-tooltip="{content: 'QQ'}"
+				style="color: rgb(49, 174, 255); background-color: rgba(49, 174, 255, .1);"
+			>
+				<i
+					class="kirafont
+					
+						icon-QQ
+					"
+				></i>
+			</a>
+		
+			<a
+				class="mdui-ripple"
+				href="https://github.com/CainHappyfish/"
+				target="_blank"
+				mdui-tooltip="{content: 'GitHub'}"
+				style="color: rgb(25, 23, 23); background-color: rgba(25, 23, 23, .15);"
+			>
+				<i
+					class="kirafont
+					
+						icon-github
+					"
+				></i>
+			</a>
+		
+	</div>
+</div>
+
+		
+			
+  <div class="kira-widget-wrap">
+    <h3 class="kira-widget-title">分类</h3>
+    <div class="kira-widget">
+      <ul class="category-list">
+        
+        
+
+        
+          <li class="category-list-item">
+            <a class="category-list-link" href="/categories/MVVM/">
+              MVVM
+            </a>
+            <span class="category-list-count">2</span>
+          </li>
+        
+          <li class="category-list-item">
+            <a class="category-list-link" href="/categories/TypeScript/">
+              TypeScript
+            </a>
+            <span class="category-list-count">1</span>
+          </li>
+        
+          <li class="category-list-item">
+            <a class="category-list-link" href="/categories/project/">
+              project
+            </a>
+            <span class="category-list-count">1</span>
+          </li>
+        
+          <li class="category-list-item">
+            <a class="category-list-link" href="/categories/vitepress/">
+              vitepress
+            </a>
+            <span class="category-list-count">2</span>
+          </li>
+        
+          <li class="category-list-item">
+            <a class="category-list-link" href="/categories/vue3/">
+              vue3
+            </a>
+            <span class="category-list-count">1</span>
+          </li>
+        
+          <li class="category-list-item">
+            <a class="category-list-link" href="/categories/项目构建/">
+              项目构建
+            </a>
+            <span class="category-list-count">2</span>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+		
+			
+	<div class="kira-widget-wrap">
+		<div id="randomtagcloud" class="kira-widget tagcloud kira-rainbow">
+			<a href="/tags/ES6/" style="font-size: 10px;">ES6</a> <a href="/tags/MVVM/" style="font-size: 12.5px;">MVVM</a> <a href="/tags/TypeScript/" style="font-size: 17.5px;">TypeScript</a> <a href="/tags/Typescript/" style="font-size: 10px;">Typescript</a> <a href="/tags/Vitepress/" style="font-size: 12.5px;">Vitepress</a> <a href="/tags/Vue/" style="font-size: 12.5px;">Vue</a> <a href="/tags/Webpack/" style="font-size: 10px;">Webpack</a> <a href="/tags/theme-censored/" style="font-size: 12.5px;">theme-censored</a> <a href="/tags/vue3/" style="font-size: 15px;">vue3</a> <a href="/tags/%E4%BB%A3%E7%A0%81%E8%A7%84%E8%8C%83/" style="font-size: 10px;">代码规范</a> <a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 20px;">前端</a> <a href="/tags/%E7%97%9B%E8%8B%A6%E7%9A%84%E9%85%8D%E7%BD%AE%E9%97%AE%E9%A2%98/" style="font-size: 12.5px;">痛苦的配置问题</a> <a href="/tags/%E9%A1%B9%E7%9B%AE%E8%A7%84%E8%8C%83/" style="font-size: 10px;">项目规范</a>
+		</div>
+		
+	</div>
+
+
+		
+			
+	<div class="kira-widget-wrap">
+		<h3 class="kira-widget-title">
+			Archive
+		</h3>
+		<div class="kira-widget">
+			<ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/">2024</a><span class="archive-list-count">9</span></li></ul>
+		</div>
+	</div>
+
+
+		
+	</aside>
+	<div class="kira-copyright">
+		&copy; 2024
+		<a href="/">破酥 | C4iN</a>
+		Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> &
+		<a href="https://github.com/ch1ny/kira-hexo/" target="_blank">Kira-Hexo</a>
+		<br />
+		
+		<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div><span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span></div><div><span id="busuanzi_container_site_uv">共接待访客<span id="busuanzi_value_site_uv"></span>位</span></div>
+	</div>
+</div>
+<div
+	class="kira-sidebar-modal"
+	id="sidebar-modal"
+	onclick="(function(self) {
+		self.classList.remove('show');
+		document.querySelector('.kira-sidebar.show#sidebar').classList.remove('show');
+	})(this)"
+></div>
+			<div class="kira-content">
+				<div id="kira-top-header"></div>
+				<div class="kira-main-content">
+					
+<link rel="stylesheet" href="/css/kira-image.css">
+
+
+<script src="/js/kira-image.js"></script>
+
+<div class="kira-image">
+    <div class="kira-image-modal">
+        <div class="kira-image-header">
+            <div class="kira-image-counter"></div>
+            <div class="kira-image-title"></div>
+            <div class="kira-image-operation">
+                <div class="kira-image-operation-button" id="kira-image-operation-button-zoom">
+                    <i class="kirafont icon-zoom-in"></i>
+                </div>
+                <div class="kira-image-operation-button" id="kira-image-operation-button-close">
+                    <i class="kirafont icon-close"></i>
+                </div>
+            </div>
+        </div>
+        <div class="kira-image-container">
+            <div class="kira-image-prev-button-panel">
+                <div class="kira-image-exchange-button">
+                    <i class="kirafont icon-left"></i>
+                </div>
+            </div>
+            <div class="kira-image-list">
+                <div class="kira-image-prev">
+                    <img />
+                </div>
+                <div class="kira-image-now">
+                    <img />
+                </div>
+                <div class="kira-image-next">
+                    <img />
+                </div>
+            </div>
+            <div class="kira-image-next-button-panel">
+                <div class="kira-image-exchange-button">
+                    <i class="kirafont icon-right"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+	
+<link rel="stylesheet" href="/css/kira-code-copy.css">
+
+	
+<script src="/js/kira-code-copy.js"></script>
+
+
+<div class="kira-post">
+	<article>
+		
+		<div class="kira-post-cover">
+			<img
+				data-src="https://pic.imgdb.cn/item/66b47385d9c307b7e9d0b377.png"
+				data-sizes="auto"
+				alt="实现一个简单的MVVM-1"
+				class="lazyload kira-post-cover-image disabled-kira-image"
+			/>
+			<h1>实现一个简单的MVVM-1</h1>
+		</div>
+		
+		<div class="kira-post-meta kira-rainbow" style="margin:10px 0!important;">
+			<a><i class="kirafont icon-calendar-fill"></i>2024年08月09日</a>
+			<a><i class="kirafont icon-edit-fill"></i>1.1k 字</a>
+			<a><i class="kirafont icon-time-circle-fill"></i>大概 4 分钟</a>
+		</div>
+		<p>记录一下对对象实现一个简单的mvvm的过程，这部分实现双向绑定。</p>
+<span id="more"></span>
+
+<h1><span id="vue的mvvm响应式原理">Vue的MVVM响应式原理</span></h1><p>在之前的文章中我们知道Vue的MVVM的核心是数据劫持（数据代理）、数据编译和”发布订阅模式”。</p>
+<p><img src="https://pic.imgdb.cn/item/66b5db3cd9c307b7e97cf526.png"></p>
+<p>在我们创建一个Vue实例时，其实Vue做了这些事情：</p>
+<ul>
+<li>创建了入口函数，分别new了一个数据观察者Observer和一个指令解析器Compile；</li>
+<li>Compile解析所有DOM节点上的Vue指令，提交到更新器Updater（实际上是一个对象）；</li>
+<li>Updater把数据（如<code>&#123;&#123;&#125;&#125;, msg, @click</code>）替换，完成页面初始化渲染；</li>
+<li>Observer使用<code>Object.defineProperty</code>劫持数据，其中的<code>getter</code>和<code>setter</code>通知变化给依赖器Dep；</li>
+<li>Dep中加入观察者Watcher，当数据发生变化时，通知Watcher更新；</li>
+<li>Watcher取到旧值和新值，在回调函数中通知Updater更新视图；</li>
+<li>Compile中每个指令都new了一个Watcher，用于触发Watcher的回调函数进行更新。</li>
+</ul>
+<p>我们按照这个思路来实现一个简单的vue3-mvvm，目标是可以编译类似如下的html文件：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span> =<span class="hljs-string">&quot;app&quot;</span>&gt;</span>  <br>  		<span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Count is: &#123;&#123; count &#125;&#125;<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;text&quot;</span> <span class="hljs-attr">v-model</span>=<span class="hljs-string">&quot;message&quot;</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>&#123;&#123; message &#125;&#125;<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">c-if</span>=<span class="hljs-string">&quot;count &gt;= 3&quot;</span>&gt;</span><br>            Vanish if count &lt; 3<br>        <span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">:style</span>=<span class="hljs-string">&quot;&#123;color: red&#125;&quot;</span>&gt;</span><br>            count &gt; 3 ? &#123;&#123; count &gt; 3 ? &quot;Yes&quot; : &quot;No&quot;&#125;&#125;<br>        <span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">c-on:click</span>=<span class="hljs-string">&quot;handleClick&quot;</span>&gt;</span>click<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">button</span> @<span class="hljs-attr">click</span>=<span class="hljs-string">&quot;handleClick&quot;</span>&gt;</span>@click2<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span><br><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p>js部分：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">let</span> app = <span class="hljs-title function_">createApp</span>(&#123;<br>  <span class="hljs-title function_">data</span>(<span class="hljs-params"></span>) &#123;<br>    <span class="hljs-keyword">return</span> &#123;<br>      <span class="hljs-attr">foo</span>: <span class="hljs-string">&quot;bar&quot;</span>,<br>      <span class="hljs-attr">count</span>: <span class="hljs-number">0</span><br>    &#125;;<br>  &#125;,<br>  <span class="hljs-attr">computed</span>: &#123;<br>    <span class="hljs-title function_">com</span>(<span class="hljs-params"></span>) &#123;<br>      <span class="hljs-keyword">return</span> (<br>        <span class="hljs-string">&quot;I&#x27;m computed of reversed foo: &quot;</span> + <span class="hljs-variable language_">this</span>.<span class="hljs-property">foo</span>.<span class="hljs-title function_">split</span>(<span class="hljs-string">&quot;&quot;</span>).<span class="hljs-title function_">reverse</span>().<span class="hljs-title function_">join</span>(<span class="hljs-string">&quot;&quot;</span>)<br>      );<br>    &#125;<br>  &#125;,<br>  <span class="hljs-attr">methods</span>: &#123;<br>    <span class="hljs-title function_">countAdd</span>(<span class="hljs-params"></span>) &#123;<br>      <span class="hljs-variable language_">this</span>.<span class="hljs-property">count</span>++;<br>    &#125;<br>  &#125;<br>&#125;);<br>app.<span class="hljs-title function_">mount</span>(<span class="hljs-string">&quot;#app&quot;</span>);<br></code></pre></td></tr></table></figure>
+
+<h1><span id="分析">分析</span></h1><p>我们知道，vue3用<code>createApp</code>来创建一个应用实例，然后用<code>.mount()</code>来挂载一个应用。每一个应用所有的data均挂载在View Model上，现在我们来构建<code>cainVM</code>。对于一个VM，我们需要存储挂载的元素和HTML模板（如果有的话）、状态选项和编译后的VM。对于<code>VmOptions</code>，参考Vue我们需要实现<code>data, setup</code>等状态选项。</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-keyword">class</span> <span class="hljs-title class_">cApp</span> <span class="hljs-keyword">implements</span> cainVm &#123;<br>    <span class="hljs-comment">// 要挂载的信息</span><br>	<span class="hljs-attr">$template</span>: <span class="hljs-built_in">string</span><br>  	<span class="hljs-attr">$el</span>: <span class="hljs-title class_">HTMLElement</span><br>	<span class="hljs-attr">$options</span>: cainVmOptions<br>  	<span class="hljs-attr">$data</span>: <span class="hljs-built_in">object</span><br>	<br>    <span class="hljs-comment">// 编译器</span><br>  	<span class="hljs-attr">$compile</span>: <span class="hljs-title class_">VmCompiler</span><br>	<br>    <span class="hljs-comment">// 挂载函数</span><br>  	<span class="hljs-title function_">mount</span>(el?: <span class="hljs-built_in">string</span> | <span class="hljs-title class_">HTMLElement</span>)<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>在挂载时，会发生编译、挂载、更新三件事。获得挂载信息后传入compiler，compiler对其进行解析，模板被编译为<strong>渲染函数</strong>，用来返回虚拟 DOM 树，并将compile后的数据挂载到对应的DOM上。由于在响应式视图中，可能会存在大量的需要随时更新的DOM，如果每次数据更新都全部重新渲染，会造成大量的性能开销（真实DOM的操作耗时远远大于执行Javascript 语句），因此我们采虚拟DOM+真实DOM来进行DOM渲染。</p>
+<p><img data-fancybox="gallery" data-sizes="auto" data-src="https://cn.vuejs.org/assets/render-pipeline.CwxnH_lZ.png" alt="render pipeline" class="lazyload"></p>
+<p>为了能重新运行计算的代码来更新，我们需要将计算包装为一个 <code>update()</code> 函数，这个 <code>update()</code> 函数会产生一个<strong>副作用</strong>，或者就简称为<strong>作用</strong> (effect)，因为它会更改程序里的状态。例如：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-keyword">let</span> <span class="hljs-variable constant_">A2</span><br><br><span class="hljs-keyword">function</span> <span class="hljs-title function_">update</span>(<span class="hljs-params"></span>) &#123;<br>  <span class="hljs-variable constant_">A2</span> = <span class="hljs-variable constant_">A0</span> + <span class="hljs-variable constant_">A1</span><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><code>A0</code> 和 <code>A1</code> 被视为这个作用的<strong>依赖</strong> (dependency)，因为它们的值被用来执行这个作用。因此这次作用也可以被称作它的依赖的一个<strong>订阅者</strong> (subscriber)。例如由于 <code>A0</code> 和 <code>A1</code> 在 <code>update()</code> 执行时被访问到了，则 <code>update()</code> 需要在第一次调用之后成为 <code>A0</code> 和 <code>A1</code> 的订阅者。当检测到变量变化时，应该通知其所有订阅了的副作用重新执行。</p>
+<p>当一个依赖发生变化后，副作用会重新运行，这时候会创建一个更新后的虚拟 DOM 树。运行时渲染器遍历这棵新树，将它与旧树进行比较，然后将必要的更新应用到真实 DOM 上去。</p>
+<blockquote>
+<p>参考</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/Foreverddb/ddbind">Foreverddb&#x2F;DdBind: DdBind </a></p>
+<p><a target="_blank" rel="noopener" href="https://cn.vuejs.org/guide/extras/reactivity-in-depth.html">深入响应式系统 | Vue.js (vuejs.org)</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.yuque.com/makabaka-bn1pq/sg17tu/auwwfdrt08lpifvo?singleDoc#">Mvvm框架复写 (yuque.com)</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.ituring.com.cn/book/2953">Vue.js设计与实现 (ituring.com.cn)</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_33262521/article/details/115809265">手写一套完整的基于Vue的MVVM原理</a></p>
+<p><a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/2383634">Vue3的Proxy响应式原理</a></p>
+</blockquote>
+
+	</article>
+
+	 
+    <div class="kira-post-copyright">
+        <strong>Author：</strong>破酥 | C4iN<br>
+        <strong>Link：</strong><a href="https://c4in1.github.io/2024/08/09/MVVM/%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84mvvm-1/" title="https:&#x2F;&#x2F;c4in1.github.io&#x2F;2024&#x2F;08&#x2F;09&#x2F;MVVM&#x2F;实现一个简单的mvvm-1&#x2F;" target="_blank" rel="noopener">https:&#x2F;&#x2F;c4in1.github.io&#x2F;2024&#x2F;08&#x2F;09&#x2F;MVVM&#x2F;实现一个简单的mvvm-1&#x2F;</a><br>
+        
+            <strong>版权声明：</strong>本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/deed.zh" target="_blank">CC BY-NC-SA 3.0 CN</a> 协议进行许可
+        
+    </div>
+
+  
+	<div class="kira-post-nav">
+		<nav class="post-nav">
+			  
+			<!-- 先找到与当前文字相同的目录 -->
+			      
+			<!-- 在找到当前文章所在的 index -->
+			    
+			<!-- 上一篇文章 -->
+			<div class="old">
+				<span>上一章</span>
+				<a href="/2024/08/08/MVVM/MVVM%E5%8E%9F%E7%90%86%E5%8F%8A%E7%AE%80%E5%8D%95%E5%AE%9E%E7%8E%B0/"> MVVM原理</a>
+			</div>
+			                              
+		</nav>
+	</div>
+	
+	<div class="kira-post-meta kira-rainbow">
+		
+			<a class="kirafont icon-container-fill -link" href="/categories/MVVM/">MVVM</a>
+		
+		
+			<a class="kirafont icon-tag-fill -none-link" href="/tags/MVVM/" rel="tag">MVVM</a> <a class="kirafont icon-tag-fill -none-link" href="/tags/Vue/" rel="tag">Vue</a> <a class="kirafont icon-tag-fill -none-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a>
+		
+	</div>
+	
+	<div class="kira-post-footer">
+		
+
+		
+	<div class="giscus"></div>
+  
+    <script src="https://giscus.app/client.js"
+      data-repo="C4in1/BlogGitTalk"
+      data-repo-id="R_kgDOMgx61Q"
+      data-category="General"
+      data-category-id="DIC_kwDOMgx61c4Chec4"
+      data-mapping="pathname"
+      data-strict="0"
+      data-reactions-enabled="1"
+      data-emit-metadata="0"
+      data-input-position="top"
+      data-theme="light"
+      data-lang="en"
+      data-loading="lazy"
+      crossorigin="anonymous"
+      async  
+    ></script>
+  
+
+	</div>
+	
+</div>
+
+				</div>
+			</div>
+			<div class="kira-right-column">
+	<a onclick="document.querySelector('#kira-top-header').scrollIntoView({behavior: 'smooth'});" class="kira-backtotop" aria-label="回到顶部" title="回到顶部">
+		<button class="mdui-fab mdui-ripple">
+			<i class="kirafont icon-caret-up"></i>
+		</button>
+	</a>
+</div>
+
+		</div>
+	</body>
+</html>

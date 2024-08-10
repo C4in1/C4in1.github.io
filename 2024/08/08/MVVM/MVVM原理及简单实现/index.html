@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="/css/layout.css">
 
 		
-		<title> MVVM原理及简单实现 -  C4iN&#39;s Caprice</title>
+		<title> MVVM原理 -  C4iN&#39;s Caprice</title>
 		<!-- <link rel="stylesheet" href="https://unpkg.com/mdui@1.0.2/dist/css/mdui.min.css" /> -->
 		<!-- <script src="https://unpkg.com/mdui@1.0.2/dist/js/mdui.min.js"></script> -->
 		
@@ -84,7 +84,7 @@
 		</a>
 	</div>
 	<div class="kira-count">
-		<div><span>文章</span>8</div>
+		<div><span>文章</span>9</div>
 		<div><span>标签</span>13</div>
 		<div><span>分类</span>6</div>
 	</div>
@@ -207,7 +207,7 @@
             <a class="category-list-link" href="/categories/MVVM/">
               MVVM
             </a>
-            <span class="category-list-count">1</span>
+            <span class="category-list-count">2</span>
           </li>
         
           <li class="category-list-item">
@@ -253,7 +253,7 @@
 			
 	<div class="kira-widget-wrap">
 		<div id="randomtagcloud" class="kira-widget tagcloud kira-rainbow">
-			<a href="/tags/ES6/" style="font-size: 10px;">ES6</a> <a href="/tags/MVVM/" style="font-size: 10px;">MVVM</a> <a href="/tags/TypeScript/" style="font-size: 17.5px;">TypeScript</a> <a href="/tags/Typescript/" style="font-size: 10px;">Typescript</a> <a href="/tags/Vitepress/" style="font-size: 12.5px;">Vitepress</a> <a href="/tags/Vue/" style="font-size: 10px;">Vue</a> <a href="/tags/Webpack/" style="font-size: 10px;">Webpack</a> <a href="/tags/theme-censored/" style="font-size: 12.5px;">theme-censored</a> <a href="/tags/vue3/" style="font-size: 15px;">vue3</a> <a href="/tags/%E4%BB%A3%E7%A0%81%E8%A7%84%E8%8C%83/" style="font-size: 10px;">代码规范</a> <a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 20px;">前端</a> <a href="/tags/%E7%97%9B%E8%8B%A6%E7%9A%84%E9%85%8D%E7%BD%AE%E9%97%AE%E9%A2%98/" style="font-size: 12.5px;">痛苦的配置问题</a> <a href="/tags/%E9%A1%B9%E7%9B%AE%E8%A7%84%E8%8C%83/" style="font-size: 10px;">项目规范</a>
+			<a href="/tags/ES6/" style="font-size: 10px;">ES6</a> <a href="/tags/MVVM/" style="font-size: 12.5px;">MVVM</a> <a href="/tags/TypeScript/" style="font-size: 17.5px;">TypeScript</a> <a href="/tags/Typescript/" style="font-size: 10px;">Typescript</a> <a href="/tags/Vitepress/" style="font-size: 12.5px;">Vitepress</a> <a href="/tags/Vue/" style="font-size: 12.5px;">Vue</a> <a href="/tags/Webpack/" style="font-size: 10px;">Webpack</a> <a href="/tags/theme-censored/" style="font-size: 12.5px;">theme-censored</a> <a href="/tags/vue3/" style="font-size: 15px;">vue3</a> <a href="/tags/%E4%BB%A3%E7%A0%81%E8%A7%84%E8%8C%83/" style="font-size: 10px;">代码规范</a> <a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 20px;">前端</a> <a href="/tags/%E7%97%9B%E8%8B%A6%E7%9A%84%E9%85%8D%E7%BD%AE%E9%97%AE%E9%A2%98/" style="font-size: 12.5px;">痛苦的配置问题</a> <a href="/tags/%E9%A1%B9%E7%9B%AE%E8%A7%84%E8%8C%83/" style="font-size: 10px;">项目规范</a>
 		</div>
 		
 	</div>
@@ -266,7 +266,7 @@
 			Archive
 		</h3>
 		<div class="kira-widget">
-			<ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/">2024</a><span class="archive-list-count">8</span></li></ul>
+			<ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/">2024</a><span class="archive-list-count">9</span></li></ul>
 		</div>
 	</div>
 
@@ -354,19 +354,18 @@
 			<img
 				data-src="https://pic.imgdb.cn/item/66b47385d9c307b7e9d0b377.png"
 				data-sizes="auto"
-				alt="MVVM原理及简单实现"
+				alt="MVVM原理"
 				class="lazyload kira-post-cover-image disabled-kira-image"
 			/>
-			<h1>MVVM原理及简单实现</h1>
+			<h1>MVVM原理</h1>
 		</div>
 		
 		<div class="kira-post-meta kira-rainbow" style="margin:10px 0!important;">
 			<a><i class="kirafont icon-calendar-fill"></i>2024年08月08日</a>
-			<a><i class="kirafont icon-edit-fill"></i>669 字</a>
+			<a><i class="kirafont icon-edit-fill"></i>630 字</a>
 			<a><i class="kirafont icon-time-circle-fill"></i>大概 2 分钟</a>
 		</div>
-		<h1><span id="mvvm原理和实现">MVVM原理和实现</span></h1><p>了解vue的底层和实现一个简单的MVVM</p>
-<p>这部分主要介绍MVVM的基本概念</p>
+		<h1><span id="mvvm原理">MVVM原理</span></h1><p>了解vue的底层和实现一个简单的MVVM，这部分主要介绍MVVM的基本概念，以及实现对数组的mvvm。</p>
 <h1><span id="几个模型">几个模型</span></h1><h2><span id="mvc">MVC</span></h2><p>MVC：所有通信都是单向的。</p>
 <ul>
 <li>视图（View）：用户界面。</li>
@@ -396,7 +395,7 @@
 <li>视图层（View）：应用的展示效果，各类UI组件</li>
 <li>业务逻辑层（ViewModel）：框架封装的核心，它负责将数据与视图关联起来</li>
 </ul>
-<p>数据双向绑定真正实现其实靠的也是ES5中提供的<code>Object.defineProperty</code>。</p>
+<p>Vue2数据双向绑定真正实现其实靠的也是ES5中提供的<code>Object.defineProperty</code>，而Vue3改为使用<code>Proxy</code>来实现数据劫持。</p>
 <h2><span id="数据劫持">数据劫持</span></h2><p><code>Object.defineProperty(obj, propertyName, descriptor)</code>用于修改属性描述符对象，作用是直接在一个对象上定义一个新属性，或者修改一个已经存在的属性。具体内容可以参考<a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty">MDN</a>。</p>
 <ul>
 <li><code>obj,propertyName</code>：要应用描述符的对象及其属性。</li>
@@ -407,14 +406,10 @@
 
 
 
-<h2><span id="数据编译">数据编译</span></h2><h2><span id="发布订阅模式">发布订阅模式</span></h2><blockquote>
+<blockquote>
 <p>参考：</p>
 <p><a target="_blank" rel="noopener" href="https://www.ruanyifeng.com/blog/2015/02/mvcmvp_mvvm.html">MVC，MVP 和 MVVM 的图示 - 阮一峰的网络日志 (ruanyifeng.com)</a></p>
 <p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/joyco773/p/14768877.html">mvvm的概念、原理及实现 - 神奇的小胖子 - 博客园 (cnblogs.com)</a></p>
-<p><a target="_blank" rel="noopener" href="https://www.yuque.com/makabaka-bn1pq/sg17tu/auwwfdrt08lpifvo?singleDoc#">Mvvm框架复写 (yuque.com)</a></p>
-<p><a target="_blank" rel="noopener" href="https://www.ituring.com.cn/book/2953">Vue.js设计与实现 (ituring.com.cn)</a></p>
-<p><a target="_blank" rel="noopener" href="https://juejin.cn/post/6844904067525935118#heading-1">手写一套完整的基于Vue的MVVM原理 - 掘金 (juejin.cn)</a></p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_33262521/article/details/115809265">彻底搞懂Vue的MVVM响应式原理-CSDN博客</a></p>
 </blockquote>
 
 	</article>
@@ -435,6 +430,12 @@
 			<!-- 先找到与当前文字相同的目录 -->
 			   
 			<!-- 在找到当前文章所在的 index -->
+			       
+			<!-- 下一篇文章 -->
+			<div class="new">
+				<span>下一章</span>
+				<a href="/2024/08/09/MVVM/%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84mvvm-1/"> 实现一个简单的MVVM-1</a>
+			</div>
 			                              
 		</nav>
 	</div>
