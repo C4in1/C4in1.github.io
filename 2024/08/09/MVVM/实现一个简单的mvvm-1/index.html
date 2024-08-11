@@ -86,7 +86,7 @@
 	<div class="kira-count">
 		<div><span>文章</span>9</div>
 		<div><span>标签</span>13</div>
-		<div><span>分类</span>6</div>
+		<div><span>分类</span>7</div>
 	</div>
 	<div class="kira-list">
 		
@@ -215,6 +215,13 @@
               TypeScript
             </a>
             <span class="category-list-count">1</span>
+          </li>
+        
+          <li class="category-list-item">
+            <a class="category-list-link" href="/categories/MVVM/Vue/">
+              Vue
+            </a>
+            <span class="category-list-count">2</span>
           </li>
         
           <li class="category-list-item">
@@ -362,8 +369,8 @@
 		
 		<div class="kira-post-meta kira-rainbow" style="margin:10px 0!important;">
 			<a><i class="kirafont icon-calendar-fill"></i>2024年08月09日</a>
-			<a><i class="kirafont icon-edit-fill"></i>1.1k 字</a>
-			<a><i class="kirafont icon-time-circle-fill"></i>大概 4 分钟</a>
+			<a><i class="kirafont icon-edit-fill"></i>2k 字</a>
+			<a><i class="kirafont icon-time-circle-fill"></i>大概 9 分钟</a>
 		</div>
 		<p>记录一下对对象实现一个简单的mvvm的过程，这部分实现双向绑定。</p>
 <span id="more"></span>
@@ -389,13 +396,41 @@
 <h1><span id="分析">分析</span></h1><p>我们知道，vue3用<code>createApp</code>来创建一个应用实例，然后用<code>.mount()</code>来挂载一个应用。每一个应用所有的data均挂载在View Model上，现在我们来构建<code>cainVM</code>。对于一个VM，我们需要存储挂载的元素和HTML模板（如果有的话）、状态选项和编译后的VM。对于<code>VmOptions</code>，参考Vue我们需要实现<code>data, setup</code>等状态选项。</p>
 <figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-keyword">class</span> <span class="hljs-title class_">cApp</span> <span class="hljs-keyword">implements</span> cainVm &#123;<br>    <span class="hljs-comment">// 要挂载的信息</span><br>	<span class="hljs-attr">$template</span>: <span class="hljs-built_in">string</span><br>  	<span class="hljs-attr">$el</span>: <span class="hljs-title class_">HTMLElement</span><br>	<span class="hljs-attr">$options</span>: cainVmOptions<br>  	<span class="hljs-attr">$data</span>: <span class="hljs-built_in">object</span><br>	<br>    <span class="hljs-comment">// 编译器</span><br>  	<span class="hljs-attr">$compile</span>: <span class="hljs-title class_">VmCompiler</span><br>	<br>    <span class="hljs-comment">// 挂载函数</span><br>  	<span class="hljs-title function_">mount</span>(el?: <span class="hljs-built_in">string</span> | <span class="hljs-title class_">HTMLElement</span>)<br>&#125;<br></code></pre></td></tr></table></figure>
 
-<p>在挂载时，会发生编译、挂载、更新三件事。获得挂载信息后传入compiler，compiler对其进行解析，模板被编译为<strong>渲染函数</strong>，用来返回虚拟 DOM 树，并将compile后的数据挂载到对应的DOM上。由于在响应式视图中，可能会存在大量的需要随时更新的DOM，如果每次数据更新都全部重新渲染，会造成大量的性能开销（真实DOM的操作耗时远远大于执行Javascript 语句），因此我们采虚拟DOM+真实DOM来进行DOM渲染。</p>
+<p>在挂载时，会发生编译、挂载、更新三件事。获得挂载信息后传入compiler，compiler对其进行解析，模板被编译为<strong>渲染函数</strong>，用来返回虚拟 DOM 树。渲染器的作用是把虚拟 DOM 渲染为真实 DOM。由于在响应式视图中，可能会存在大量的需要随时更新的DOM，如果每次数据更新都全部重新渲染，会造成大量的性能开销（真实DOM的操作耗时远远大于执行Javascript 语句），因此我们采虚拟DOM+真实DOM来进行DOM渲染。</p>
 <p><img data-fancybox="gallery" data-sizes="auto" data-src="https://cn.vuejs.org/assets/render-pipeline.CwxnH_lZ.png" alt="render pipeline" class="lazyload"></p>
 <p>为了能重新运行计算的代码来更新，我们需要将计算包装为一个 <code>update()</code> 函数，这个 <code>update()</code> 函数会产生一个<strong>副作用</strong>，或者就简称为<strong>作用</strong> (effect)，因为它会更改程序里的状态。例如：</p>
 <figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-keyword">let</span> <span class="hljs-variable constant_">A2</span><br><br><span class="hljs-keyword">function</span> <span class="hljs-title function_">update</span>(<span class="hljs-params"></span>) &#123;<br>  <span class="hljs-variable constant_">A2</span> = <span class="hljs-variable constant_">A0</span> + <span class="hljs-variable constant_">A1</span><br>&#125;<br></code></pre></td></tr></table></figure>
 
 <p><code>A0</code> 和 <code>A1</code> 被视为这个作用的<strong>依赖</strong> (dependency)，因为它们的值被用来执行这个作用。因此这次作用也可以被称作它的依赖的一个<strong>订阅者</strong> (subscriber)。例如由于 <code>A0</code> 和 <code>A1</code> 在 <code>update()</code> 执行时被访问到了，则 <code>update()</code> 需要在第一次调用之后成为 <code>A0</code> 和 <code>A1</code> 的订阅者。当检测到变量变化时，应该通知其所有订阅了的副作用重新执行。</p>
 <p>当一个依赖发生变化后，副作用会重新运行，这时候会创建一个更新后的虚拟 DOM 树。运行时渲染器遍历这棵新树，将它与旧树进行比较，然后将必要的更新应用到真实 DOM 上去。</p>
+<p>我们实现一个MVVM主要有三个部分：编译器、渲染器、响应式系统。</p>
+<h2><span id="渲染器">渲染器</span></h2><p>渲染器的作用是把虚拟 DOM 渲染为真实 DOM，当数据变化时，只需要在虚拟DOM中找到对应的VNode，并且只更新其对应的真实DOM节点。组件树中的 vnodes 必须是唯一的。</p>
+<p>我们可以根据真实DOM构建VNode：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-keyword">export</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">VNode</span> &#123;<br><br>  <span class="hljs-attr">type</span>: <span class="hljs-built_in">string</span> | <span class="hljs-built_in">symbol</span><br>  <span class="hljs-attr">children</span>: <span class="hljs-built_in">string</span> | <span class="hljs-title class_">Array</span>&lt;<span class="hljs-title class_">VNode</span>&gt;<br>  <span class="hljs-attr">props</span>: <span class="hljs-title class_">Record</span>&lt;<span class="hljs-built_in">symbol</span>, <span class="hljs-built_in">unknown</span>&gt;<br>  <span class="hljs-comment">/**</span><br><span class="hljs-comment">   * DOM属性，可以是HTML元素容器，文本节点以及注释，对应其渲染出的真实DOM</span><br><span class="hljs-comment">   */</span><br>  <span class="hljs-attr">el</span>: <span class="hljs-title class_">Container</span> | <span class="hljs-title class_">Text</span> | <span class="hljs-title class_">Comment</span><br>  <span class="hljs-comment">// 唯一标识</span><br>  <span class="hljs-attr">key</span>: <span class="hljs-built_in">string</span> | <span class="hljs-built_in">number</span> | <span class="hljs-built_in">symbol</span> | <span class="hljs-literal">undefined</span><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>看下面的例子：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;TEST&quot;</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">:class</span>=<span class="hljs-string">&quot;test&quot;</span>&gt;</span><br>        TEST<br>    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> @<span class="hljs-attr">click</span>=<span class="hljs-string">&quot;handleClick&quot;</span>&gt;</span><br>        Click<br>    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p>会生成成如下虚拟DOM：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs typescript">&#123;<br>	<span class="hljs-attr">type</span>: <span class="hljs-string">&quot;div&quot;</span>,<br>	<span class="hljs-attr">props</span>: &#123;<br>        <span class="hljs-attr">class</span>: <span class="hljs-string">&quot;TEST&quot;</span>,<br>    &#125;,<br>    <span class="hljs-attr">children</span>: [<br>        &#123;<br>            <span class="hljs-attr">type</span>: <span class="hljs-string">&quot;div&quot;</span>,<br>            <span class="hljs-attr">props</span>: &#123;<br>                <span class="hljs-attr">class</span>: <span class="hljs-title function_">getProps</span>(test), 		<span class="hljs-comment">// 这里test是响应式的，需要特殊处理</span><br>            &#125;<br>            <span class="hljs-attr">children</span>: <span class="hljs-string">&quot;TEST&quot;</span>,<br>        &#125;,<br>        &#123;<br>         	<span class="hljs-attr">type</span>: <span class="hljs-string">&quot;div&quot;</span>,<br>            <span class="hljs-attr">props</span>: &#123;<br>                <span class="hljs-attr">onClick</span>: handleClick, 		<span class="hljs-comment">// 这里click是响应式的，需要特殊处理</span><br>            &#125;<br>            <span class="hljs-attr">children</span>: <span class="hljs-string">&quot;Click&quot;</span>,<br>        &#125;,<br>    ],<br>    <br>    <br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>接下来把虚拟DOM渲染为真实DOM，也就是实现一个渲染器，下面是实现的伪代码：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">renderer</span>(<span class="hljs-params"><span class="hljs-attr">vnode</span>: <span class="hljs-title class_">VNode</span>, <span class="hljs-attr">container</span>: <span class="hljs-title class_">Container</span></span>) &#123;<br>    <span class="hljs-keyword">const</span> el = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">createElement</span>(vnode.<span class="hljs-property">type</span>)<br>    <br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">const</span> key <span class="hljs-keyword">in</span> vnode) &#123;<br>      <span class="hljs-comment">/* 添加props到元素的属性、事件中 */</span><br>    &#125;<br>    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> vnode.<span class="hljs-property">children</span> === <span class="hljs-string">&#x27;string&#x27;</span>) &#123;<br>      <span class="hljs-comment">/* 如果子节点是字符串，则说明是文本节点*/</span><br>    &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (<span class="hljs-title class_">Array</span>.<span class="hljs-title function_">isArray</span>(vnode.<span class="hljs-property">children</span>)) &#123;<br>      <span class="hljs-comment">/* 如果子节点是数组，则递归调用renderer，遍历所有子节点 */</span><br>      vnode.<span class="hljs-property">children</span>.<span class="hljs-title function_">forEach</span>(<span class="hljs-function"><span class="hljs-params">child</span> =&gt;</span> <span class="hljs-title function_">renderer</span>(child, el))<br>    &#125; <span class="hljs-keyword">else</span> &#123;<br>      <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;Wrong Type&quot;</span>)<br>    &#125;<br>    <br>    <span class="hljs-comment">// 将元素添加到挂载点下</span><br>    container.<span class="hljs-title function_">appendChild</span>(el)<br>    <br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<h2><span id="编译器">编译器</span></h2><p>我们知道，当模板进入mvvm时首先要编译成渲染函数。模板中可能含有：</p>
+<ul>
+<li>不带动态绑定的HTML元素</li>
+<li>带动态绑定的HTML元素</li>
+<li>注释</li>
+</ul>
+<p>在Vue中采用带编译时信息的虚拟 DOM，当遇到不带动态绑定的HTML元素时，Vue会进行静态提升，在每次渲染时都使用这份相同的 vnode，渲染器知道新旧 vnode 在这部分是完全相同的，所以会完全跳过对它们的差异比对。</p>
+<p>对于单个有动态绑定的元素来说，在为这些元素生成渲染函数时，Vue 在 vnode 创建调用中直接编码了每个元素所需的更新类型（style，class之类）。</p>
+<p>在Vue中有一个概念“区块”，指内部结构是稳定的一个部分，<code>v-if</code> 和 <code>v-for</code> 指令会创建新的区块节点。每一个块都会追踪其所有带更新类型标记的后代节点 (不只是直接子节点)，编译的结果会被打平为一个数组，仅包含所有动态的后代节点，这样减少了我们在虚拟 DOM 协调时需要遍历的节点数量，模板中任何的静态部分都会被高效地略过。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">&lt;div&gt; &lt;!-- root block --&gt;<br>  &lt;div&gt;...&lt;/div&gt;         &lt;!-- 不会追踪 --&gt;<br>  &lt;div :id=&quot;id&quot;&gt;&lt;/div&gt;   &lt;!-- 要追踪 --&gt;<br>  &lt;div&gt;                  &lt;!-- 不会追踪 --&gt;<br>    &lt;div&gt;&#123;&#123; bar &#125;&#125;&lt;/div&gt; &lt;!-- 要追踪 --&gt;<br>  &lt;/div&gt;<br>&lt;/div&gt;<br><br>div (block root)<br>- div 带有 :id 绑定<br>- div 带有 &#123;&#123; bar &#125;&#125; 绑定<br></code></pre></td></tr></table></figure>
+
+<p>对于每一个传入实例，编译器需要读取哪些节点是绑定的，创建各个节点对应的vnode，根据DOM结构创建渲染函数，并进行扁平化处理。</p>
 <blockquote>
 <p>参考</p>
 <p><a target="_blank" rel="noopener" href="https://github.com/Foreverddb/ddbind">Foreverddb&#x2F;DdBind: DdBind </a></p>
@@ -404,6 +439,8 @@
 <p><a target="_blank" rel="noopener" href="https://www.ituring.com.cn/book/2953">Vue.js设计与实现 (ituring.com.cn)</a></p>
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_33262521/article/details/115809265">手写一套完整的基于Vue的MVVM原理</a></p>
 <p><a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/2383634">Vue3的Proxy响应式原理</a></p>
+<p><a target="_blank" rel="noopener" href="https://cn.vuejs.org/guide/extras/rendering-mechanism.html#compiler-informed-virtual-dom">渲染机制 | Vue.js (vuejs.org)</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/vuejs/core">vuejs&#x2F;core: 🖖 Vue.js is a progressive, incrementally-adoptable JavaScript framework for building UI on the web. (github.com)</a></p>
 </blockquote>
 
 	</article>
@@ -430,13 +467,23 @@
 				<span>上一章</span>
 				<a href="/2024/08/08/MVVM/MVVM%E5%8E%9F%E7%90%86%E5%8F%8A%E7%AE%80%E5%8D%95%E5%AE%9E%E7%8E%B0/"> MVVM原理</a>
 			</div>
-			                              
+			                                              
+			<!-- 先找到与当前文字相同的目录 -->
+			      
+			<!-- 在找到当前文章所在的 index -->
+			    
+			<!-- 上一篇文章 -->
+			<div class="old">
+				<span>上一章</span>
+				<a href="/2024/08/08/MVVM/MVVM%E5%8E%9F%E7%90%86%E5%8F%8A%E7%AE%80%E5%8D%95%E5%AE%9E%E7%8E%B0/"> MVVM原理</a>
+			</div>
+			          
 		</nav>
 	</div>
 	
 	<div class="kira-post-meta kira-rainbow">
 		
-			<a class="kirafont icon-container-fill -link" href="/categories/MVVM/">MVVM</a>
+			<a class="kirafont icon-container-fill -link" href="/categories/MVVM/">MVVM</a><a class="kirafont icon-container-fill -link" href="/categories/MVVM/Vue/">Vue</a>
 		
 		
 			<a class="kirafont icon-tag-fill -none-link" href="/tags/MVVM/" rel="tag">MVVM</a> <a class="kirafont icon-tag-fill -none-link" href="/tags/Vue/" rel="tag">Vue</a> <a class="kirafont icon-tag-fill -none-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a>
