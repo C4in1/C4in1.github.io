@@ -496,6 +496,10 @@
 <p>watch 的实现原理本质上利用了副作用函数重新执行时的可调度性。一个<code>watch</code>本身会创建一个 effect，当这个<code>effect</code>依赖的响应式数据发生变化时，会执行该<code>effect</code>的调度器函数，即<code> scheduler</code>，可以理解为一个回调函数。</p>
 <p>过期的副作用函数会导致竞态问题。为了解决这个问题，我们可以为<code>watch</code>的回调函数设计了第三个参数，即<code>onInvalidate</code>。它是一个函数，用来注册过期回调。每当<code>watch</code>的回调函数执行之前，会优先执行用户通过<code>onInvalidate</code>注册的过期回调。</p>
 <h2><span id="响应式系统实现">响应式系统实现</span></h2><blockquote>
+<p>最后在这里放个源码，更新中</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/CainHappyfish/vue-mvvm-domo">CainHappyfish&#x2F;vue-mvvm-domo (github.com)</a></p>
+</blockquote>
+<blockquote>
 <p>参考</p>
 <p><a target="_blank" rel="noopener" href="https://github.com/Foreverddb/ddbind">Foreverddb&#x2F;DdBind: DdBind </a></p>
 <p><a target="_blank" rel="noopener" href="https://cn.vuejs.org/guide/extras/reactivity-in-depth.html">深入响应式系统 | Vue.js (vuejs.org)</a></p>
