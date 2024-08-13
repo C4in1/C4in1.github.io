@@ -362,8 +362,8 @@
 		
 		<div class="kira-post-meta kira-rainbow" style="margin:10px 0!important;">
 			<a><i class="kirafont icon-calendar-fill"></i>2024年08月09日</a>
-			<a><i class="kirafont icon-edit-fill"></i>5.1k 字</a>
-			<a><i class="kirafont icon-time-circle-fill"></i>大概 23 分钟</a>
+			<a><i class="kirafont icon-edit-fill"></i>5.8k 字</a>
+			<a><i class="kirafont icon-time-circle-fill"></i>大概 26 分钟</a>
 		</div>
 		<p>记录一下对对象实现一个简单的mvvm的过程，这部分主要是最基本的构造。</p>
 <span id="more"></span>
@@ -488,7 +488,14 @@
 <figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-keyword">export</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">watchEffect</span>(<span class="hljs-params"><span class="hljs-attr">fn</span>: <span class="hljs-title class_">EffectFunction</span>, <span class="hljs-attr">options</span>: <span class="hljs-title class_">EffectOptions</span></span>): <span class="hljs-title class_">EffectFunction</span> &#123;<br>  <span class="hljs-keyword">const</span> <span class="hljs-attr">effectFn</span>: <span class="hljs-title class_">EffectFunction</span> = <span class="hljs-function">() =&gt;</span> &#123;<br>    <span class="hljs-title function_">cleanup</span>(effectFn)<br>    activeEffect = fn<br>    effectStack.<span class="hljs-title function_">push</span>(activeEffect)<br>    <span class="hljs-keyword">const</span> res = <span class="hljs-title function_">fn</span>()<br>    effectStack.<span class="hljs-title function_">pop</span>()<br>    activeEffect = effectStack[effectStack.<span class="hljs-property">length</span> - <span class="hljs-number">1</span>]<br><br>    <span class="hljs-keyword">return</span> res<br>  &#125;<br><br>  effectFn.<span class="hljs-property">options</span> = options<br>  effectFn.<span class="hljs-property">deps</span> = []<br><br>  <span class="hljs-keyword">if</span> (!options.<span class="hljs-property">lazy</span>) &#123;<br>    <span class="hljs-title function_">effectFn</span>()<br>  &#125;<br><br>  <span class="hljs-keyword">return</span> effectFn<br>&#125;<br></code></pre></td></tr></table></figure>
 
 <p>很眼熟吧，其实就是上文中一直用到的<code>effect</code>函数。</p>
-<blockquote>
+<h2><span id="总结一下">总结一下</span></h2><p>一个响应式数据最基本的实现依赖于对“读取”和“设置”操作的拦截。当“读取”操作发生时，我们将当前执行的副作用函数存储到“桶”中；当<br>“设置”操作发生时，再将副作用函数从“桶”里取出并执行。而后我们使用<code>WeakMap</code>配合<code>Map</code>构建了新的“桶”结构，从而能够在响应式数据与副作用函数之间建立更加精确的联系。</p>
+<p>我们还讨论了分支切换导致的冗余副作用的问题，这个问题会导致副作用函数进行不必要的更新。为了解决这个问题，我们需要在每<br>次副作用函数重新执行之前，清除上一次建立的响应联系，而当副作用函数重新执行后，会再次建立新的响应联系，新的响应联系中不存在冗余副作用问题，从而解决了问题。</p>
+<p>为了避免在响应式数据与副作用函数之间建立的响应联系发生错乱，我们需要使用副作用函数栈来存储不同的副作用函数。当一个副作用函数执行完毕后，将其从栈中弹出。如果 trigger触发执行的副作用函数与当前正在执行的副作用函数相同，则不触发执行。</p>
+<p>所谓可调度，指的是当<code>trigger </code>动作触发副作用函数重新执行时，有能力决定副作用函数执行的时机、次数以及方式。为了实现调度能力，我们为<code>effect</code>函数增加了第二个选项参数，可以通过 scheduler 选项指定调用器，这样用户可以通过调度器自行完成任务的调度。</p>
+<p>计算属性实际上是一个懒执行的副作用函数，我们通过 lazy 选项使得副作用函数可以懒执行。被标记为懒执行的副作用函数可以通过手动方式让其执行。</p>
+<p>watch 的实现原理本质上利用了副作用函数重新执行时的可调度性。一个 watch 本身会创建一个 effect，当这个 effect 依赖的响应式数据发生变化时，会执行该 effect 的调度器函数，即 scheduler，可以理解为一个回调函数。</p>
+<p>过期的副作用函数会导致竞态问题。为了解决这个问题，我们可以为<code>watch</code>的回调函数设计了第三个参数，即<code>onInvalidate</code>。它是一个函数，用来注册过期回调。每当<code>watch</code>的回调函数执行之前，会优先执行用户通过<code>onInvalidate</code>注册的过期回调。</p>
+<h2><span id="响应式系统实现">响应式系统实现</span></h2><blockquote>
 <p>参考</p>
 <p><a target="_blank" rel="noopener" href="https://github.com/Foreverddb/ddbind">Foreverddb&#x2F;DdBind: DdBind </a></p>
 <p><a target="_blank" rel="noopener" href="https://cn.vuejs.org/guide/extras/reactivity-in-depth.html">深入响应式系统 | Vue.js (vuejs.org)</a></p>
