@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html 
+	lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		
+<link rel="stylesheet" href="/css/layout.css">
+
+		
+		<title> 实现一个简单的MVVM-3 -  C4iN&#39;s Caprice</title>
+		<!-- <link rel="stylesheet" href="https://unpkg.com/mdui@1.0.2/dist/css/mdui.min.css" /> -->
+		<!-- <script src="https://unpkg.com/mdui@1.0.2/dist/js/mdui.min.js"></script> -->
+		
+<link rel="stylesheet" href="/lib/mdui/mdui.min.css">
+
+		
+<script src="/lib/mdui/mdui.min.js"></script>
+
+		<!-- lazyload -->
+		
+<script src="/lib/lazysizes.js"></script>
+
+		<!-- smooth-scrolling -->
+		
+<script src="/lib/smooth-scrolling.js"></script>
+
+		<!-- highlight -->
+		
+<link rel="stylesheet" href="/lib/highlight/atom-one-dark.min.css">
+
+		
+<script src="/lib/highlight/highlight.min.js"></script>
+
+		<!-- 预置 kiraicon -->
+		
+<link rel="stylesheet" href="/lib/iconfont/iconfont.css">
+
+		
+		<link
+			rel="shortcut icon"
+			href="https://pic.imgdb.cn/item/6693875ad9c307b7e98b4288.gif"
+			type="image/gif"
+		/>
+		
+<link rel="stylesheet" href="/deps/css/APlayer.min.css">
+
+		
+		
+<script src="/deps/js/APlayer.min.js"></script>
+<script src="/deps/js/Meting.min.js"></script>
+
+	<meta name="generator" content="Hexo 6.3.0"></head>
+
+	<body>
+		<div
+			class="kira-background"
+			style="background-image: url('https://pic.imgdb.cn/item/66b458ffd9c307b7e9aadb03.png')"
+		></div>
+		<div class="kira-header">
+    <a
+        class="kira-drawer-button mdui-ripple"
+        title="导航栏"
+        onclick="document.querySelector('.kira-sidebar-modal').classList.add('show');document.querySelector('.kira-sidebar#sidebar').classList.add('show');"
+    >
+        <i class="kirafont icon-menu"></i>
+    </a>
+    <a href="/" title="C4iN&#39;s Caprice">
+        <img
+			src="https://pic.imgdb.cn/item/66b45933d9c307b7e9ab0715.png"
+			alt="破酥 | C4iN"
+		/>
+    </a>
+</div>
+		<div class="kira-body">
+			<div class="kira-sidebar" id="sidebar">
+	<div class="kira-avatar mdui-ripple">
+		<a target="_blank" rel="noopener" href="https://pic.imgdb.cn/item/66b45933d9c307b7e9ab0715.png" title="破酥 | C4iN">
+			<img
+				src="https://pic.imgdb.cn/item/66b45933d9c307b7e9ab0715.png"
+				alt="破酥 | C4iN"
+			/>
+		</a>
+	</div>
+	<div class="kira-count">
+		<div><span>文章</span>12</div>
+		<div><span>标签</span>13</div>
+		<div><span>分类</span>6</div>
+	</div>
+	<div class="kira-list">
+		
+		<a
+			class="kira-list-item mdui-ripple false"
+			href="/"
+			title="回到首页"
+		>
+			<i
+				class="kirafont
+					
+						icon-home
+					"
+			></i>
+			<div class="kira-list-item-content">
+				回到首页
+			</div>
+		</a>
+		
+		<a
+			class="kira-list-item mdui-ripple false"
+			href="/archive"
+			title="文章归档"
+		>
+			<i
+				class="kirafont
+					
+						icon-container
+					"
+			></i>
+			<div class="kira-list-item-content">
+				文章归档
+			</div>
+		</a>
+		
+		<a
+			class="kira-list-item mdui-ripple false"
+			href="/about"
+			title="关于本人"
+		>
+			<i
+				class="kirafont
+					
+						icon-user
+					"
+			></i>
+			<div class="kira-list-item-content">
+				关于本人
+			</div>
+		</a>
+		
+		<a
+			class="kira-list-item mdui-ripple false"
+			href="/friends"
+			title="我的朋友"
+		>
+			<i
+				class="kirafont
+					
+						icon-team
+					"
+			></i>
+			<div class="kira-list-item-content">
+				我的朋友
+			</div>
+		</a>
+		
+	</div>
+	<aside id="kira-sidebar">
+		
+			<div class="kira-widget-wrap">
+	<div class="kira-widget kira-social">
+		
+			<a
+				class="mdui-ripple"
+				href="tencent://AddContact/?fromId=45&fromSubId=1&subcmd=all&uin=2405544030&website=www.oicqzone.com"
+				target="_blank"
+				mdui-tooltip="{content: 'QQ'}"
+				style="color: rgb(49, 174, 255); background-color: rgba(49, 174, 255, .1);"
+			>
+				<i
+					class="kirafont
+					
+						icon-QQ
+					"
+				></i>
+			</a>
+		
+			<a
+				class="mdui-ripple"
+				href="https://github.com/CainHappyfish/"
+				target="_blank"
+				mdui-tooltip="{content: 'GitHub'}"
+				style="color: rgb(25, 23, 23); background-color: rgba(25, 23, 23, .15);"
+			>
+				<i
+					class="kirafont
+					
+						icon-github
+					"
+				></i>
+			</a>
+		
+	</div>
+</div>
+
+		
+			
+  <div class="kira-widget-wrap">
+    <h3 class="kira-widget-title">分类</h3>
+    <div class="kira-widget">
+      <ul class="category-list">
+        
+        
+
+        
+          <li class="category-list-item">
+            <a class="category-list-link" href="/categories/MVVM/">
+              MVVM
+            </a>
+            <span class="category-list-count">4</span>
+          </li>
+        
+          <li class="category-list-item">
+            <a class="category-list-link" href="/categories/TypeScript/">
+              TypeScript
+            </a>
+            <span class="category-list-count">2</span>
+          </li>
+        
+          <li class="category-list-item">
+            <a class="category-list-link" href="/categories/Vue/">
+              Vue
+            </a>
+            <span class="category-list-count">1</span>
+          </li>
+        
+          <li class="category-list-item">
+            <a class="category-list-link" href="/categories/project/">
+              project
+            </a>
+            <span class="category-list-count">1</span>
+          </li>
+        
+          <li class="category-list-item">
+            <a class="category-list-link" href="/categories/vitepress/">
+              vitepress
+            </a>
+            <span class="category-list-count">2</span>
+          </li>
+        
+          <li class="category-list-item">
+            <a class="category-list-link" href="/categories/项目构建/">
+              项目构建
+            </a>
+            <span class="category-list-count">2</span>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+		
+			
+	<div class="kira-widget-wrap">
+		<div id="randomtagcloud" class="kira-widget tagcloud kira-rainbow">
+			<a href="/tags/ES6/" style="font-size: 10px;">ES6</a> <a href="/tags/MVVM/" style="font-size: 15px;">MVVM</a> <a href="/tags/TypeScript/" style="font-size: 17.5px;">TypeScript</a> <a href="/tags/Typescript/" style="font-size: 10px;">Typescript</a> <a href="/tags/Vitepress/" style="font-size: 12.5px;">Vitepress</a> <a href="/tags/Vue/" style="font-size: 15px;">Vue</a> <a href="/tags/Webpack/" style="font-size: 10px;">Webpack</a> <a href="/tags/theme-censored/" style="font-size: 12.5px;">theme-censored</a> <a href="/tags/vue3/" style="font-size: 15px;">vue3</a> <a href="/tags/%E4%BB%A3%E7%A0%81%E8%A7%84%E8%8C%83/" style="font-size: 10px;">代码规范</a> <a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 20px;">前端</a> <a href="/tags/%E7%97%9B%E8%8B%A6%E7%9A%84%E9%85%8D%E7%BD%AE%E9%97%AE%E9%A2%98/" style="font-size: 12.5px;">痛苦的配置问题</a> <a href="/tags/%E9%A1%B9%E7%9B%AE%E8%A7%84%E8%8C%83/" style="font-size: 10px;">项目规范</a>
+		</div>
+		
+	</div>
+
+
+		
+			
+	<div class="kira-widget-wrap">
+		<h3 class="kira-widget-title">
+			Archive
+		</h3>
+		<div class="kira-widget">
+			<ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/">2024</a><span class="archive-list-count">12</span></li></ul>
+		</div>
+	</div>
+
+
+		
+	</aside>
+	<div class="kira-copyright">
+		&copy; 2024
+		<a href="/">破酥 | C4iN</a>
+		Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> &
+		<a href="https://github.com/ch1ny/kira-hexo/" target="_blank">Kira-Hexo</a>
+		<br />
+		
+		<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div><span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span></div><div><span id="busuanzi_container_site_uv">共接待访客<span id="busuanzi_value_site_uv"></span>位</span></div>
+	</div>
+</div>
+<div
+	class="kira-sidebar-modal"
+	id="sidebar-modal"
+	onclick="(function(self) {
+		self.classList.remove('show');
+		document.querySelector('.kira-sidebar.show#sidebar').classList.remove('show');
+	})(this)"
+></div>
+			<div class="kira-content">
+				<div id="kira-top-header"></div>
+				<div class="kira-main-content">
+					
+<link rel="stylesheet" href="/css/kira-image.css">
+
+
+<script src="/js/kira-image.js"></script>
+
+<div class="kira-image">
+    <div class="kira-image-modal">
+        <div class="kira-image-header">
+            <div class="kira-image-counter"></div>
+            <div class="kira-image-title"></div>
+            <div class="kira-image-operation">
+                <div class="kira-image-operation-button" id="kira-image-operation-button-zoom">
+                    <i class="kirafont icon-zoom-in"></i>
+                </div>
+                <div class="kira-image-operation-button" id="kira-image-operation-button-close">
+                    <i class="kirafont icon-close"></i>
+                </div>
+            </div>
+        </div>
+        <div class="kira-image-container">
+            <div class="kira-image-prev-button-panel">
+                <div class="kira-image-exchange-button">
+                    <i class="kirafont icon-left"></i>
+                </div>
+            </div>
+            <div class="kira-image-list">
+                <div class="kira-image-prev">
+                    <img />
+                </div>
+                <div class="kira-image-now">
+                    <img />
+                </div>
+                <div class="kira-image-next">
+                    <img />
+                </div>
+            </div>
+            <div class="kira-image-next-button-panel">
+                <div class="kira-image-exchange-button">
+                    <i class="kirafont icon-right"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+	
+<link rel="stylesheet" href="/css/kira-code-copy.css">
+
+	
+<script src="/js/kira-code-copy.js"></script>
+
+
+<div class="kira-post">
+	<article>
+		
+		<div class="kira-post-cover">
+			<img
+				data-src="https://pic.imgdb.cn/item/66b47385d9c307b7e9d0b377.png"
+				data-sizes="auto"
+				alt="实现一个简单的MVVM-3"
+				class="lazyload kira-post-cover-image disabled-kira-image"
+			/>
+			<h1>实现一个简单的MVVM-3</h1>
+		</div>
+		
+		<div class="kira-post-meta kira-rainbow" style="margin:10px 0!important;">
+			<a><i class="kirafont icon-calendar-fill"></i>2024年08月27日</a>
+			<a><i class="kirafont icon-edit-fill"></i>5.2k 字</a>
+			<a><i class="kirafont icon-time-circle-fill"></i>大概 24 分钟</a>
+		</div>
+		<p>这部分记录一下组件的实现原理。</p>
+<span id="more"></span>
+
+<h1><span id="组件的实现原理">组件的实现原理</span></h1><p>我们可以将一个大的页面拆分为多个部分，每一个部分都可以作为单独的组件，这些组件共同组成完整的页面。组件化的实现同样需要渲染器的支持。</p>
+<p>一个有状态组件就是一个选项对象：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-keyword">const</span> component = &#123;<br>    <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;componenet&quot;</span>,<br>    <span class="hljs-title function_">data</span>(<span class="hljs-params"></span>) &#123;<br>        <span class="hljs-keyword">return</span> &#123;<br>            <span class="hljs-attr">foo</span>: <span class="hljs-number">1</span><br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>如果从渲染器的内部实现来看，一个组件则是一个特殊类型的虚拟 DOM 节点。</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-keyword">const</span> vnode = &#123;<br>	<span class="hljs-attr">type</span>: component<br>    ...<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>我们之前在<code>patch</code>函数中留下过一个接口，现在我们来完善它：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs typescript">...<br><span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> <span class="hljs-keyword">type</span> === <span class="hljs-built_in">object</span>) &#123;<br>    <span class="hljs-keyword">if</span> (!oldNode) &#123;<br>        <span class="hljs-comment">// 挂载组件</span><br>        <span class="hljs-title function_">mountComponent</span>(newNode, container, anchor)<br>    &#125; <span class="hljs-keyword">else</span> &#123;<br>        <span class="hljs-comment">// 更新组件</span><br>        <span class="hljs-title function_">patchComponent</span>(oldNode, newNode, anchor)<br>    &#125;<br>&#125;<br>...<br></code></pre></td></tr></table></figure>
+
+<p>渲染器有能力处理组件后，下一步我们要做的是，设计组件在用户层面的接口。组件本身是对页面内容的封装，它用来描述页面内容的一部分，一个组件必须包含一个渲染函数，即<code>render</code>函数，并且渲染函数的返回值应该是虚拟 DOM。换句话说，<strong>组件的渲染函数就是用来描述组件所渲染内容的接口</strong>：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-keyword">const</span> component = &#123;<br>    <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;componenet&quot;</span>,<br>    <span class="hljs-title function_">render</span>(<span class="hljs-params"></span>) &#123;<br>        <span class="hljs-comment">// 返回vdom</span><br>        <span class="hljs-keyword">return</span> &#123;<br>            <span class="hljs-attr">type</span>: <span class="hljs-string">&#x27;div&#x27;</span>,<br>            <span class="hljs-attr">children</span>: <span class="hljs-string">&#x27;text&#x27;</span><br>        &#125;<br>    &#125;<br>&#125;<br><br><span class="hljs-keyword">const</span> compVNode = &#123;<br>    <span class="hljs-attr">type</span>: component<br>&#125;<br><br>renderer.<span class="hljs-title function_">render</span>(<span class="hljs-title class_">CompVNode</span>, <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">querySelector</span>(<span class="hljs-string">&#x27;#app&#x27;</span>))<br></code></pre></td></tr></table></figure>
+
+<p>接下来我们来实现<code>mountComponent</code>函数，实现组件的初始渲染。</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">mountComponent</span>(<span class="hljs-params">newCompVNode, container, anchor</span>) &#123;<br>  <span class="hljs-comment">// 获取组件</span><br>  <span class="hljs-keyword">const</span> componentOptions = newCompVNode.<span class="hljs-property">type</span> <span class="hljs-keyword">as</span> componentOptions<br>  <span class="hljs-comment">// 获取组件渲染函数</span><br>  <span class="hljs-keyword">const</span> &#123; render &#125; = componentOptions<br>  <span class="hljs-comment">// 执行渲染函数，获取组件要渲染的内容，即 render 函数返回的虚拟ODM</span><br>  <span class="hljs-keyword">const</span> subTree = <span class="hljs-title function_">render</span>()<br>  <br>  <span class="hljs-comment">// 挂载组件subTree</span><br>  <span class="hljs-title function_">patch</span>(<span class="hljs-literal">undefined</span>, subTree, container, anchor)<br>  <br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h2><span id="组件状态与自更新">组件状态与自更新</span></h2><p>我们约定用户必须使用<code>data</code>函数来定义组件自身的状态，同时可以在渲染函数中通过<code>this</code>访问由<code>data</code>函数返回的状态数据。当组件自身状态发生变化时，我们需要有能力触发组件更新，即组件的自更新。为此，我们需要将整个渲染任务包装到一个<code>watchEffect</code>中：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">mountComponent</span>(<span class="hljs-params">newCompVNode, container, anchor</span>) &#123;<br>  <span class="hljs-comment">// 获取组件</span><br>  <span class="hljs-keyword">const</span> componentOptions = newCompVNode.<span class="hljs-property">type</span><br>  <span class="hljs-comment">// 获取组件渲染函数</span><br>  <span class="hljs-keyword">const</span> &#123; render, data &#125; = componentOptions<br>  <span class="hljs-comment">// 调用data函数获取原始数据，并包装为响应式</span><br>  <span class="hljs-keyword">const</span> state = <span class="hljs-title function_">reactive</span>(<span class="hljs-title function_">data</span>())<br>  <span class="hljs-title function_">watchEffect</span>(<span class="hljs-function">() =&gt;</span> &#123;<br>    <span class="hljs-comment">// 执行渲染函数，获取组件要渲染的内容，即 render 函数返回的虚拟ODM</span><br>    <span class="hljs-comment">// 调用时将this设置为state，从而render函数内部可以使用this访问组件自身状态数据</span><br>    <span class="hljs-keyword">const</span> subTree = render.<span class="hljs-title function_">call</span>(state)<br>    <span class="hljs-comment">// 挂载组件subTree</span><br>    <span class="hljs-title function_">patch</span>(<span class="hljs-literal">undefined</span>, subTree, container, anchor)<br>    <br>  &#125;)<br><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>一旦组件自身的响应式数据发生变化，组件就会自动重新执行渲染函数，从而完成更新。但是，由于<code>watchEffect</code>的执行是同步的，因此当响应式数据发生变化时，与之关联的副作用函数会同步执行。换句话说，如果多次修改响应式数据的值，将会导致渲染函数执行多次，这实际上是没有必要的。</p>
+<p>因此，我们需要设计一个机制，以使得无论对响应式数据进行多少次修改，副作用函数都只会重新执行一次。为此，我们需要实现一个调度器，当副作用函数需要重新执行时，我们不会立即执行它，而是将它缓冲到一个微任务队列中，等到执行栈清空后，再将它从微任务队列中取出并执行，我们就有机会对任务进行去重，从而避免多次执行副作用函数带来的性能开销。下面是简单实现：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-comment">// 任务缓存序列，使用Set自动去重</span><br><span class="hljs-keyword">const</span> queue = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Set</span>&lt;<span class="hljs-title class_">EffectFunction</span>&gt;()<br><span class="hljs-comment">// 是否正在刷新队列</span><br><span class="hljs-keyword">let</span> isFlushing = <span class="hljs-literal">false</span><br><span class="hljs-comment">// 立即resolve的Promise</span><br><span class="hljs-keyword">const</span> p = <span class="hljs-title class_">Promise</span>.<span class="hljs-title function_">resolve</span>()<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 任务调度函数</span><br><span class="hljs-comment"> * */</span><br><span class="hljs-keyword">function</span> <span class="hljs-title function_">queueJob</span>(<span class="hljs-params"><span class="hljs-attr">job</span>: <span class="hljs-title class_">EffectFunction</span></span>) &#123;<br>  <span class="hljs-comment">// 将任务存入任务队列</span><br>  queue.<span class="hljs-title function_">add</span>(job)<br>  <span class="hljs-comment">// 如果还没开始刷新，则进行刷新</span><br>  <span class="hljs-keyword">if</span> (!isFlushing) &#123;<br>    <span class="hljs-comment">// 设置标识为true避免重复刷新</span><br>    isFlushing = <span class="hljs-literal">true</span><br>    <span class="hljs-comment">// 在微任务中刷新缓冲队列</span><br>    p.<span class="hljs-title function_">then</span>(<span class="hljs-function">() =&gt;</span> &#123;<br>      <span class="hljs-keyword">try</span> &#123;<br>        <span class="hljs-comment">// 执行任务</span><br>        queue.<span class="hljs-title function_">forEach</span>(<span class="hljs-function">(<span class="hljs-params"><span class="hljs-attr">job</span>: <span class="hljs-title class_">EffectFunction</span></span>) =&gt;</span> <span class="hljs-title function_">job</span>())<br>      &#125; <span class="hljs-keyword">finally</span> &#123;<br>        <span class="hljs-comment">// 重置状态</span><br>        isFlushing = <span class="hljs-literal">false</span><br>        queue.<span class="hljs-title function_">clear</span>()<br>      &#125;<br>    &#125;)<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>有了<code>queueJob</code>函数之后，我们可以在创建渲染副作用时使用它：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-title function_">watchEffect</span>(<span class="hljs-function">() =&gt;</span> &#123;<br>  <span class="hljs-keyword">const</span> subTree = render.<span class="hljs-title function_">call</span>(state, state)<br>  <span class="hljs-title function_">patch</span>(<span class="hljs-literal">undefined</span>, subTree, container, anchor)<br>&#125;, &#123;<br>  <span class="hljs-attr">scheduler</span>: queueJob<br>&#125;)<br></code></pre></td></tr></table></figure>
+
+<p>上面这段代码存在缺陷。可以看到，我们在<code>watchEffect</code>函数内调用 <code>patch</code>函数完成渲染时，第一个参数总是<code> null</code>。这意味着，每次更新发生时都会进行全新的挂载，而不会打补丁，这是不正确的。正确的做法是：每次更新时，都拿新的<code>subTree</code>与上一次组件所渲染的<code>subTree</code>进行打补丁。为此，我们需要实现组件实例，用它来维护组件整个生命周期的状态，这样渲染器才能够在正确的时机执行合适的操作。</p>
+<h2><span id="组件实例与组件的生命周期">组件实例与组件的生命周期</span></h2><p>组件实例本质上就是一个状态集合（或一个对象），它维护着组件运行过程中的所有信息，例如注册到组件的生命周期函数、组件渲染的子树（<code>subTree</code>）、组件是否已经被挂载、组件自身的状态（data），等等。为了解决上一节中关于组件更新的问题，我们需要引入组件实例的概念：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-keyword">export</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">ComponentInstance</span> &#123;<br>  <span class="hljs-comment">/**</span><br><span class="hljs-comment">   * 状态数据</span><br><span class="hljs-comment">   * */</span><br>  <span class="hljs-attr">state</span>: <span class="hljs-built_in">any</span><br>  <span class="hljs-comment">/**</span><br><span class="hljs-comment">   * 是否挂载</span><br><span class="hljs-comment">   * */</span><br>  <span class="hljs-attr">isMounted</span>: <span class="hljs-built_in">boolean</span><br>  <span class="hljs-comment">/**</span><br><span class="hljs-comment">   * 渲染内容，存储组件的渲染函数返回的虚拟 DOM，即组件的子树</span><br><span class="hljs-comment">   * */</span><br>  <span class="hljs-attr">subTree</span>: <span class="hljs-title class_">VNode</span> | <span class="hljs-literal">null</span><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>然后修改<code>mountComponent</code>：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">mountComponent</span>(<span class="hljs-params"><span class="hljs-title class_">CompVNode</span>: <span class="hljs-title class_">VNode</span>, <span class="hljs-attr">container</span>: <span class="hljs-title class_">Container</span>, anchor?: <span class="hljs-title class_">Node</span> | <span class="hljs-literal">null</span></span>) &#123;<br>  ...<br>  <span class="hljs-comment">// 组件实例</span><br>  <span class="hljs-keyword">const</span> <span class="hljs-attr">instance</span>: <span class="hljs-title class_">ComponentInstance</span> = &#123;<br>    <span class="hljs-comment">// 状态数据data</span><br>    state,<br>    <span class="hljs-comment">// 是否挂载</span><br>    <span class="hljs-attr">isMounted</span>: <span class="hljs-literal">false</span>,<br>    <span class="hljs-comment">// 渲染内容subTree</span><br>    <span class="hljs-attr">subTree</span>: <span class="hljs-literal">null</span><br>  &#125;<br><br>  <span class="hljs-comment">// 将组件实例设置到vnode上，用于后续更新</span><br>  newCompVNode.<span class="hljs-property">component</span> = instance<br><br>  <span class="hljs-title function_">watchEffect</span>(<span class="hljs-function">() =&gt;</span> &#123;<br>    <span class="hljs-comment">// 执行渲染函数，获取组件要渲染的内容，即 render 函数返回的虚拟ODM</span><br>    <span class="hljs-comment">// 调用时将this设置为state，从而render函数内部可以使用this访问组件自身状态数据</span><br>    <span class="hljs-keyword">const</span> subTree = render.<span class="hljs-title function_">call</span>(state, state)<br><br>    <span class="hljs-keyword">if</span> (!instance.<span class="hljs-property">isMounted</span>) &#123;<br>      <span class="hljs-comment">// 初次挂载组件subTree</span><br>      <span class="hljs-title function_">patch</span>(<span class="hljs-literal">undefined</span>, subTree, container, anchor)<br>      <span class="hljs-comment">// 将组件实例的 isMounted 设置为 true，这样当更新发生时就不会再次进行挂载操作</span><br>      instance.<span class="hljs-property">isMounted</span> = <span class="hljs-literal">true</span><br>    &#125; <span class="hljs-keyword">else</span> &#123;<br>      <span class="hljs-comment">// 已被挂载，更新</span><br>      <span class="hljs-title function_">patch</span>(instance.<span class="hljs-property">subTree</span> <span class="hljs-keyword">as</span> <span class="hljs-title class_">VNode</span>, subTree, container, anchor)<br>      instance.<span class="hljs-property">subTree</span> = subTree<br>    &#125;<br><br>  &#125;, &#123;<br>    <span class="hljs-attr">scheduler</span>: queueJob<br>  &#125;)<br><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>我们可以在需要的时候，任意地在组件实例<code> instance</code>上添加需要的属性。但需要注意的是，我们应该尽可能保持组件实例轻量，以减少内存占用。组件实例的<code>instance.isMounted</code>属性可以用来区分组件的挂载和更新，我们可以在合适的时机调用组件对应的生命周期钩子。</p>
+<h2><span id="props与组件的被动更新"><code> props</code>与组件的被动更新</span></h2><p>在虚拟 DOM 层面，组件的 props 与普通 HTML 标签的属性差别不大：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-comment">// &lt;MyComponent title=&quot;A Big Title&quot; :other=&quot;val&quot; /&gt;</span><br><span class="hljs-keyword">const</span> vnode = &#123;<br>	<span class="hljs-attr">type</span>: component,<br>    <span class="hljs-attr">props</span>: &#123;<br>        <span class="hljs-attr">title</span>: <span class="hljs-string">&quot;A Big Title&quot;</span>,<br>        <span class="hljs-attr">other</span>: <span class="hljs-string">&quot;val&quot;</span>,<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>在编写组件时，我们需要显式地指定组件会接收哪些 props 数据：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-keyword">const</span> component = &#123;<br>	<span class="hljs-attr">name</span>: <span class="hljs-string">&quot;componenet&quot;</span>,<br>    <span class="hljs-comment">// props</span><br>    <span class="hljs-attr">props</span>: &#123;<br>        <span class="hljs-attr">title</span>: <span class="hljs-title class_">String</span><br>    &#125;,<br>    <span class="hljs-title function_">render</span>(<span class="hljs-params"></span>) &#123;<br>        <span class="hljs-attr">type</span>: <span class="hljs-string">&#x27;div&#x27;</span>,<br>        <span class="hljs-attr">children</span>: <span class="hljs-string">`count is: <span class="hljs-subst">$&#123;<span class="hljs-variable language_">this</span>.title&#125;</span>`</span><br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>对于一个组件来说，有两部分关于 props 的内容我们需要关心：</p>
+<ul>
+<li>为组件传递的 props 数据，即组件的<code>vnode.props</code>对象；</li>
+<li>组件选项对象中定义的 props 选项，即<code> MyComponent.props</code>对象。</li>
+</ul>
+<p>我们结合这两个选项来解析需要的<code>props</code>：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">mountComponent</span>(<span class="hljs-params">compVNode, container, anchor</span>) &#123;<br>  <span class="hljs-comment">// 获取组件</span><br>  <span class="hljs-keyword">const</span> componentOptions = compVNode.<span class="hljs-property">type</span> <span class="hljs-keyword">as</span> componentOptions<br>  <span class="hljs-comment">// 获取组件渲染函数与props定义</span><br>  <span class="hljs-keyword">const</span> &#123; render, data, <span class="hljs-attr">props</span>: propsOption,beforeCreate, created, beforeMount, mounted, beforeUpdate, updated &#125; = componentOptions<br><br>  ...<br>  <br>  <span class="hljs-comment">// 获取props, attrs</span><br>  <span class="hljs-keyword">const</span> [props, attrs] = <span class="hljs-title function_">resolveProps</span>(propsOption, compVNode.<span class="hljs-property">props</span>)<br><br>  <span class="hljs-comment">// 组件实例</span><br>  <span class="hljs-keyword">const</span> <span class="hljs-attr">instance</span>: <span class="hljs-title class_">ComponentInstance</span> = &#123;<br>    <span class="hljs-comment">// 状态数据data</span><br>    state,<br>    <span class="hljs-comment">// 将解析出的 props 数据包装为 shallowReactive 并定义到组件实例上</span><br>    <span class="hljs-attr">props</span>: <span class="hljs-title function_">shallowReactive</span>(props),<br>    <span class="hljs-comment">// 是否挂载</span><br>    <span class="hljs-attr">isMounted</span>: <span class="hljs-literal">false</span>,<br>    <span class="hljs-comment">// 渲染内容subTree</span><br>    <span class="hljs-attr">subTree</span>: <span class="hljs-literal">null</span><br>  &#125;<br><br>  ...<br><br>&#125;<br><br><span class="hljs-keyword">function</span> <span class="hljs-title function_">resolveProps</span>(<span class="hljs-params"><span class="hljs-attr">options</span>: <span class="hljs-built_in">any</span>, <span class="hljs-attr">propsData</span>: <span class="hljs-built_in">object</span></span>) &#123;<br>  <span class="hljs-keyword">const</span> props = &#123;&#125;<br>  <span class="hljs-keyword">const</span> attrs = &#123;&#125;<br><br>  <span class="hljs-comment">// 遍历为组件传递的 props 数据</span><br>  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">const</span> key <span class="hljs-keyword">in</span> propsData) &#123;<br>    <span class="hljs-keyword">if</span> (key <span class="hljs-keyword">in</span> options) &#123;<br>      <span class="hljs-comment">// 如果为组件传递的 props 数据在组件自身的 props 选项中有定义，props合法</span><br>      props[key] = propsData[key]<br><br>    &#125; <span class="hljs-keyword">else</span> &#123;<br>      <span class="hljs-comment">// 否则将其作为 attrs</span><br>      attrs[key] = propsData[key]<br>    &#125;<br>  &#125;<br>  <br>  <span class="hljs-comment">// 返回 props 和 attrs 数据</span><br>  <span class="hljs-keyword">return</span> &#123; props, attrs &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>这里需要注意两点：</p>
+<ul>
+<li>在 Vue.js 3 中，没有定义在<code>MyComponent.props</code>选项中的 props 数据将存储到<code>attrs</code>对象中。</li>
+<li>上述实现中没有包含默认值、类型校验等内容的处理。</li>
+</ul>
+<p>处理完 props 数据后，我们再来讨论关于<code>props</code>数据变化的问题。<code>props</code>本质上是父组件的数据，当<code>props</code>发生变化时，会触发父组件重新渲染。在更新过程中，渲染器发现父组件的<code>subTree</code>包含组件类型的虚拟节点，所以会调用<code>patchComponent</code>函数完成子组件的更新。我们把由父组件自更新所引起的子组件更新叫作子组件的被动更新。当子组件发生被动更新时，我们需要做的是：</p>
+<ul>
+<li>检测子组件是否真的需要更新，因为子组件的 props 可能是不变的</li>
+<li>如果需要更新，则更新子组件的 props、slots 等内容</li>
+</ul>
+<p>实现如下：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 组件更新函数</span><br><span class="hljs-comment"> * */</span><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">patchComponent</span>(<span class="hljs-params">oldVNode, newVNode, anchor</span>) &#123;<br>  <span class="hljs-comment">// 获取组件实例，同时也然后给新组件虚拟节点指向组件实例</span><br>  <span class="hljs-keyword">const</span> instance = ((newVNode <span class="hljs-keyword">as</span> <span class="hljs-title class_">VNode</span>).<span class="hljs-property">component</span> = (oldVNode <span class="hljs-keyword">as</span> <span class="hljs-title class_">VNode</span>).<span class="hljs-property">component</span>)<br>  <span class="hljs-comment">// 获取当前props</span><br>  <span class="hljs-keyword">if</span> (instance) &#123;<br>    <span class="hljs-keyword">const</span> &#123; props &#125; = instance<br>    <span class="hljs-keyword">if</span> (<span class="hljs-title function_">hasPropsChanged</span>(oldVNode, newVNode)) &#123;<br>      <span class="hljs-comment">// 调用resolveProps重新获取props数据</span><br>      <span class="hljs-keyword">const</span> [ newProps ] = <span class="hljs-title function_">resolveProps</span>((newVNode.<span class="hljs-property">type</span> <span class="hljs-keyword">as</span> componentOptions).<span class="hljs-property">props</span>, newVNode.<span class="hljs-property">props</span>)<br>      <span class="hljs-comment">// 更新props</span><br>      <span class="hljs-keyword">for</span> (<span class="hljs-keyword">const</span> k <span class="hljs-keyword">in</span> newProps) &#123;<br>        props[k] = newProps[k]<br>      &#125;<br>      <span class="hljs-comment">// 删除不存在的props</span><br>      <span class="hljs-keyword">for</span> (<span class="hljs-keyword">const</span> k <span class="hljs-keyword">in</span> props) &#123;<br>        <span class="hljs-keyword">if</span> (!(k <span class="hljs-keyword">in</span> newProps)) &#123;<br>          <span class="hljs-keyword">delete</span> props[k]<br>        &#125;<br>      &#125;<br>    &#125;<br>  &#125; <span class="hljs-keyword">else</span> &#123;<br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">error</span>(<span class="hljs-string">&quot;instance does not exist.&quot;</span>, oldVNode, newVNode)<br>  &#125;<br><br><br>&#125;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * props变更处理函数</span><br><span class="hljs-comment"> * */</span><br><span class="hljs-keyword">function</span> <span class="hljs-title function_">hasPropsChanged</span>(<span class="hljs-params">oldProps, newProps</span>) &#123;<br>  <span class="hljs-comment">// 获取新旧props的键值</span><br>  <span class="hljs-keyword">const</span> newKeys = <span class="hljs-title class_">Object</span>.<span class="hljs-title function_">keys</span>(newProps)<br>  <span class="hljs-keyword">const</span> oldKeys = <span class="hljs-title class_">Object</span>.<span class="hljs-title function_">keys</span>(oldProps)<br>  <span class="hljs-comment">// props数量变化</span><br>  <span class="hljs-keyword">if</span> (newKeys.<span class="hljs-property">length</span> !== oldKeys.<span class="hljs-property">length</span>) &#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span><br>  &#125;<br>  <span class="hljs-comment">// props数量未变，判断内容是否变化</span><br>  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span> ; i &lt; newKeys.<span class="hljs-property">length</span>; i++) &#123;<br>    <span class="hljs-keyword">const</span> key = newKeys[i]<br>    <span class="hljs-comment">// 存在不同的props</span><br>    <span class="hljs-keyword">if</span> (newProps[key] !== oldProps[key]) &#123;<br>      <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span><br>    &#125;<br>  &#125;<br>  <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>需要注意的是，我们要将组件实例添加到新的组件<code>vnode</code>对象上，即<code> n2.component = n1.component</code>，否则下次更新时将无法取得组件实例；<code>instance.props</code>对象本身是浅响应的，因此，在更新组件的<code>props</code>时，只需要设置<code>instance.props</code>对象下的属性值即可触发组件重新渲染。</p>
+<p>由于<code>props</code>数据与组件自身的状态数据都需要暴露到渲染函数中，并使得渲染函数能够通过<code>this</code>访问它们，因此我们需要封装一个渲染上下文对象：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-comment">// 创建渲染上下文对象，本质是组件实例的代理</span><br><span class="hljs-keyword">const</span> renderContext = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Proxy</span>(instance, &#123;<br>    <span class="hljs-title function_">get</span>(<span class="hljs-params">target, key, receiver</span>) &#123;<br>      <span class="hljs-keyword">const</span> &#123; state, props &#125; = target<br><br>      <span class="hljs-comment">// 先尝试读取自身状态数据</span><br>      <span class="hljs-keyword">if</span> (state &amp;&amp; key <span class="hljs-keyword">in</span> state) &#123;<br>        <span class="hljs-keyword">return</span> state[key]<br>      &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (key <span class="hljs-keyword">in</span> props) &#123;<br>        <span class="hljs-keyword">return</span> props[key]<br>      &#125; <span class="hljs-keyword">else</span> &#123;<br>        <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">error</span>(<span class="hljs-string">&#x27;state does not exist&#x27;</span>)<br>      &#125;<br>    &#125;,<br>    <span class="hljs-title function_">set</span> (target, key, value, receiver) &#123;<br>      <span class="hljs-keyword">const</span> &#123; state, props &#125; = target<br>      <span class="hljs-keyword">if</span> (state &amp;&amp; key <span class="hljs-keyword">in</span> state) &#123;<br>        state[key] = value<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span><br>      &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (key <span class="hljs-keyword">in</span> props) &#123;<br>        <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">warn</span>(<span class="hljs-string">`Attempting to mutate prop &quot;<span class="hljs-subst">$&#123;<span class="hljs-built_in">String</span>(key)&#125;</span>&quot;. Props are readonly.`</span>)<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span><br>      &#125; <span class="hljs-keyword">else</span> &#123;<br>        <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">error</span>(<span class="hljs-string">&#x27;state does not exist&#x27;</span>)<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span><br>      &#125;<br>    &#125;<br>&#125;)<br></code></pre></td></tr></table></figure>
+
+<h2><span id="setup函数的作用与实现"><code>setup</code>函数的作用与实现</span></h2><p>组件的<code>setup</code>函数是 Vue3 新增的组件选项，它有别于 Vue2 中存在的其他组件选项。这是因为<code>setup</code>函数主要用于配合组合式API，为用户提供一个地方，用于建立组合逻辑、创建响应式数据、创建通用函数、注册生命周期钩子等能力。在组件的整个生命周期中，<code>setup</code>函数只会在被挂载时执行一次，它的返回值可以有两种情况。</p>
+<ul>
+<li><p>返回一个函数，该函数将作为组件的<code>render</code>函数</p>
+<p>这种方式常用于组件不是以模板来表达其渲染内容的情况。如果组件以模板来表达其渲染的内容，那么 setup 函数不可以再返回函数，否则会与模板编译生成的渲染函数产生冲突。</p>
+</li>
+<li><p>返回一个对象，该对象中包含的数据将暴露给模板使用</p>
+<p>可以看到，<code>setup</code>函数暴露的数据可以在渲染函数中通过<code> this</code>来访问。</p>
+</li>
+</ul>
+<p><code>setup</code>函数接收两个参数。第一个参数是<code>props</code>数据对象，第二个参数也是一个对象，通常称为<code> setupContext</code>，我们可以通过<code>setup</code>函数的第一个参数取得外部为组件传递的<code>props</code>数据对象。同时，<code>setup</code>函数还接收第二个参数<code>setupContext</code>对象，其中保存着与组件接口相关的数据和方法：</p>
+<ul>
+<li><code>slot</code>：插槽</li>
+<li><code>emit</code>：一个函数，用来发射自定义事件</li>
+<li><code>attrs</code>：当为组件传递<code>props</code>时，那些没有显式地声明为 props 的属性会存储到<code>attrs</code>对象中</li>
+<li><code>expose</code>：一个函数，用来显式地对外暴露组件数据（API设计讨论中）</li>
+</ul>
+<blockquote>
+<p>通常情况下，不建议将 setup 与 Vue.js 2 中其他组件选项混合使用。例如 data、watch、methods 等选项，我们称之为 “传统”组件选项。</p>
+</blockquote>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-keyword">export</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">mountComponent</span>(<span class="hljs-params"><span class="hljs-attr">compVNode</span>: <span class="hljs-title class_">VNode</span>, <span class="hljs-attr">container</span>: <span class="hljs-title class_">Container</span>, anchor?: <span class="hljs-title class_">Node</span> | <span class="hljs-literal">null</span></span>) &#123;<br>  <span class="hljs-comment">// 获取组件</span><br>  <span class="hljs-keyword">const</span> componentOptions = compVNode.<span class="hljs-property">type</span> <span class="hljs-keyword">as</span> componentOptions<br>  <span class="hljs-comment">// 获取组件渲染函数与props定义</span><br>  <span class="hljs-keyword">let</span> &#123; render, data, setup, <span class="hljs-attr">props</span>: propsOption, beforeCreate, created, beforeMount, mounted, beforeUpdate, updated &#125; = componentOptions<br>  <br>  ...<br>  <br>  <span class="hljs-comment">// setupContext</span><br>  <span class="hljs-keyword">const</span> setupContext = &#123; attrs &#125;<br>  <span class="hljs-comment">// setupState用于存储由setup返回的数据</span><br>  <span class="hljs-keyword">let</span> <span class="hljs-attr">setupState</span>: <span class="hljs-built_in">any</span> | <span class="hljs-literal">null</span> = <span class="hljs-literal">null</span><br><br>  <span class="hljs-comment">// 处理setup相关</span><br>  <span class="hljs-keyword">if</span> (setup) &#123;<br>    <span class="hljs-comment">// 调用setup函数</span><br>    <span class="hljs-comment">// 将只读版本的 props 作为第一个参数传递，避免用户意外地修改 props 的值</span><br>    <span class="hljs-comment">// 将setupContext作为第二个参数</span><br>    <span class="hljs-keyword">const</span> setupResult = <span class="hljs-title function_">setup</span>(<span class="hljs-title function_">shallowReadonly</span>(instance.<span class="hljs-property">props</span>), setupContext)<br>    <span class="hljs-comment">// setup返回函数，将其作为渲染函数</span><br>    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> setupResult === <span class="hljs-string">&#x27;function&#x27;</span>) &#123;<br>      <span class="hljs-keyword">if</span> (render) &#123;<br>        <span class="hljs-comment">// 如果存在渲染函数，则报告冲突错误</span><br>        <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">error</span>(<span class="hljs-string">&#x27;render conflicts&#x27;</span>)<br>        <span class="hljs-comment">// 将setupResult作为渲染函数</span><br>        render = setupResult<br>      &#125; <span class="hljs-keyword">else</span> &#123;<br>        <span class="hljs-comment">// 否则作为数据状态赋值给setupState</span><br>        setupState = setupResult<br>      &#125;<br>    &#125;<br>  &#125;<br><br>  <span class="hljs-comment">// 将组件实例设置到vnode上，用于后续更新</span><br>  compVNode.<span class="hljs-property">component</span> = instance<br><br>  <span class="hljs-comment">// 创建渲染上下文对象，本质是组件实例的代理</span><br>  <span class="hljs-keyword">const</span> renderContext = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Proxy</span>(instance, &#123;<br>    <span class="hljs-title function_">get</span>(<span class="hljs-params">target, key, receiver</span>) &#123;<br>      <span class="hljs-keyword">const</span> &#123; state, props &#125; = target<br><br>      <span class="hljs-comment">// 先尝试读取自身状态数据</span><br>      <span class="hljs-keyword">if</span> (state &amp;&amp; key <span class="hljs-keyword">in</span> state) &#123;<br>        <span class="hljs-keyword">return</span> state[key]<br>      &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (key <span class="hljs-keyword">in</span> props) &#123;<br>        <span class="hljs-keyword">return</span> props[key]<br>      &#125; <span class="hljs-keyword">else</span> &#123;<br>        <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">error</span>(<span class="hljs-string">&#x27;state does not exist&#x27;</span>)<br>      &#125;<br>    &#125;,<br>    <span class="hljs-title function_">set</span> (target, key, value, receiver) &#123;<br>      <span class="hljs-keyword">const</span> &#123; state, props &#125; = target<br>      <span class="hljs-keyword">if</span> (state &amp;&amp; key <span class="hljs-keyword">in</span> state) &#123;<br>        state[key] = value<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span><br>      &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (key <span class="hljs-keyword">in</span> props) &#123;<br>        <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">warn</span>(<span class="hljs-string">`Attempting to mutate prop &quot;<span class="hljs-subst">$&#123;<span class="hljs-built_in">String</span>(key)&#125;</span>&quot;. Props are readonly.`</span>)<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span><br>      &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (setupState &amp;&amp; key <span class="hljs-keyword">in</span> setupState) &#123;<br>        <span class="hljs-comment">// setupState处理</span><br>        setupState[key] = value<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span><br>      &#125; <span class="hljs-keyword">else</span> &#123;<br>        <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">error</span>(<span class="hljs-string">&#x27;state does not exist&#x27;</span>)<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span><br>      &#125;<br>    &#125;<br>  &#125;)<br>  <br>  ...<br><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h2><span id="组件事件与emit的实现">组件事件与<code>emit</code>的实现</span></h2><p><code>emit</code>用来发射组件的自定义事件：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-keyword">const</span> component = &#123;<br>	<span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;component&#x27;</span>,<br>    <span class="hljs-title function_">setup</span>(<span class="hljs-params">props, &#123; emit &#125;</span>) &#123;<br>        <span class="hljs-title function_">emit</span>(<span class="hljs-string">&#x27;change&#x27;</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>)<br>    &#125;<br>&#125;<br><br><span class="hljs-comment">// &lt;MyComponent @change=&quot;handler&quot; /&gt;</span><br><span class="hljs-keyword">const</span> componentVNode = &#123;<br>    <span class="hljs-attr">type</span>: component,<br>    <span class="hljs-attr">props</span>: &#123;<br>        <span class="hljs-attr">onChange</span>: handler<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>在具体的实现上，发射自定义事件的本质就是根据事件名称去<code>props</code>数据对象中寻找对应的事件处理函数并执行。整体实现并不复杂，只需要实现一个<code>emit</code>函数并将其添加到<code>setupContext</code>对象中，这样用户就可以通过<code>setupContext</code>取得<code>emit</code>函数了。</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-comment">/**</span><br><span class="hljs-comment">   * emit事件传递函数</span><br><span class="hljs-comment">   * <span class="hljs-doctag">@param</span> <span class="hljs-variable">event</span> - 事件名称</span><br><span class="hljs-comment">   * <span class="hljs-doctag">@param</span> <span class="hljs-variable">payload</span> - 传递给事件处理函数的参数</span><br><span class="hljs-comment">* */</span><br><span class="hljs-keyword">function</span> <span class="hljs-title function_">emit</span>(<span class="hljs-params">event, ...payload</span>) &#123;<br>    <span class="hljs-keyword">const</span> eventName =<span class="hljs-string">`on<span class="hljs-subst">$&#123;event[<span class="hljs-number">0</span>].toUpperCase() + event.slice(<span class="hljs-number">1</span>)&#125;</span>`</span><br>    <span class="hljs-comment">// 根据处理后的事件名去寻找对用的事件处理函数</span><br>    <span class="hljs-keyword">const</span> handler = instance.<span class="hljs-property">props</span>[eventName]<br>    <span class="hljs-keyword">if</span> (handler) &#123;<br>      <span class="hljs-title function_">handler</span>(...payload)<br>    &#125; <span class="hljs-keyword">else</span> &#123;<br>      <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">error</span>(<span class="hljs-string">`[<span class="hljs-subst">$&#123;eventName&#125;</span>] <span class="hljs-subst">$&#123;eventName&#125;</span> does not exist`</span>)<br>    &#125;<br>&#125;<br><br><br><span class="hljs-comment">// setupContext</span><br><span class="hljs-keyword">const</span> setupContext = &#123; attrs, emit &#125;<br></code></pre></td></tr></table></figure>
+
+<p>这里有一点需要额外注意，我们在讲解<code>props</code>时提到，任何没有显式地声明为 props 的属性都会存储到<code>attrs</code>中。换句话说，任何事件类型的<code> props</code>，即<code>onXxx</code>类的属性，都不会出现在<code>props</code>中。这导致我们无法根据事件名称在<code>instance.props</code>中找到对应的事件处理函数。为了解决这个问题，我们需要在解析<code>props</code>数据的时候对事件类型的<code>props</code>做特殊处理，如下面的代码所示：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-keyword">export</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">resolveProps</span>(<span class="hljs-params"><span class="hljs-attr">options</span>:  <span class="hljs-title class_">Record</span>&lt;<span class="hljs-built_in">string</span> | <span class="hljs-built_in">symbol</span>, <span class="hljs-built_in">any</span>&gt;, <span class="hljs-attr">propsData</span>: <span class="hljs-built_in">object</span></span>) &#123;<br>  <span class="hljs-keyword">const</span> props = &#123;&#125;<br>  <span class="hljs-keyword">const</span> attrs = &#123;&#125;<br><br>  <span class="hljs-comment">// 遍历为组件传递的 props 数据</span><br>  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">const</span> key <span class="hljs-keyword">in</span> propsData) &#123;<br>    <span class="hljs-keyword">if</span> (key <span class="hljs-keyword">in</span> options || key.<span class="hljs-title function_">startsWith</span>(<span class="hljs-string">&quot;on&quot;</span>)) &#123;<br>      <span class="hljs-comment">// 如果为组件传递的 props 数据在组件自身的 props 选项中有定义，props合法</span><br>      <span class="hljs-comment">// 以字符串 on 开头的 props，无论是否显式地声明，都将其添加到 props数据中，而不是添加到 attrs 中</span><br>      props[key] = propsData[key]<br><br>    &#125; <span class="hljs-keyword">else</span> &#123;<br>      <span class="hljs-comment">// 否则将其作为 attrs</span><br>      attrs[key] = propsData[key]<br>    &#125;<br>  &#125;<br><br>  <span class="hljs-comment">// 返回 props 和 attrs 数据</span><br>  <span class="hljs-keyword">return</span> [ props, attrs ]<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h2><span id="插槽的工作原理与实现">插槽的工作原理与实现</span></h2><p>组件的插槽指组件会预留一个槽位，该槽位具体要渲染的内容由用户插入。以下是<code>component</code>组件的模板：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs vue">&lt;template&gt;<br>    &lt;header&gt;<br>    	&lt;slot name=&quot;header&quot;/&gt;<br>    &lt;/header&gt;<br>    <br>    &lt;div&gt;<br>        &lt;slot name=&quot;body&quot;/&gt;<br>    &lt;/div&gt;<br>    <br>    &lt;footer&gt;<br>        &lt;slot name=&quot;footer&quot;/&gt;<br>    &lt;/footer&gt;<br>&lt;/template&gt;<br></code></pre></td></tr></table></figure>
+
+<p>当在父组件中使用 &lt;component&gt; 组件时，可以根据插槽的名字来插入自定义的内容：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs vue">&lt;component&gt;<br>	&lt;template #header&gt;<br>		&lt;h1&gt;<br>            title<br>        &lt;/h1&gt;<br>    &lt;/template&gt;<br>    &lt;template #header&gt;<br>		&lt;p&gt;<br>            context<br>        &lt;/p&gt;<br>    &lt;/template&gt;<br>    &lt;template #header&gt;<br>		&lt;p&gt;<br>            footer<br>        &lt;/p&gt;<br>    &lt;/template&gt;<br>&lt;/component&gt;<br></code></pre></td></tr></table></figure>
+
+<p>上面这段父组件模板会被编译成如下渲染函数：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">render</span>(<span class="hljs-params"></span>) &#123;<br>    <span class="hljs-keyword">return</span> &#123;<br>        <span class="hljs-attr">type</span>: component,<br>        <span class="hljs-attr">children</span>: &#123;<br>            <span class="hljs-title function_">header</span>(<span class="hljs-params"></span>) &#123;<br>                <span class="hljs-keyword">return</span> &#123; <span class="hljs-attr">type</span>: <span class="hljs-string">&#x27;h1&#x27;</span>, <span class="hljs-attr">children</span>: <span class="hljs-string">&#x27;title&#x27;</span>&#125;<br>            &#125;<br>            ... 下同<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>组件模板中的插槽内容会被编译为插槽函数，而插槽函数的返回值就是具体的插槽内容。组件<code>component</code>的模板则会被编译为如下渲染函数：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">render</span>(<span class="hljs-params"></span>) &#123;<br>	<span class="hljs-keyword">return</span> [<br>        &#123;<br>            <span class="hljs-attr">type</span>: <span class="hljs-string">&#x27;header&#x27;</span>,<br>            <span class="hljs-attr">children</span>: [<span class="hljs-variable language_">this</span>.<span class="hljs-property">$slots</span>.<span class="hljs-title function_">header</span>()]<br>        &#125;,<br>        ... 下同<br>    ]<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>可以看到，渲染插槽内容的过程，就是调用插槽函数并渲染由其返回的内容的过程。在运行时的实现上，插槽则依赖于<code>setupContext</code>中的<code>slots</code>对象：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-comment">// 使用编译好的compVNode.children作为slot对象</span><br><span class="hljs-keyword">const</span> slots = compVNode.<span class="hljs-property">children</span> || &#123;&#125;<br><br><span class="hljs-comment">// setupContext</span><br><span class="hljs-keyword">const</span> setupContext = &#123; attrs, emit, slots &#125;<br></code></pre></td></tr></table></figure>
+
+<p>为了在 render 函数内和生命周期钩子函数内能够通过<code>this.$slots</code>来访问插槽内容，我们还需要在<code>renderContext</code>中特殊对待<code>$slots</code>属性：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-comment">// 添加这一行</span><br><span class="hljs-comment">// 如果key值为$slots，直接返回对应插槽</span><br><span class="hljs-keyword">if</span> (key === <span class="hljs-string">&quot;$slots&quot;</span>) <span class="hljs-keyword">return</span> slots<br></code></pre></td></tr></table></figure>
+
+<h2><span id="注册生命周期">注册生命周期</span></h2><p>在 Vue3 中，有一部分组合式 API 是用来注册生命周期钩子函数的，例如<code> onMounted</code>、<code>onUpdated</code>。对于多个钩子函数，我们需要维护一个变量<code> currentInstance</code>，用它来存储当前组件实例，每当初始化组件并执行组件的<code>setup</code>函数之前，先将<code> currentInstance</code>设置为当前组件实例，再执行组件的<code>setup</code>函数，这样我们就可以通过<code>currentInstance</code>来获取当前正在被初始化的组件实例，从而将那些通过<code>onMounted</code>函数注册的钩子函数与组件实例进行关联。</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-comment">// 存储当前正在被初始化的组件实例</span><br><span class="hljs-keyword">let</span> <span class="hljs-attr">currentInstance</span>: <span class="hljs-title class_">ComponentInstance</span> | <span class="hljs-literal">null</span> = <span class="hljs-literal">null</span><br><br><span class="hljs-comment">// 在调用setup函数前设置当前组件实例</span><br><span class="hljs-title function_">setCurrentInstance</span>(instance)<br><span class="hljs-comment">// 处理setup相关</span><br><span class="hljs-keyword">if</span> (setup) &#123;<br>    <span class="hljs-comment">// 调用setup函数</span><br>    <span class="hljs-comment">// 将只读版本的 props 作为第一个参数传递，避免用户意外地修改 props 的值</span><br>    <span class="hljs-comment">// 将setupContext作为第二个参数</span><br>    <span class="hljs-keyword">const</span> setupResult = <span class="hljs-title function_">setup</span>(<span class="hljs-title function_">shallowReadonly</span>(instance.<span class="hljs-property">props</span>), setupContext)<br>    <span class="hljs-comment">// setup返回函数，将其作为渲染函数</span><br>    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> setupResult === <span class="hljs-string">&#x27;function&#x27;</span>) &#123;<br>      <span class="hljs-keyword">if</span> (render) &#123;<br>        <span class="hljs-comment">// 如果存在渲染函数，则报告冲突错误</span><br>        <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">error</span>(<span class="hljs-string">&#x27;render conflicts&#x27;</span>)<br>        <span class="hljs-comment">// 将setupResult作为渲染函数</span><br>        render = setupResult<br>      &#125; <span class="hljs-keyword">else</span> &#123;<br>        <span class="hljs-comment">// 否则作为数据状态赋值给setupState</span><br>        setupState = setupResult<br>      &#125;<br>    &#125;<br>    <span class="hljs-comment">// 执行完成后重置currentInstance</span><br>    <span class="hljs-title function_">setCurrentInstance</span>(<span class="hljs-literal">null</span>)<br>&#125;<br><br><span class="hljs-keyword">function</span> <span class="hljs-title function_">setCurrentInstance</span>(<span class="hljs-params"><span class="hljs-attr">instance</span>: <span class="hljs-title class_">ComponentInstance</span> | <span class="hljs-literal">null</span></span>) &#123;<br>  currentInstance = instance<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>最后就是<code>onMounted</code>函数的实现：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-keyword">export</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">onMounted</span>(<span class="hljs-params"><span class="hljs-attr">fn</span>: <span class="hljs-title class_">EffectFunction</span></span>) &#123;<br>  <span class="hljs-keyword">if</span> (currentInstance) &#123;<br>    <span class="hljs-comment">// 将生命周期函数添加到 instance.mounted 中</span><br>    currentInstance.<span class="hljs-property">mounted</span>.<span class="hljs-title function_">push</span>(fn)<br>  &#125; <span class="hljs-keyword">else</span> &#123;<br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;onMounted can only be used in setup.&quot;</span>)<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>其他生命周期钩子函数类似。</p>
+
+	</article>
+
+	 
+    <div class="kira-post-copyright">
+        <strong>Author：</strong>破酥 | C4iN<br>
+        <strong>Link：</strong><a href="https://c4in1.github.io/2024/08/27/MVVM/%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84MVVM-3/" title="https:&#x2F;&#x2F;c4in1.github.io&#x2F;2024&#x2F;08&#x2F;27&#x2F;MVVM&#x2F;实现一个简单的MVVM-3&#x2F;" target="_blank" rel="noopener">https:&#x2F;&#x2F;c4in1.github.io&#x2F;2024&#x2F;08&#x2F;27&#x2F;MVVM&#x2F;实现一个简单的MVVM-3&#x2F;</a><br>
+        
+            <strong>版权声明：</strong>本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/deed.zh" target="_blank">CC BY-NC-SA 3.0 CN</a> 协议进行许可
+        
+    </div>
+
+  
+	<div class="kira-post-nav">
+		<nav class="post-nav">
+			      
+			<!-- 先找到与当前文字相同的目录 -->
+			            
+			<!-- 在找到当前文章所在的 index -->
+			            
+			<!-- 上一篇文章 -->
+			<div class="old">
+				<span>上一章</span>
+				<a href="/2024/08/18/MVVM/%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84MVVM-2/"> 实现一个简单的MVVM-2</a>
+			</div>
+			                          
+		</nav>
+	</div>
+	
+	<div class="kira-post-meta kira-rainbow">
+		
+			<a class="kirafont icon-container-fill -link" href="/categories/MVVM/">MVVM</a>
+		
+		
+			<a class="kirafont icon-tag-fill -none-link" href="/tags/MVVM/" rel="tag">MVVM</a> <a class="kirafont icon-tag-fill -none-link" href="/tags/Vue/" rel="tag">Vue</a> <a class="kirafont icon-tag-fill -none-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a>
+		
+	</div>
+	
+	<div class="kira-post-footer">
+		
+
+		
+	<div class="giscus"></div>
+  
+    <script src="https://giscus.app/client.js"
+      data-repo="C4in1/BlogGitTalk"
+      data-repo-id="R_kgDOMgx61Q"
+      data-category="General"
+      data-category-id="DIC_kwDOMgx61c4Chec4"
+      data-mapping="pathname"
+      data-strict="0"
+      data-reactions-enabled="1"
+      data-emit-metadata="0"
+      data-input-position="top"
+      data-theme="light"
+      data-lang="en"
+      data-loading="lazy"
+      crossorigin="anonymous"
+      async  
+    ></script>
+  
+
+	</div>
+	
+</div>
+
+				</div>
+			</div>
+			<div class="kira-right-column">
+	<a onclick="document.querySelector('#kira-top-header').scrollIntoView({behavior: 'smooth'});" class="kira-backtotop" aria-label="回到顶部" title="回到顶部">
+		<button class="mdui-fab mdui-ripple">
+			<i class="kirafont icon-caret-up"></i>
+		</button>
+	</a>
+</div>
+
+		</div>
+	</body>
+</html>
