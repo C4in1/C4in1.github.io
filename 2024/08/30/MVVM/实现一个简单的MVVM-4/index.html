@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html 
+	lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		
+<link rel="stylesheet" href="/css/layout.css">
+
+		
+		<title> 实现一个简单的MVVM-4 -  C4iN&#39;s Caprice</title>
+		<!-- <link rel="stylesheet" href="https://unpkg.com/mdui@1.0.2/dist/css/mdui.min.css" /> -->
+		<!-- <script src="https://unpkg.com/mdui@1.0.2/dist/js/mdui.min.js"></script> -->
+		
+<link rel="stylesheet" href="/lib/mdui/mdui.min.css">
+
+		
+<script src="/lib/mdui/mdui.min.js"></script>
+
+		<!-- lazyload -->
+		
+<script src="/lib/lazysizes.js"></script>
+
+		<!-- smooth-scrolling -->
+		
+<script src="/lib/smooth-scrolling.js"></script>
+
+		<!-- highlight -->
+		
+<link rel="stylesheet" href="/lib/highlight/atom-one-dark.min.css">
+
+		
+<script src="/lib/highlight/highlight.min.js"></script>
+
+		<!-- 预置 kiraicon -->
+		
+<link rel="stylesheet" href="/lib/iconfont/iconfont.css">
+
+		
+		<link
+			rel="shortcut icon"
+			href="https://pic.imgdb.cn/item/6693875ad9c307b7e98b4288.gif"
+			type="image/gif"
+		/>
+		
+<link rel="stylesheet" href="/deps/css/APlayer.min.css">
+
+		
+		
+<script src="/deps/js/APlayer.min.js"></script>
+<script src="/deps/js/Meting.min.js"></script>
+
+	<meta name="generator" content="Hexo 6.3.0"></head>
+
+	<body>
+		<div
+			class="kira-background"
+			style="background-image: url('https://pic.imgdb.cn/item/66b458ffd9c307b7e9aadb03.png')"
+		></div>
+		<div class="kira-header">
+    <a
+        class="kira-drawer-button mdui-ripple"
+        title="导航栏"
+        onclick="document.querySelector('.kira-sidebar-modal').classList.add('show');document.querySelector('.kira-sidebar#sidebar').classList.add('show');"
+    >
+        <i class="kirafont icon-menu"></i>
+    </a>
+    <a href="/" title="C4iN&#39;s Caprice">
+        <img
+			src="https://pic.imgdb.cn/item/66b45933d9c307b7e9ab0715.png"
+			alt="破酥 | C4iN"
+		/>
+    </a>
+</div>
+		<div class="kira-body">
+			<div class="kira-sidebar" id="sidebar">
+	<div class="kira-avatar mdui-ripple">
+		<a target="_blank" rel="noopener" href="https://pic.imgdb.cn/item/66b45933d9c307b7e9ab0715.png" title="破酥 | C4iN">
+			<img
+				src="https://pic.imgdb.cn/item/66b45933d9c307b7e9ab0715.png"
+				alt="破酥 | C4iN"
+			/>
+		</a>
+	</div>
+	<div class="kira-count">
+		<div><span>文章</span>13</div>
+		<div><span>标签</span>13</div>
+		<div><span>分类</span>6</div>
+	</div>
+	<div class="kira-list">
+		
+		<a
+			class="kira-list-item mdui-ripple false"
+			href="/"
+			title="回到首页"
+		>
+			<i
+				class="kirafont
+					
+						icon-home
+					"
+			></i>
+			<div class="kira-list-item-content">
+				回到首页
+			</div>
+		</a>
+		
+		<a
+			class="kira-list-item mdui-ripple false"
+			href="/archive"
+			title="文章归档"
+		>
+			<i
+				class="kirafont
+					
+						icon-container
+					"
+			></i>
+			<div class="kira-list-item-content">
+				文章归档
+			</div>
+		</a>
+		
+		<a
+			class="kira-list-item mdui-ripple false"
+			href="/about"
+			title="关于本人"
+		>
+			<i
+				class="kirafont
+					
+						icon-user
+					"
+			></i>
+			<div class="kira-list-item-content">
+				关于本人
+			</div>
+		</a>
+		
+		<a
+			class="kira-list-item mdui-ripple false"
+			href="/friends"
+			title="我的朋友"
+		>
+			<i
+				class="kirafont
+					
+						icon-team
+					"
+			></i>
+			<div class="kira-list-item-content">
+				我的朋友
+			</div>
+		</a>
+		
+	</div>
+	<aside id="kira-sidebar">
+		
+			<div class="kira-widget-wrap">
+	<div class="kira-widget kira-social">
+		
+			<a
+				class="mdui-ripple"
+				href="tencent://AddContact/?fromId=45&fromSubId=1&subcmd=all&uin=2405544030&website=www.oicqzone.com"
+				target="_blank"
+				mdui-tooltip="{content: 'QQ'}"
+				style="color: rgb(49, 174, 255); background-color: rgba(49, 174, 255, .1);"
+			>
+				<i
+					class="kirafont
+					
+						icon-QQ
+					"
+				></i>
+			</a>
+		
+			<a
+				class="mdui-ripple"
+				href="https://github.com/CainHappyfish/"
+				target="_blank"
+				mdui-tooltip="{content: 'GitHub'}"
+				style="color: rgb(25, 23, 23); background-color: rgba(25, 23, 23, .15);"
+			>
+				<i
+					class="kirafont
+					
+						icon-github
+					"
+				></i>
+			</a>
+		
+	</div>
+</div>
+
+		
+			
+  <div class="kira-widget-wrap">
+    <h3 class="kira-widget-title">分类</h3>
+    <div class="kira-widget">
+      <ul class="category-list">
+        
+        
+
+        
+          <li class="category-list-item">
+            <a class="category-list-link" href="/categories/MVVM/">
+              MVVM
+            </a>
+            <span class="category-list-count">5</span>
+          </li>
+        
+          <li class="category-list-item">
+            <a class="category-list-link" href="/categories/TypeScript/">
+              TypeScript
+            </a>
+            <span class="category-list-count">2</span>
+          </li>
+        
+          <li class="category-list-item">
+            <a class="category-list-link" href="/categories/Vue/">
+              Vue
+            </a>
+            <span class="category-list-count">1</span>
+          </li>
+        
+          <li class="category-list-item">
+            <a class="category-list-link" href="/categories/project/">
+              project
+            </a>
+            <span class="category-list-count">1</span>
+          </li>
+        
+          <li class="category-list-item">
+            <a class="category-list-link" href="/categories/vitepress/">
+              vitepress
+            </a>
+            <span class="category-list-count">2</span>
+          </li>
+        
+          <li class="category-list-item">
+            <a class="category-list-link" href="/categories/项目构建/">
+              项目构建
+            </a>
+            <span class="category-list-count">2</span>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+		
+			
+	<div class="kira-widget-wrap">
+		<div id="randomtagcloud" class="kira-widget tagcloud kira-rainbow">
+			<a href="/tags/ES6/" style="font-size: 10px;">ES6</a> <a href="/tags/MVVM/" style="font-size: 16px;">MVVM</a> <a href="/tags/TypeScript/" style="font-size: 18px;">TypeScript</a> <a href="/tags/Typescript/" style="font-size: 10px;">Typescript</a> <a href="/tags/Vitepress/" style="font-size: 12px;">Vitepress</a> <a href="/tags/Vue/" style="font-size: 16px;">Vue</a> <a href="/tags/Webpack/" style="font-size: 10px;">Webpack</a> <a href="/tags/theme-censored/" style="font-size: 12px;">theme-censored</a> <a href="/tags/vue3/" style="font-size: 14px;">vue3</a> <a href="/tags/%E4%BB%A3%E7%A0%81%E8%A7%84%E8%8C%83/" style="font-size: 10px;">代码规范</a> <a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 20px;">前端</a> <a href="/tags/%E7%97%9B%E8%8B%A6%E7%9A%84%E9%85%8D%E7%BD%AE%E9%97%AE%E9%A2%98/" style="font-size: 12px;">痛苦的配置问题</a> <a href="/tags/%E9%A1%B9%E7%9B%AE%E8%A7%84%E8%8C%83/" style="font-size: 10px;">项目规范</a>
+		</div>
+		
+	</div>
+
+
+		
+			
+	<div class="kira-widget-wrap">
+		<h3 class="kira-widget-title">
+			Archive
+		</h3>
+		<div class="kira-widget">
+			<ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/">2024</a><span class="archive-list-count">13</span></li></ul>
+		</div>
+	</div>
+
+
+		
+	</aside>
+	<div class="kira-copyright">
+		&copy; 2024
+		<a href="/">破酥 | C4iN</a>
+		Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> &
+		<a href="https://github.com/ch1ny/kira-hexo/" target="_blank">Kira-Hexo</a>
+		<br />
+		
+		<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div><span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span></div><div><span id="busuanzi_container_site_uv">共接待访客<span id="busuanzi_value_site_uv"></span>位</span></div>
+	</div>
+</div>
+<div
+	class="kira-sidebar-modal"
+	id="sidebar-modal"
+	onclick="(function(self) {
+		self.classList.remove('show');
+		document.querySelector('.kira-sidebar.show#sidebar').classList.remove('show');
+	})(this)"
+></div>
+			<div class="kira-content">
+				<div id="kira-top-header"></div>
+				<div class="kira-main-content">
+					
+<link rel="stylesheet" href="/css/kira-image.css">
+
+
+<script src="/js/kira-image.js"></script>
+
+<div class="kira-image">
+    <div class="kira-image-modal">
+        <div class="kira-image-header">
+            <div class="kira-image-counter"></div>
+            <div class="kira-image-title"></div>
+            <div class="kira-image-operation">
+                <div class="kira-image-operation-button" id="kira-image-operation-button-zoom">
+                    <i class="kirafont icon-zoom-in"></i>
+                </div>
+                <div class="kira-image-operation-button" id="kira-image-operation-button-close">
+                    <i class="kirafont icon-close"></i>
+                </div>
+            </div>
+        </div>
+        <div class="kira-image-container">
+            <div class="kira-image-prev-button-panel">
+                <div class="kira-image-exchange-button">
+                    <i class="kirafont icon-left"></i>
+                </div>
+            </div>
+            <div class="kira-image-list">
+                <div class="kira-image-prev">
+                    <img />
+                </div>
+                <div class="kira-image-now">
+                    <img />
+                </div>
+                <div class="kira-image-next">
+                    <img />
+                </div>
+            </div>
+            <div class="kira-image-next-button-panel">
+                <div class="kira-image-exchange-button">
+                    <i class="kirafont icon-right"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+	
+<link rel="stylesheet" href="/css/kira-code-copy.css">
+
+	
+<script src="/js/kira-code-copy.js"></script>
+
+
+<div class="kira-post">
+	<article>
+		
+		<div class="kira-post-cover">
+			<img
+				data-src="https://pic.imgdb.cn/item/66b47385d9c307b7e9d0b377.png"
+				data-sizes="auto"
+				alt="实现一个简单的MVVM-4"
+				class="lazyload kira-post-cover-image disabled-kira-image"
+			/>
+			<h1>实现一个简单的MVVM-4</h1>
+		</div>
+		
+		<div class="kira-post-meta kira-rainbow" style="margin:10px 0!important;">
+			<a><i class="kirafont icon-calendar-fill"></i>2024年08月30日</a>
+			<a><i class="kirafont icon-edit-fill"></i>5.1k 字</a>
+			<a><i class="kirafont icon-time-circle-fill"></i>大概 24 分钟</a>
+		</div>
+		<p>这部分讲MVVM中编译器的实现。</p>
+<span id="more"></span>
+
+<p><del>又要被编译原理折磨了（悲</del></p>
+<p>作为前端，我们应用编译技术的场景通常是：表格、报表中的自定义公式计算器，设计一种领域特定语言（DSL）等。</p>
+<h1><span id="编译器">编译器</span></h1><p>编译器其实只是一段程序，它用来将“一种语言 A”翻译成“另外一种语言 B”。其中，语言 A 通常叫作源代码（source code），语言 B 通常叫作目标代码（object code 或 target code）。编译器将源代码翻译为目标代码的过程叫作编译（compile）。以下爱是教科书式完整编译过程：</p>
+<p><img src="https://pic.imgdb.cn/item/66d3c757d9c307b7e9e078df.png"></p>
+<h2><span id="dsl模板编译">DSL模板编译</span></h2><p>对于 Vue.js 模板编译器来说，源代码就是组件的模板，而目标代码是能够在浏览器平台上运行的 JavaScript 代码，或其他拥有 JavaScript 运行时的平台代码，模板编译器的目标代码其实就是渲染函数：</p>
+<p><img src="https://pic.imgdb.cn/item/66d3c7d7d9c307b7e9e0c61b.png"></p>
+<p>模板编译器会首先对模板进行词法分析和语法分析，得到模板 AST。接着，将模板 AST 转换（transform）成 JavaScript AST。最后，根据 JavaScript AST 生成 JavaScript 代码，即渲染函数代码。</p>
+<p><img src="https://pic.imgdb.cn/item/66d3c85bd9c307b7e9e11c20.png"></p>
+<p>比如我们有这么一段模板：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs vue">&lt;div&gt;<br>    &lt;h1 v-if=&quot;ok&quot;&gt;<br>        Template<br>    &lt;/h1&gt;<br>&lt;/div&gt;<br></code></pre></td></tr></table></figure>
+
+<p>将会被编译成如下的AST：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-keyword">const</span> ast = &#123;<br>    <span class="hljs-comment">// 逻辑根节点</span><br>    <span class="hljs-attr">type</span>: <span class="hljs-string">&#x27;Root&#x27;</span>,<br>    <span class="hljs-attr">children</span>: [<br>        <span class="hljs-attr">type</span>: <span class="hljs-string">&#x27;Element&#x27;</span>,<br>        <span class="hljs-attr">tag</span>: <span class="hljs-string">&#x27;div&#x27;</span>,<br>        <span class="hljs-attr">children</span>: [<br>            &#123;<br>				<span class="hljs-attr">type</span>: <span class="hljs-string">&#x27;Element&#x27;</span>,<br>        		<span class="hljs-attr">tag</span>: <span class="hljs-string">&#x27;h1&#x27;</span>,<br>        		<span class="hljs-attr">props</span>: [<br>        			<span class="hljs-comment">// v-if 节点</span><br>        			&#123;<br>        				<span class="hljs-attr">type</span>: <span class="hljs-string">&#x27;Directive&#x27;</span>,<br>        				<span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;if&#x27;</span><br>        				<span class="hljs-comment">// 表达式节点</span><br>        				<span class="hljs-attr">exp</span>: &#123;<br>							<span class="hljs-attr">type</span>: <span class="hljs-string">&#x27;Expression&#x27;</span>,<br>        					contentL <span class="hljs-string">&#x27;ok&#x27;</span><br>                        &#125;<br>        			&#125;<br>                ]<br>            &#125;<br>        ]<br>    ]<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>模板 AST 具有与模板同构的嵌套结构。每一棵 AST 都有一个逻辑上的根节点，其类型为 Root。模板中真正的根节点则作为 Root 节点的 children 存在。</p>
+<ul>
+<li>不同类型的节点是通过节点的 type 属性进行区分的。例如标签节点的 type 值为 ‘Element’。</li>
+<li>标签节点的子节点存储在其 children 数组中。</li>
+<li>标签节点的属性节点和指令节点会存储在 props 数组中。</li>
+<li>不同类型的节点会使用不同的对象属性进行描述。例如指令节点拥有 name 属性，用来表达指令的名称，而表达式节点拥有 content 属性，用来描述表达式的内容。</li>
+</ul>
+<p><img src="https://pic.imgdb.cn/item/66d3cbeed9c307b7e9e39a4d.png"></p>
+<p><code>parse</code>函数接收字符串模板作为参数，并将解析后得到的 AST 作为返回值返回。</p>
+<p>有了模板 AST 后，我们就可以对其进行语义分析，并对模板 AST进行转换了。接着，我们还需要将模板 AST 转换为 JavaScript AST。因为 Vue.js 模板编译器的最终目标是生成渲染函数，而渲染函数本质上是 JavaScript 代码，所以我们需要将模板 AST 转换成用于描述渲染函数的 JavaScript AST。</p>
+<p><img src="https://pic.imgdb.cn/item/66d3cc8dd9c307b7e9e412b3.png"></p>
+<p>有了 JavaScript AST 后，我们就可以根据它生成渲染函数了，<code>generate</code>函数会将渲染函数的代码以字符<br>串的形式返回，并存储在<code>code</code>常量中。</p>
+<p><img src="https://pic.imgdb.cn/item/66d3ccc1d9c307b7e9e43b21.png"></p>
+<p>下面是完整流程：</p>
+<p><img src="https://pic.imgdb.cn/item/66d3ccd2d9c307b7e9e4466e.png"></p>
+<h2><span id="parse实现原理与状态机"><code>parse</code>实现原理与状态机</span></h2><p>解析器的入参是字符串模板，解析器会逐个读取字符串模板中的字符，并根据一定的规则将整个字符串切割为一个个 Token。下面是这个过程的有限状态自动机，有的圆圈是单线的，而有的圆圈是双线的。双线代表此时状态机是一个合法的 Token：</p>
+<p><img src="https://pic.imgdb.cn/item/66d3ce9fd9c307b7e9e5a4e7.png"></p>
+<p>对于模板<code>&lt;div&gt;Hello&lt;/div&gt;</code>，有如下过程：</p>
+<ul>
+<li>状态机处于<strong>初始状态1</strong></li>
+<li><strong>初始状态1</strong>读取<code>&lt;</code>，进入标签<strong>开始状态2</strong></li>
+<li><strong>标签开始状态2</strong>读取<code>div</code>，由于是字母，直到读取到<code>&gt;</code>前都处于<strong>标签名称状态3</strong></li>
+<li><strong>标签名称状态3</strong>读取<code>&gt;</code>，回到<strong>初始状态1</strong></li>
+<li><strong>初始状态1</strong>读取到文本内容<code>Hello</code>，直到读取<code>&lt;</code>前都处于<strong>文本状态4</strong>，并记录在文本状态 4下产生的文本内容，</li>
+<li><strong>文本状态4</strong>读取<code>&lt;</code>，进入<strong>标签开始状态2</strong></li>
+<li><strong>标签开始状态2</strong>读取<code>/</code>，进入<strong>结束标签状态5</strong></li>
+<li><strong>结束标签状态5</strong>读取<code>div</code>，直到读取到<code>&gt;</code>前都处于<strong>结束标签名称状态6</strong></li>
+<li><strong>结束标签名称状态6</strong>读取<code>&gt;</code>，回到<strong>初始状态1</strong>，分析结束，并记录在<strong>结束标签名称状态 6</strong>下生成的结束标签名称。</li>
+</ul>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-keyword">export</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">tokenize</span>(<span class="hljs-params"><span class="hljs-attr">str</span>: <span class="hljs-built_in">string</span></span>) &#123;<br><br>  <span class="hljs-comment">// 状态机当前状态</span><br>  <span class="hljs-keyword">let</span> currentState = <span class="hljs-title class_">State</span>.<span class="hljs-property">initial</span><br>  <span class="hljs-comment">// 缓存字符</span><br>  <span class="hljs-keyword">const</span> <span class="hljs-attr">chars</span>: <span class="hljs-title class_">Array</span>&lt;<span class="hljs-built_in">string</span>&gt; = []<br>  <span class="hljs-comment">// 存储生成 Token</span><br>  <span class="hljs-keyword">const</span> <span class="hljs-attr">tokens</span>: <span class="hljs-title class_">Array</span>&lt;token&gt; = []<br><br>  <span class="hljs-comment">// 使用while循环开启自动机</span><br>  <span class="hljs-keyword">while</span> (str) &#123;<br>    <span class="hljs-comment">// 查看第一个字符</span><br>    <span class="hljs-keyword">const</span> <span class="hljs-attr">char</span>: <span class="hljs-built_in">string</span> = str[<span class="hljs-number">0</span>]<br>    <span class="hljs-comment">// 状态匹配</span><br>    <span class="hljs-keyword">switch</span> (currentState) &#123;<br>      <span class="hljs-comment">/* 初始状态 */</span><br>      <span class="hljs-keyword">case</span> <span class="hljs-title class_">State</span>.<span class="hljs-property">initial</span>:<br>        <span class="hljs-comment">// 进入标签开始状态</span><br>        <span class="hljs-keyword">if</span> (char === <span class="hljs-string">&#x27;&lt;&#x27;</span>) &#123;<br>          currentState = <span class="hljs-title class_">State</span>.<span class="hljs-property">tagStart</span><br>          <span class="hljs-comment">// 指向下一个字符</span><br>          str = str.<span class="hljs-title function_">substring</span>(<span class="hljs-number">1</span>)<br><br>        &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (<span class="hljs-title function_">isAlpha</span>(char)) &#123;<br>          <span class="hljs-comment">// 进入文本状态</span><br><br>          currentState = <span class="hljs-title class_">State</span>.<span class="hljs-property">text</span><br>          <span class="hljs-comment">// 缓存当前字母</span><br>          chars.<span class="hljs-title function_">push</span>(char)<br>          <span class="hljs-comment">// 指向下一个字符</span><br>          str = str.<span class="hljs-title function_">substring</span>(<span class="hljs-number">1</span>)<br><br>        &#125;<br>        <span class="hljs-keyword">break</span><br><br>      <span class="hljs-comment">/* 标签开始状态 */</span><br>      <span class="hljs-keyword">case</span> <span class="hljs-title class_">State</span>.<span class="hljs-property">tagStart</span>:<br>        <span class="hljs-keyword">if</span> (<span class="hljs-title function_">isAlpha</span>(char)) &#123;<br>          <span class="hljs-comment">// 进入标签名称状态</span><br><br>          currentState = <span class="hljs-title class_">State</span>.<span class="hljs-property">tagName</span><br>          <span class="hljs-comment">// 缓存当前字母</span><br>          chars.<span class="hljs-title function_">push</span>(char)<br>          <span class="hljs-comment">// 指向下一个字符</span><br>          str = str.<span class="hljs-title function_">substring</span>(<span class="hljs-number">1</span>)<br><br>        &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (char === <span class="hljs-string">&#x27;/&#x27;</span>) &#123;<br>          <span class="hljs-comment">// 进入结束标签状态</span><br><br>          currentState = <span class="hljs-title class_">State</span>.<span class="hljs-property">tagEnd</span><br>          <span class="hljs-comment">// 指向下一个字符</span><br>          str = str.<span class="hljs-title function_">substring</span>(<span class="hljs-number">1</span>)<br>        &#125;<br>        <span class="hljs-keyword">break</span><br><br>      <span class="hljs-comment">/* 标签名称状态 */</span><br>      <span class="hljs-keyword">case</span> <span class="hljs-title class_">State</span>.<span class="hljs-property">tagName</span>:<br>        <span class="hljs-keyword">if</span> (<span class="hljs-title function_">isAlpha</span>(char)) &#123;<br>          <span class="hljs-comment">// 缓存当前字母</span><br>          chars.<span class="hljs-title function_">push</span>(char)<br>          <span class="hljs-comment">// 指向下一个字符</span><br>          str = str.<span class="hljs-title function_">substring</span>(<span class="hljs-number">1</span>)<br><br>        &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (char === <span class="hljs-string">&#x27;&gt;&#x27;</span>) &#123;<br>          <span class="hljs-comment">// 切换初始状态</span><br><br>          currentState = <span class="hljs-title class_">State</span>.<span class="hljs-property">initial</span><br>          <span class="hljs-comment">// 创建标签token，存储到tokens中</span><br>          tokens.<span class="hljs-title function_">push</span>(&#123;<br>            <span class="hljs-attr">type</span>: <span class="hljs-string">&quot;tag&quot;</span>,<br>            <span class="hljs-attr">name</span>: chars.<span class="hljs-title function_">join</span>(<span class="hljs-string">&#x27;&#x27;</span>)<br>          &#125;)<br>          <span class="hljs-comment">// 重置缓存</span><br>          chars.<span class="hljs-property">length</span> = <span class="hljs-number">0</span><br>          <span class="hljs-comment">// 指向下一个字符</span><br>          str = str.<span class="hljs-title function_">substring</span>(<span class="hljs-number">1</span>)<br>        &#125;<br>        <span class="hljs-keyword">break</span><br><br>      <span class="hljs-comment">/* 文本状态 */</span><br>      <span class="hljs-keyword">case</span> <span class="hljs-title class_">State</span>.<span class="hljs-property">text</span>:<br>        <span class="hljs-keyword">if</span> (<span class="hljs-title function_">isAlpha</span>(char)) &#123;<br>          <br>          chars.<span class="hljs-title function_">push</span>(char)<br>          str = str.<span class="hljs-title function_">substring</span>(<span class="hljs-number">1</span>)<br>          <br>        &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (char === <span class="hljs-string">&#x27;&lt;&#x27;</span>) &#123;<br>          <span class="hljs-comment">// 进入标签开始状态</span><br>          currentState = <span class="hljs-title class_">State</span>.<span class="hljs-property">tagStart</span><br>          <span class="hljs-comment">// 创建文本token</span><br>          tokens.<span class="hljs-title function_">push</span>(&#123;<br>            <span class="hljs-attr">type</span>: <span class="hljs-string">&quot;text&quot;</span>,<br>            <span class="hljs-attr">content</span>: chars.<span class="hljs-title function_">join</span>(<span class="hljs-string">&#x27;&#x27;</span>)<br>          &#125;)<br>          <span class="hljs-comment">// 重置缓存</span><br>          chars.<span class="hljs-property">length</span> = <span class="hljs-number">0</span><br>          <span class="hljs-comment">// 指向下一个字符</span><br>          str = str.<span class="hljs-title function_">substring</span>(<span class="hljs-number">1</span>)<br>        &#125;<br>        <span class="hljs-keyword">break</span><br><br>      <span class="hljs-comment">/* 标签结束状态 */</span><br>        <span class="hljs-keyword">case</span> <span class="hljs-title class_">State</span>.<span class="hljs-property">tagEnd</span>:<br>          <span class="hljs-keyword">if</span> (<span class="hljs-title function_">isAlpha</span>(char)) &#123;<br>            currentState = <span class="hljs-title class_">State</span>.<span class="hljs-property">tagEndName</span><br>            <span class="hljs-comment">// 缓存当前字母</span><br>            chars.<span class="hljs-title function_">push</span>(char)<br>            <span class="hljs-comment">// 指向下一个字符</span><br>            str = str.<span class="hljs-title function_">substring</span>(<span class="hljs-number">1</span>)<br>            <br>          &#125;<br>          <span class="hljs-keyword">break</span><br><br>      <span class="hljs-comment">/* 标签结束名称状态 */</span><br>        <span class="hljs-keyword">case</span> <span class="hljs-title class_">State</span>.<span class="hljs-property">tagEndName</span>:<br>          <span class="hljs-keyword">if</span> (<span class="hljs-title function_">isAlpha</span>(char)) &#123;<br><br>            chars.<span class="hljs-title function_">push</span>(char)<br>            str = str.<span class="hljs-title function_">substring</span>(<span class="hljs-number">1</span>)<br><br>          &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (char === <span class="hljs-string">&#x27;&gt;&#x27;</span>) &#123;<br>            <span class="hljs-comment">// 切换初始状态</span><br>            currentState = <span class="hljs-title class_">State</span>.<span class="hljs-property">initial</span><br>            <span class="hljs-comment">// 保存结束标签token</span><br>            tokens.<span class="hljs-title function_">push</span>(&#123;<br>              <span class="hljs-attr">type</span>: <span class="hljs-string">&#x27;tagEnd&#x27;</span>,<br>              <span class="hljs-attr">name</span>: chars.<span class="hljs-title function_">join</span>(<span class="hljs-string">&#x27;&#x27;</span>)<br>            &#125;)<br>            <span class="hljs-comment">// 重置缓存</span><br>            chars.<span class="hljs-property">length</span> = <span class="hljs-number">0</span><br>            <span class="hljs-comment">// 指向下一个字符</span><br>            str = str.<span class="hljs-title function_">substring</span>(<span class="hljs-number">1</span>)<br>            <br>          &#125;<br><br>        <br>    &#125;<br>  &#125;<br>  <span class="hljs-keyword">return</span> tokens<br><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>上面的代码是最基础的实现方式，易于理解，后续会继续优化这段代码。我们可以通过正则表达式来精简 tokenize 函数的代码。</p>
+<h2><span id="构造ast">构造AST</span></h2><p>HTML 是一种标记语言，它的格式非常固定，标签元素之间天然嵌套，形成父子关系。因此，一棵用于描述 HTML 的 AST 将拥有与 HTML 标签非常相似的树型结构。</p>
+<p><img src="https://pic.imgdb.cn/item/66d50bc1d9c307b7e954ebe8.png"></p>
+<p>根据 Token 列表构建 AST 的过程，其实就是对 Token 列表进行扫描的过程。从第一个 Token 开始，顺序地扫描整个 Token 列表，直到列表中的所有 Token 处理完毕。在这个过程中，我们需要维护一个栈<code> elementStack</code>，这个栈将用于维护元素间的父子关系。</p>
+<ul>
+<li>每遇到一个开始标签节点，我们就构造一个<code>Element</code>类型的 AST 节点，并将其压入栈中。</li>
+<li>类似地，每当遇到一个结束标签节点，我们就将当前栈顶的节点弹出。</li>
+</ul>
+<p>这样，栈顶的节点将始终充当父节点的角色。扫描过程中遇到的所有节点，都会作为当前栈顶节点的子节点，并添加到栈顶节点的<code>children</code>属性下。</p>
+<p><img src="https://pic.imgdb.cn/item/66d50c00d9c307b7e955159d.png"></p>
+<p>结束状态：</p>
+<p><img src="https://pic.imgdb.cn/item/66d50d08d9c307b7e955c1a8.png"></p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">parse</span>(<span class="hljs-params">templateStr</span>) &#123;<br>  <span class="hljs-comment">// 获取模板对应token</span><br>  <span class="hljs-keyword">const</span> tokens = <span class="hljs-title function_">tokenize</span>(templateStr)<br>  <span class="hljs-comment">// 创建Root节点</span><br>  <span class="hljs-keyword">const</span> root = &#123;<br>    <span class="hljs-attr">type</span>: <span class="hljs-string">&#x27;Root&#x27;</span>,<br>    <span class="hljs-attr">children</span>: []<br>  &#125;<br><br>  <span class="hljs-comment">// 创建 elementStack 栈</span><br>  <span class="hljs-keyword">const</span> elementStack = [root]<br><br>  <span class="hljs-comment">// 循环扫描 tokens</span><br>  <span class="hljs-keyword">while</span> (tokens.<span class="hljs-property">length</span>) &#123;<br>    <span class="hljs-comment">// 获取当前栈顶节点作为父节点 parent</span><br>    <span class="hljs-keyword">const</span> parent = elementStack[elementStack.<span class="hljs-property">length</span> - <span class="hljs-number">1</span>] <span class="hljs-keyword">as</span> <span class="hljs-title class_">AstNode</span><br>    <span class="hljs-comment">// 获取当前 token</span><br>    <span class="hljs-keyword">const</span> token = tokens[<span class="hljs-number">0</span>]<br><br>    <span class="hljs-keyword">switch</span> (token.<span class="hljs-property">type</span>) &#123;<br><br>      <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;tag&#x27;</span>:<br>        <span class="hljs-comment">// 如果token是开始标签，则创建 Element 类型的AST节点</span><br>        <span class="hljs-keyword">const</span> elementNode = &#123;<br>          <span class="hljs-attr">type</span>: <span class="hljs-string">&#x27;Element&#x27;</span>,<br>          <span class="hljs-attr">tag</span>: token.<span class="hljs-property">name</span>,<br>          <span class="hljs-attr">children</span>: []<br>        &#125;<br>        <span class="hljs-comment">// 添加到父节点的 children</span><br>        parent.<span class="hljs-property">children</span>?.<span class="hljs-title function_">push</span>(elementNode)<br>        <span class="hljs-comment">// 压栈</span><br>        elementStack.<span class="hljs-title function_">push</span>(elementNode)<br>        <span class="hljs-keyword">break</span><br><br>      <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;text&#x27;</span>:<br>        <span class="hljs-comment">// 如果token是文本节点，则创建 Element 类型的AST节点</span><br>        <span class="hljs-keyword">const</span> textNode = &#123;<br>          <span class="hljs-attr">type</span>: <span class="hljs-string">&#x27;Text&#x27;</span>,<br>          <span class="hljs-attr">content</span>: token.<span class="hljs-property">content</span><br>        &#125;<br>        <span class="hljs-comment">// 添加到父节点的 children</span><br>        parent.<span class="hljs-property">children</span>?.<span class="hljs-title function_">push</span>(textNode)<br>        <span class="hljs-keyword">break</span><br><br>      <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;tagEnd&#x27;</span>:<br>        <span class="hljs-comment">// 结束标签则弹出栈顶元素</span><br>        elementStack.<span class="hljs-title function_">pop</span>()<br>        <span class="hljs-keyword">break</span><br>    &#125;<br><br>    <span class="hljs-comment">// 移除处理过的 token</span><br>    tokens.<span class="hljs-title function_">shift</span>()<br><br>  &#125;<br><br>  <span class="hljs-keyword">return</span> root<br><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h2><span id="ast-的转换与插件化架构">AST 的转换与插件化架构</span></h2><p>所谓 AST 的转换，指的是对 AST 进行一系列操作，将其转换为新的 AST 的过程。新的 AST 可以是原语言或原 DSL 的描述，也可以是其他语言或其他 DSL 的描述。转换后的 AST 可以用于代码生成。这其实就是 Vue 的模板编译器将模板编译为渲染函数的过程。</p>
+<p>为了对 AST 进行转换，我们需要能访问 AST 的每一个节点，这样才有机会对特定节点进行修改、替换、删除等操作。由于 AST 是树型数据结构，所以我们需要编写一个深度优先的遍历算法，从而实现对 AST 中节点的访问。</p>
+<p>我们先完成一个工具函数<code>dump</code>用于打印节点信息：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">dump</span>(<span class="hljs-params">node, indent = <span class="hljs-number">0</span></span>) &#123;<br>  <span class="hljs-keyword">const</span> <span class="hljs-keyword">type</span> = node.<span class="hljs-property">type</span><br><br>  <span class="hljs-keyword">const</span> desc = <span class="hljs-keyword">type</span> === <span class="hljs-string">&#x27;Root&#x27;</span><br>  ? <span class="hljs-string">&#x27;&#x27;</span><br>  : <span class="hljs-keyword">type</span> === <span class="hljs-string">&#x27;Element&#x27;</span><br>    ? node.<span class="hljs-property">tag</span><br>    : node.<span class="hljs-property">content</span><br><br>  <span class="hljs-comment">// 打印节点信息</span><br>  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">`<span class="hljs-subst">$&#123;<span class="hljs-string">&#x27;-&#x27;</span>.repeat(indent)&#125;</span><span class="hljs-subst">$&#123;<span class="hljs-keyword">type</span>&#125;</span>: <span class="hljs-subst">$&#123;desc&#125;</span>`</span>)<br><br>  <span class="hljs-comment">// 递归打印</span><br>  <span class="hljs-keyword">if</span> (node.<span class="hljs-property">children</span>) &#123;<br>    node.<span class="hljs-property">children</span>.<span class="hljs-title function_">forEach</span>(<span class="hljs-function">(<span class="hljs-params"><span class="hljs-attr">child</span>: <span class="hljs-title class_">AstNode</span></span>) =&gt;</span> &#123;<span class="hljs-title function_">dump</span>(child, indent + <span class="hljs-number">2</span>)&#125;)<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>接下来，我们将着手实现对 AST 中节点的访问，从 AST 根节点开始，进行深度优先遍历，我们可以在遍历时对AST进行转换操作：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">traverseNode</span>(<span class="hljs-params">ast</span>) &#123;<br>  <span class="hljs-comment">// 转换操作，任意</span><br>  <span class="hljs-keyword">if</span> (ast.<span class="hljs-property">type</span> === <span class="hljs-string">&#x27;Element&#x27;</span> &amp;&amp; ast.<span class="hljs-property">tag</span> = <span class="hljs-string">&#x27;p&#x27;</span>) ast.<span class="hljs-property">tag</span> = <span class="hljs-string">&#x27;h1&#x27;</span><br>  <span class="hljs-comment">// 有子节点则递归调用</span><br>  <span class="hljs-keyword">const</span> children = ast.<span class="hljs-property">children</span><br>  <span class="hljs-keyword">if</span> (children) &#123;<br>    children.<span class="hljs-title function_">forEach</span>(<span class="hljs-function">(<span class="hljs-params"><span class="hljs-attr">child</span>: <span class="hljs-title class_">AstNode</span></span>) =&gt;</span> &#123;<br>      <span class="hljs-title function_">traverseNode</span>(child)<br>    &#125;)<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>随着功能的不断增加，<code>traverseNode</code>函数将会变得越来越“臃肿””，我们可以使用回调函数的机制来实现解<br>耦，为<code>traverseNode</code>函数添加一个上下文。</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">traverseNode</span>(<span class="hljs-params">ast, ctx</span>) &#123;<br><br>  <span class="hljs-comment">// 有子节点则递归调用</span><br>  <span class="hljs-keyword">const</span> children = ast.<span class="hljs-property">children</span><br>  <span class="hljs-comment">// 获取转换函数</span><br>  <span class="hljs-keyword">const</span> transforms = ctx.<span class="hljs-property">nodeTransforms</span><br><br>  transforms.<span class="hljs-title function_">forEach</span>(<span class="hljs-function"><span class="hljs-params">transform</span> =&gt;</span> &#123;<br>    <span class="hljs-title function_">transform</span>(ast, ctx)<br>  &#125;)<br><br>  <span class="hljs-keyword">if</span> (children) &#123;<br>    children.<span class="hljs-title function_">forEach</span>(<span class="hljs-function">(<span class="hljs-params"><span class="hljs-attr">child</span>: <span class="hljs-title class_">AstNode</span></span>) =&gt;</span> &#123;<br>      <span class="hljs-title function_">traverseNode</span>(child, ctx)<br>    &#125;)<br>  &#125;<br>&#125;<br><br><span class="hljs-keyword">function</span> <span class="hljs-title function_">transform</span>(<span class="hljs-params">ast</span>) &#123;<br>  <span class="hljs-keyword">const</span> ctx = &#123;<br>    <span class="hljs-attr">nodeTransforms</span>: [<br>      transformElement,<br>      transformText<br>    ]<br>  &#125;<br><br>  <span class="hljs-title function_">traverseNode</span>(ast, ctx)<br>&#125;<br><br><span class="hljs-keyword">function</span> <span class="hljs-title function_">transformElement</span>(<span class="hljs-params"></span>) &#123;&#125;<br><span class="hljs-keyword">function</span> <span class="hljs-title function_">transformText</span>(<span class="hljs-params"></span>) &#123;&#125;<br></code></pre></td></tr></table></figure>
+
+<p>接下来我们继续丰富上下文信息的构造：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-keyword">export</span> <span class="hljs-keyword">interface</span> transformCtx &#123;<br>  <span class="hljs-comment">/**</span><br><span class="hljs-comment">   * 转换函数组</span><br><span class="hljs-comment">   * */</span><br>  <span class="hljs-attr">nodeTransforms</span>: <span class="hljs-title class_">Array</span>&lt;<span class="hljs-title class_">Function</span>&gt;<br><br>  <span class="hljs-comment">/**</span><br><span class="hljs-comment">   * 当前转换节点</span><br><span class="hljs-comment">   * */</span><br>  <span class="hljs-attr">currentNode</span>: <span class="hljs-title class_">AstNode</span> | <span class="hljs-literal">null</span><br><br>  <span class="hljs-comment">/**</span><br><span class="hljs-comment">   * 当前节点在父节点的 children 中的位置索引。</span><br><span class="hljs-comment">   * */</span><br>  <span class="hljs-attr">childIndex</span>: <span class="hljs-built_in">number</span><br><br>  <span class="hljs-comment">/**</span><br><span class="hljs-comment">   * 当前节点父节点</span><br><span class="hljs-comment">   * */</span><br>  <span class="hljs-attr">parent</span>: <span class="hljs-title class_">AstNode</span> | <span class="hljs-literal">null</span><br><br>  <span class="hljs-comment">/**</span><br><span class="hljs-comment">   * 节点替换函数</span><br><span class="hljs-comment">   * */</span><br>  <span class="hljs-attr">replaceNode</span>: <span class="hljs-function">(<span class="hljs-params"><span class="hljs-attr">node</span>: <span class="hljs-title class_">AstNode</span></span>) =&gt;</span> <span class="hljs-built_in">void</span><br>    <br>  <span class="hljs-comment">/**</span><br><span class="hljs-comment">   * 节点移除函数</span><br><span class="hljs-comment">   * */</span><br>  <span class="hljs-attr">removeNode</span>: <span class="hljs-function">() =&gt;</span> <span class="hljs-built_in">void</span><br><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>修改<code>transform</code>和<code>traverseNode</code>函数：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">transform</span>(<span class="hljs-params">ast</span>) &#123;<br>  <span class="hljs-keyword">const</span> ctx = &#123;<br>    <span class="hljs-attr">nodeTransforms</span>: [<br>      transformElement,<br>      transformText<br>    ],<br><br>    <span class="hljs-attr">currentNode</span>: <span class="hljs-literal">null</span>,<br>    <span class="hljs-attr">childIndex</span>: <span class="hljs-number">0</span>,<br>    <span class="hljs-attr">parent</span>: <span class="hljs-literal">null</span>,<br><br>    <span class="hljs-title function_">replaceNode</span>(<span class="hljs-params">node</span>) &#123;<br>      <span class="hljs-comment">// 找到当前节点在父节点的 children 中的位置 context.childIndex 并替换即可</span><br>      <span class="hljs-keyword">if</span> (ctx.<span class="hljs-property">parent</span> &amp;&amp; ctx.<span class="hljs-property">parent</span>.<span class="hljs-property">children</span>) &#123;<br>        ctx.<span class="hljs-property">parent</span>.<span class="hljs-property">children</span>[ctx.<span class="hljs-property">childIndex</span>] = node<br>        <span class="hljs-comment">// 更新 currentNode</span><br>        ctx.<span class="hljs-property">currentNode</span> = node<br>      &#125; <span class="hljs-keyword">else</span> &#123;<br>        <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">error</span>(<span class="hljs-string">&quot;children do not exist.&quot;</span>)<br>      &#125;<br>    &#125;,<br>      <br>    <span class="hljs-title function_">removeNode</span>(<span class="hljs-params"></span>) &#123;<br>      <span class="hljs-keyword">if</span> (ctx.<span class="hljs-property">parent</span> &amp;&amp; ctx.<span class="hljs-property">parent</span>.<span class="hljs-property">children</span>) &#123;<br>        <span class="hljs-comment">// 根据当前节点的索引删除当前节点</span><br>        ctx.<span class="hljs-property">parent</span>.<span class="hljs-property">children</span>.<span class="hljs-title function_">splice</span>(ctx.<span class="hljs-property">childIndex</span>, <span class="hljs-number">1</span>)<br>        <span class="hljs-comment">// 置空 currentNode</span><br>        ctx.<span class="hljs-property">currentNode</span> = <span class="hljs-literal">null</span><br>      &#125; <span class="hljs-keyword">else</span> &#123;<br>        <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">error</span>(<span class="hljs-string">&quot;children do not exist.&quot;</span>)<br>      &#125;<br>    &#125;<br>      <br>  &#125;<br><br>  <span class="hljs-title function_">traverseNode</span>(ast, ctx)<br>&#125;<br><br><span class="hljs-keyword">function</span> <span class="hljs-title function_">traverseNode</span>(<span class="hljs-params">ast, ctx</span>) &#123;<br>  ctx.<span class="hljs-property">currentNode</span> = ast<br><br>  ...<br>  <br>  transforms.<span class="hljs-title function_">forEach</span>(<span class="hljs-function"><span class="hljs-params">transform</span> =&gt;</span> &#123;<br>    <span class="hljs-title function_">transform</span>(ast, ctx)<br>    <span class="hljs-comment">// 节点被删除则返回</span><br>    <span class="hljs-keyword">if</span> (!ctx.<span class="hljs-property">currentNode</span>) &#123; <span class="hljs-keyword">return</span> &#125;<br>  &#125;)<br><br>  <span class="hljs-keyword">if</span> (children) &#123;<br>    children.<span class="hljs-title function_">forEach</span>(<span class="hljs-function">(<span class="hljs-params"><span class="hljs-attr">child</span>: <span class="hljs-title class_">AstNode</span></span>) =&gt;</span> &#123;<br>      <span class="hljs-comment">// 设置父节点</span><br>      ctx.<span class="hljs-property">parent</span> = ast<br>      <span class="hljs-comment">// 设置索引</span><br>      ctx.<span class="hljs-property">childIndex</span> = children.<span class="hljs-title function_">indexOf</span>(child)<br>      <span class="hljs-title function_">traverseNode</span>(child, ctx)<br>    &#125;)<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>目前的顺序处理的工作流存在的问题是，当一个节点被处理时，意味着它的父节点已经被处理完毕了，并且我们无法再回过头重新处理父节点。父节点的转换操作必须等待其所有子节点全部转换完毕后再执行，我们目前设计的转换工作流并不支持这一能力。</p>
+<p><img src="https://pic.imgdb.cn/item/66d52887d9c307b7e9750555.png"></p>
+<p>对节点的访问分为两个阶段，即进入阶段和退出阶段。当转换函数处于进入阶段时，它会先进入父节点，再进入子节点。而当转换函数处于退出阶段时，则会先退出子节点，再退出父节点。我们重新修改<code>traverseNode</code>函数：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-keyword">export</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">traverseNode</span>(<span class="hljs-params"><span class="hljs-attr">ast</span>: <span class="hljs-title class_">AstNode</span>, <span class="hljs-attr">ctx</span>: transformCtx</span>) &#123;<br>  ctx.<span class="hljs-property">currentNode</span> = ast<br>  <span class="hljs-comment">// 退出阶段的回调函数数组</span><br>  <span class="hljs-keyword">const</span> <span class="hljs-attr">exitFns</span>: <span class="hljs-title class_">Array</span>&lt;<span class="hljs-title class_">Function</span>&gt; = []<br>  ...<br><br>  transforms.<span class="hljs-title function_">forEach</span>(<span class="hljs-function"><span class="hljs-params">transform</span> =&gt;</span> &#123;<br>    <span class="hljs-comment">// 存储退出阶段的回调函数</span><br>    <span class="hljs-keyword">const</span> onExit = <span class="hljs-title function_">transform</span>(ctx.<span class="hljs-property">currentNode</span>, ctx)<br>    <span class="hljs-keyword">if</span> (onExit) &#123;<br>      exitFns.<span class="hljs-title function_">push</span>(onExit)<br>    &#125;<br>    ...<br>  &#125;)<br>	...<br>  <br>  <span class="hljs-comment">// 处理退出阶段回调函数，反序执行</span><br>  <span class="hljs-keyword">let</span> i = exitFns.<span class="hljs-property">length</span><br>  <span class="hljs-keyword">while</span> (i--) &#123;<br>    exitFns[i]()<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>在<code>traverseNode</code>函数的最后，执行这些缓存在<code>exitFns</code>数组中的回调函数保证当退出阶段的回调函数执行时，当前访问的节点的子节点已经全部处理过了。我们在编写转换函数时，可以将转换逻辑编写在退出阶段的回调函数中，从而保证在对当前访问的节点进行转换之前，其子节点一定全部处理完毕。</p>
+<p>需要注意的是，退出阶段的回调函数是反序执行的。这意味着，如果注册了多个转换函数，则它们的注册顺序将决定代码的执行结果。例如：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-attr">nodeTransForm</span>: [<br>	transformA,<br>    transformB<br>]<br><br><span class="hljs-comment">// 执行结果</span><br>transformA<br>transformB<br>transformB<br>transformA<br></code></pre></td></tr></table></figure>
+
+<h2><span id="将模板-ast-转为-javascript-ast">将模板 AST 转为 JavaScript AST</span></h2><p>我们需要将模板 AST 转换为用于描述渲染函数的 JavaScript AST。下面时函数声明语句的组成：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-keyword">export</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">JavaScriptAstNode</span> &#123;<br>  <span class="hljs-attr">type</span>: <span class="hljs-built_in">string</span><br><br>  <span class="hljs-comment">/**</span><br><span class="hljs-comment">   * 标识符</span><br><span class="hljs-comment">   * */</span><br>  <span class="hljs-attr">id</span>: <span class="hljs-title class_">JavaScriptAstIdentifier</span><br><br>  <span class="hljs-comment">/**</span><br><span class="hljs-comment">   * 函数参数</span><br><span class="hljs-comment">   * */</span><br>  <span class="hljs-attr">params</span>: []<br><br>  <span class="hljs-comment">/**</span><br><span class="hljs-comment">   * 函数体</span><br><span class="hljs-comment">   * */</span><br>  <span class="hljs-attr">body</span>: <span class="hljs-title class_">JavaScriptAstState</span>[]<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>为了简化问题，这里我们不考虑箭头函数、生成器函数、<code>async</code>函数等情况。</p>
+<ul>
+<li><code>id</code>：函数名称，它是一个标识符<code> Identifier</code>。</li>
+<li><code>params</code>：函数的参数，它是一个数组。</li>
+<li><code>body</code>：函数体，由于函数体可以包含多个语句，因此它也是一个数组。</li>
+</ul>
+<p>我们分别用<code>CallExpression, StringLiteral, ArrayExpression</code>分别描述函数调用、字符串字面量和数组：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 函数调用结构</span><br><span class="hljs-comment"> * */</span><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">CallExp</span> &#123;<br><br>  <span class="hljs-attr">type</span>: <span class="hljs-string">&quot;CallExpression&quot;</span><br><br>  <span class="hljs-comment">/**</span><br><span class="hljs-comment">   * 用来描述被调用函数的名字称，它本身是一个标识符节点</span><br><span class="hljs-comment">   * */</span><br>  <span class="hljs-attr">callee</span>: <span class="hljs-title class_">Identifier</span><br><br>  <span class="hljs-comment">/**</span><br><span class="hljs-comment">   * 被调用函数的形式参数</span><br><span class="hljs-comment">   * */</span><br>  <span class="hljs-attr">arguments</span>: <span class="hljs-title class_">AstState</span>[]<br><br>&#125;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 字符串字面量</span><br><span class="hljs-comment"> * */</span><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">StringLiteral</span> &#123;<br>  <br>  <span class="hljs-attr">type</span>: <span class="hljs-string">&quot;StringLiteral&quot;</span><br>  <br>  <span class="hljs-attr">value</span>: <span class="hljs-built_in">string</span><br>  <br>&#125;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 数组</span><br><span class="hljs-comment"> * */</span><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">ArrayExp</span> &#123;<br>  <br>  <span class="hljs-attr">type</span>: <span class="hljs-string">&quot;ArrayExpression&quot;</span><br>  <br>  <span class="hljs-comment">/**</span><br><span class="hljs-comment">   * 数组元素</span><br><span class="hljs-comment">   * */</span><br>  <span class="hljs-attr">elements</span>: []<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>下面是一个例子，使用之前的模板：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-comment">// &lt;div&gt;&lt;p&gt;MVVM&lt;/p&gt;&lt;p&gt;Template&lt;/p&gt;&lt;/div&gt;</span><br><span class="hljs-comment">/*</span><br><span class="hljs-comment">	function render() &#123;</span><br><span class="hljs-comment">		return h(&#x27;div&#x27;, [/* ... */</span>])<br>	&#125;<br>*/<br><br><span class="hljs-keyword">const</span> <span class="hljs-title class_">FunctionDeclNode</span> = &#123;<br>    <span class="hljs-attr">type</span>: <span class="hljs-string">&#x27;FunctionDecl&#x27;</span>	<span class="hljs-comment">// 表示函数声明</span><br>    <span class="hljs-attr">id</span>: &#123;<br>        <span class="hljs-attr">type</span>: <span class="hljs-string">&#x27;Identifier&#x27;</span>,<br>    	<span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;render&#x27;</span> 		<span class="hljs-comment">// 存储标识符的名称</span><br>    &#125;,<br>	<span class="hljs-attr">params</span>: [],<br>    <span class="hljs-attr">body</span>: [<br>        &#123;<br>            <span class="hljs-attr">type</span>: <span class="hljs-string">&#x27;ReturnStatement&#x27;</span>,<br>            <span class="hljs-comment">// 最外层 h 函数调用</span><br>            <span class="hljs-attr">return</span>: &#123;<br>                <span class="hljs-attr">type</span>: <span class="hljs-string">&#x27;CallExpression&#x27;</span>,<br>                <span class="hljs-attr">callee</span>: &#123;<br>                    <span class="hljs-attr">type</span>: <span class="hljs-string">&#x27;Identifier&#x27;</span>, <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;h&#x27;</span>,<br>                    <span class="hljs-attr">arguments</span>: [<br>                        <span class="hljs-comment">// 字符串字面量`div`</span><br>                        &#123;<br>                            <span class="hljs-attr">type</span>: <span class="hljs-string">&#x27;StringLiteral&#x27;</span>,<br>                            <span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;div&#x27;</span><br>                        &#125;,<br>                        <span class="hljs-comment">// 数组</span><br>                        &#123;<br>                            <span class="hljs-attr">type</span>: <span class="hljs-string">&#x27;ArrayExpression&#x27;</span>,<br>                            <span class="hljs-attr">elements</span>: [<br>                                <span class="hljs-comment">// h 函数调用</span><br>                                &#123;<br>                                    <span class="hljs-attr">type</span>: <span class="hljs-string">&#x27;CallExpression&#x27;</span>,<br>                                    <span class="hljs-attr">callee</span>: &#123; <span class="hljs-attr">type</span>: <span class="hljs-string">&#x27;Identifier&#x27;</span>, <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;h&#x27;</span>&#125;,<br>                                    <span class="hljs-attr">arguments</span>: &#123;<br>                                        &#123;<span class="hljs-attr">type</span>: <span class="hljs-string">&quot;StringLiteral&quot;</span>, <span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;p&#x27;</span>&#125;,<br>                                    	&#123;<span class="hljs-attr">type</span>: <span class="hljs-string">&quot;StringLiteral&quot;</span>, <span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;Vue&#x27;</span>&#125;,<br>                                    &#125;<br>                                &#125;,<br>                        		<span class="hljs-comment">// 另一节点类似，省略</span><br>                            ]<br>                        &#125;<br>                    ]<br>                &#125;<br>            &#125;<br>        &#125;<br>    ]<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>接下来我们开始编写转换函数，将模板 AST 转换为上述 JavaScript AST。不过在开始之前，我们需要编写一些用来创建 JavaScript AST 节点的辅助函数。</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 创建 StringLiteral 节点</span><br><span class="hljs-comment"> * */</span><br><span class="hljs-title function_">createStringLiteral</span>(<span class="hljs-params">value</span>) &#123;<br>  <span class="hljs-keyword">return</span> &#123;<br>    <span class="hljs-attr">type</span>: <span class="hljs-string">&#x27;StringLiteral&#x27;</span>,<br>    <span class="hljs-attr">value</span>: value<br>  &#125;<br>&#125;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 创建 Identifier 节点</span><br><span class="hljs-comment"> * */</span><br><span class="hljs-keyword">function</span> <span class="hljs-title function_">createIdentifier</span>(<span class="hljs-params">name</span>) &#123;<br>  <span class="hljs-keyword">return</span> &#123;<br>    <span class="hljs-attr">type</span>: <span class="hljs-string">&#x27;Identifier&#x27;</span>,<br>    <span class="hljs-attr">name</span>: name<br>  &#125;<br>&#125;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 创建 ArrayExpression 节点</span><br><span class="hljs-comment"> * */</span><br><span class="hljs-keyword">function</span> <span class="hljs-title function_">ArrayExpression</span>(<span class="hljs-params">elements</span>) &#123;<br>  <span class="hljs-keyword">return</span> &#123;<br>    <span class="hljs-attr">type</span>: <span class="hljs-string">&#x27;ArrayExpression&#x27;</span>,<br>    <span class="hljs-attr">elements</span>: elements<br>  &#125;<br>&#125;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 创建 CallExpression 节点</span><br><span class="hljs-comment"> * */</span><br><span class="hljs-keyword">function</span> <span class="hljs-title function_">CallExpression</span>(<span class="hljs-params">callee, args</span>) &#123;<br>  <span class="hljs-keyword">return</span> &#123;<br>    <span class="hljs-attr">type</span>: <span class="hljs-string">&#x27;CallExpression&#x27;</span>,<br>    <span class="hljs-attr">callee</span>: <span class="hljs-title function_">createIdentifier</span>(callee),<br>    <span class="hljs-attr">arguments</span>: args<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>为了把模板 AST 转换为 JavaScript AST，我们同样需要两个转换函数<code>transformElement</code>和<code> transformText</code>：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 转换标签节点</span><br><span class="hljs-comment"> * */</span><br><span class="hljs-keyword">function</span> <span class="hljs-title function_">transformElement</span>(<span class="hljs-params">node</span>) &#123;<br>  <span class="hljs-comment">// 将转换代码编写在退出阶段的回调函数中，保证该标签节点的子节点全部被处理完毕</span><br>  <span class="hljs-keyword">return</span> <span class="hljs-function">() =&gt;</span> &#123;<br>    <span class="hljs-comment">// 不是元素节点则返回</span><br>    <span class="hljs-keyword">if</span> (node.<span class="hljs-property">type</span> !== <span class="hljs-string">&quot;Element&quot;</span>) &#123;<br>      <span class="hljs-keyword">return</span><br>    &#125;<br><br>    <span class="hljs-comment">// 创建 h 函数调用语句</span><br>    <span class="hljs-keyword">const</span> <span class="hljs-attr">callExp</span>: <span class="hljs-title class_">CallExp</span> = <span class="hljs-title function_">createCallExpression</span>(<span class="hljs-string">&#x27;h&#x27;</span>, [<br>      <span class="hljs-title function_">createStringLiteral</span>(node.<span class="hljs-property">tag</span> <span class="hljs-keyword">as</span> <span class="hljs-built_in">string</span>)<br>    ])<br><br>    <span class="hljs-comment">// 处理 h 函数调用的参数</span><br>    <span class="hljs-keyword">if</span> (node.<span class="hljs-property">children</span> &amp;&amp; node.<span class="hljs-property">children</span>[<span class="hljs-number">0</span>].<span class="hljs-property">jsNode</span>) &#123;<br>      node.<span class="hljs-property">children</span>.<span class="hljs-property">length</span> === <span class="hljs-number">1</span><br>      <span class="hljs-comment">// 只有一个子节点则使用 jsNode 作为参数</span><br>      ? callExp.<span class="hljs-property">arguments</span>.<span class="hljs-title function_">push</span>(node.<span class="hljs-property">children</span>[<span class="hljs-number">0</span>].<span class="hljs-property">jsNode</span>)<br>      <span class="hljs-comment">// 有多个子节点则创建 ArrayExpression 作为参数</span><br>      : callExp.<span class="hljs-property">arguments</span>.<span class="hljs-title function_">push</span>(<br>          <span class="hljs-title function_">createArrayExpression</span>(node.<span class="hljs-property">children</span>.<span class="hljs-title function_">map</span>(<span class="hljs-function"><span class="hljs-params">c</span> =&gt;</span> c.<span class="hljs-property">jsNode</span>))<br>        )<br>    &#125;<br><br>    <span class="hljs-comment">// 添加到 jsNode</span><br>    node.<span class="hljs-property">jsNode</span> = callExp<br><br>  &#125;<br><br>&#125;<br><br><span class="hljs-keyword">function</span> <span class="hljs-title function_">transformText</span>(<span class="hljs-params">node</span>) &#123;<br>  <span class="hljs-comment">// 不是文本节点则不处理</span><br>  <span class="hljs-keyword">if</span> (node.<span class="hljs-property">type</span> !== <span class="hljs-string">&#x27;Text&#x27;</span>) &#123;<br>    <span class="hljs-keyword">return</span><br>  &#125;<br><br>  <span class="hljs-comment">// 使用 node.content 创建一个 StringLiteral 类型的节点，添加到 node.jsNode 属性下</span><br>  node.<span class="hljs-property">jsNode</span> = <span class="hljs-title function_">createStringLiteral</span>(node.<span class="hljs-property">content</span> <span class="hljs-keyword">as</span> <span class="hljs-built_in">string</span>)<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>转换后得到的 AST 只是用来描述渲染函数<code>render</code>的返回值的，所以我们最后一步要做的就是，补全 JavaScript AST，即把用来描述 render 函数本身的函数声明语句节点附加到 JavaScript AST 中。这需要我们编写<code>transformRoot</code>函数来实现对 Root 根节点的转换：</p>
+<h2><span id="代码生成">代码生成</span></h2><p>我们将实现 generate 函数来完成代码生成的任务，代码生成也是编译器的最后一步。与 AST 转换一样，代码生成也需要上下文对象。该上下文对象用来维护代码生成过程中程序的运行状态：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-keyword">export</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">generate</span>(<span class="hljs-params">node</span>) &#123;<br>  <span class="hljs-keyword">const</span> <span class="hljs-attr">ctx</span>: generateCtx = &#123;<br>    <span class="hljs-comment">// 存储最终生成的渲染代码</span><br>    <span class="hljs-attr">code</span>: <span class="hljs-string">&#x27;&#x27;</span>,<br>    <span class="hljs-title function_">push</span>(<span class="hljs-params"><span class="hljs-attr">code</span>: <span class="hljs-built_in">string</span></span>) &#123;<br>      ctx.<span class="hljs-property">code</span> += code<br>    &#125;<br>  &#125;<br><br>  <span class="hljs-comment">// 代码生成</span><br>  <span class="hljs-title function_">genNode</span>(node, ctx)<br>  <br>  <span class="hljs-comment">// 返回渲染函数代码</span><br>  <span class="hljs-keyword">return</span> ctx.<span class="hljs-property">code</span><br><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>我们希望最终生成的代码具有较强的可读性，因此我们应该考虑生成代码的格式，例如缩进和换行等。这就需要我们扩展<code>context</code>对象，为其增加用来完成换行和缩进的工具函数：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-keyword">export</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">generate</span>(<span class="hljs-params"><span class="hljs-attr">node</span>: <span class="hljs-title class_">JsAstNode</span></span>) &#123;<br>  <span class="hljs-keyword">const</span> <span class="hljs-attr">ctx</span>: generateCtx = &#123;<br>    <span class="hljs-comment">// 存储最终生成的渲染代码</span><br>    <span class="hljs-attr">code</span>: <span class="hljs-string">&#x27;&#x27;</span>,<br>    <span class="hljs-title function_">push</span>(<span class="hljs-params"><span class="hljs-attr">code</span>: <span class="hljs-built_in">string</span></span>) &#123;<br>      ctx.<span class="hljs-property">code</span> += code<br>    &#125;,<br><br>    <span class="hljs-attr">currentIndent</span>: <span class="hljs-number">0</span>,<br><br>    <span class="hljs-title function_">newline</span>(<span class="hljs-params"></span>) &#123;<br>      ctx.<span class="hljs-property">code</span> += <span class="hljs-string">&#x27;\n&#x27;</span> + <span class="hljs-string">`  `</span>.<span class="hljs-title function_">repeat</span>(ctx.<span class="hljs-property">currentIndent</span>)<br>    &#125;,<br>    <br>    <span class="hljs-title function_">indent</span>(<span class="hljs-params"></span>) &#123;<br>      ctx.<span class="hljs-property">currentIndent</span>++<br>      ctx.<span class="hljs-title function_">newline</span>()<br>    &#125;,<br><br>    <span class="hljs-title function_">deIndent</span>(<span class="hljs-params"></span>) &#123;<br>      ctx.<span class="hljs-property">currentIndent</span>--<br>      ctx.<span class="hljs-property">newline</span><br>    &#125;<br><br>  &#125;<br><br>  <span class="hljs-comment">// 代码生成</span><br>  <span class="hljs-title function_">genNode</span>(node, ctx)<br><br>  <span class="hljs-comment">// 返回渲染函数代码</span><br>  <span class="hljs-keyword">return</span> ctx.<span class="hljs-property">code</span><br><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>有了这些基础能力之后，我们就可以开始编写<code>genNode</code>函数来完成代码生成的工作了。代码生成的原理其实很简单，只需要匹配各种类型的 JavaScript AST 节点，并调用对应的生成函数即可：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">genNode</span>(<span class="hljs-params"><span class="hljs-attr">node</span>: <span class="hljs-title class_">JsAstNode</span>, <span class="hljs-attr">context</span>: generateCtx</span>) &#123;<br>  <span class="hljs-keyword">switch</span> (node.<span class="hljs-property">type</span>) &#123;<br><br>    <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;FunctionDecl&#x27;</span>:<br>      <span class="hljs-title function_">genFunctionDecl</span>(node, context)<br>      <span class="hljs-keyword">break</span><br><br>    <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;ReturnStatement&#x27;</span>:<br>      <span class="hljs-title function_">genReturnStatement</span>(node, context)<br>      <span class="hljs-keyword">break</span><br><br>    <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;CallExpression&#x27;</span>:<br>      <span class="hljs-title function_">genCallExpression</span>(node, context)<br>      <span class="hljs-keyword">break</span><br><br>    <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;StringLiteral&#x27;</span>:<br>      <span class="hljs-title function_">genStringLiteral</span>(node, context)<br>      <span class="hljs-keyword">break</span><br><br>    <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;ArrayExpression&#x27;</span>:<br>      <span class="hljs-title function_">genArrayExpression</span>(node, context)<br>      <span class="hljs-keyword">break</span><br><br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>接下来我们分别实现每一种情况对应的生成函数。首先来看<code>genFunctionDecl</code>，用来为函数声明类型的节点生成对应的 JavaScript 代码。</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">genFunctionDecl</span>(<span class="hljs-params"><span class="hljs-attr">node</span>: <span class="hljs-title class_">JsAstNode</span>, <span class="hljs-attr">context</span>: generateCtx</span>) &#123;<br>  <span class="hljs-keyword">const</span> &#123; push, indent, deIndent&#125; = context<br><br>  <span class="hljs-title function_">push</span>(<span class="hljs-string">`function <span class="hljs-subst">$&#123;(node.id <span class="hljs-keyword">as</span> Identifier).name&#125;</span>`</span>)<br>  <span class="hljs-title function_">push</span>(<span class="hljs-string">`(`</span>)<br>  <span class="hljs-comment">// 调用 genNodeList</span><br>  <span class="hljs-title function_">genNodeList</span>(node.<span class="hljs-property">params</span> <span class="hljs-keyword">as</span> <span class="hljs-built_in">any</span>[], context)<br>  <span class="hljs-title function_">push</span>(<span class="hljs-params"><span class="hljs-string">`) &#123;`</span></span>)<br>  <span class="hljs-comment">// 缩进</span><br>  <span class="hljs-title function_">indent</span>()<br>  <span class="hljs-comment">// 递归为函数体生成代码</span><br>  (node.<span class="hljs-property">body</span> <span class="hljs-keyword">as</span> <span class="hljs-title class_">JsAstNode</span>[]).<span class="hljs-title function_">forEach</span>(<span class="hljs-function">(<span class="hljs-params"><span class="hljs-attr">n</span>: <span class="hljs-title class_">JsAstNode</span></span>) =&gt;</span> <span class="hljs-title function_">genNode</span>(n, context))<br>  <span class="hljs-comment">// 取消缩进</span><br>  <span class="hljs-title function_">deIndent</span>()<br>  <span class="hljs-title function_">push</span>(<span class="hljs-string">&#x27;&#125;&#x27;</span>)<br>&#125;<br><br><span class="hljs-keyword">function</span> <span class="hljs-title function_">genNodeList</span>(<span class="hljs-params"><span class="hljs-attr">params</span>: <span class="hljs-title class_">Array</span>&lt;<span class="hljs-title class_">JsAstNode</span>&gt;, <span class="hljs-attr">context</span>: generateCtx</span>) &#123;<br>  <span class="hljs-keyword">const</span> &#123; push &#125; = context<br>  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span> ; i &lt; params.<span class="hljs-property">length</span> ; i++) &#123;<br>    <span class="hljs-keyword">const</span> param = params[i]<br>    <span class="hljs-title function_">genNode</span>(param, context)<br><br>    <span class="hljs-keyword">if</span> (i &lt; params.<span class="hljs-property">length</span> - <span class="hljs-number">1</span>) &#123;<br>      <span class="hljs-title function_">push</span>(<span class="hljs-string">&#x27;, &#x27;</span>)<br>    &#125;<br>      <br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>这里有一个需要注意的点：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-title function_">indent</span>()<br><span class="hljs-comment">// 递归为函数体生成代码</span><br>(node.<span class="hljs-property">body</span> <span class="hljs-keyword">as</span> <span class="hljs-title class_">JsAstNode</span>[]).<span class="hljs-title function_">forEach</span>(<span class="hljs-function">(<span class="hljs-params"><span class="hljs-attr">n</span>: <span class="hljs-title class_">JsAstNode</span></span>) =&gt;</span> <span class="hljs-title function_">genNode</span>(n, context))<br></code></pre></td></tr></table></figure>
+
+<p>这段代码经过Webpack打包后的代码为：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-comment">// 缩进</span><br><span class="hljs-title function_">indent</span>()(node.<span class="hljs-property">body</span>).<span class="hljs-title function_">forEach</span>(<span class="hljs-function">(<span class="hljs-params">n</span>) =&gt;</span> <span class="hljs-title function_">genNode</span>(n, context));<br></code></pre></td></tr></table></figure>
+
+<p>会引发<code>indent() is not a function</code>错误。为了避免这个问题，最好在<code>indent()</code>后面加上<code>;</code>。</p>
+</blockquote>
+<p><code>genArrayExpression</code>函数的实现与<code>genNodelist</code>相似，只需要包裹<code>[]</code>即可：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">genArrayExpression</span>(<span class="hljs-params"><span class="hljs-attr">node</span>: <span class="hljs-title class_">ArrayExp</span>, <span class="hljs-attr">context</span>: generateCtx</span>) &#123;<br>  <span class="hljs-keyword">const</span> &#123; push &#125; = context<br>  <span class="hljs-title function_">push</span>(<span class="hljs-string">&#x27;[&#x27;</span>)<br>  <span class="hljs-title function_">genNodeList</span>(node.<span class="hljs-property">elements</span>, context)<br>  <span class="hljs-title function_">push</span>(<span class="hljs-string">&#x27;]&#x27;</span>)<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><code>genCallExpression</code>也用到了<code>genNodeList</code>用于处理参数：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">genCallExpression</span>(<span class="hljs-params"><span class="hljs-attr">node</span>: <span class="hljs-title class_">CallExp</span>, <span class="hljs-attr">context</span>: generateCtx</span>) &#123;<br>  <span class="hljs-keyword">const</span> &#123; push &#125; = context<br>  <span class="hljs-comment">// 获取被调用函数名称和参数</span><br>  <span class="hljs-keyword">const</span> &#123; callee, <span class="hljs-attr">arguments</span>: args &#125; = node<br>  <span class="hljs-title function_">push</span>(<span class="hljs-string">`<span class="hljs-subst">$&#123;callee.name&#125;</span>(`</span>)<br>  <span class="hljs-title function_">genNodeList</span>(args, context)<br>  <span class="hljs-title function_">push</span>(<span class="hljs-string">&#x27;)&#x27;</span>)<br><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>对于<code>ReturnStatement</code>和<code>StringLiteral</code>类型的节点来说，为它们生成代码很简单：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">genReturnStatement</span>(<span class="hljs-params"><span class="hljs-attr">node</span>: <span class="hljs-title class_">JsAstNode</span>, <span class="hljs-attr">context</span>: generateCtx</span>) &#123;<br>  <span class="hljs-keyword">const</span> &#123; push &#125; = context<br>  <span class="hljs-title function_">push</span>(<span class="hljs-string">&#x27;return &#x27;</span>)<br>  <span class="hljs-title function_">genNode</span>(node.<span class="hljs-property">return</span>, context)<br>&#125;<br><br><span class="hljs-keyword">function</span> <span class="hljs-title function_">genStringLiteral</span>(<span class="hljs-params"><span class="hljs-attr">node</span>: <span class="hljs-title class_">StringLiteral</span>, <span class="hljs-attr">context</span>: generateCtx</span>) &#123;<br>  <span class="hljs-keyword">const</span> &#123; push &#125; = context<br>  <span class="hljs-title function_">push</span>(<span class="hljs-string">`<span class="hljs-subst">$&#123;node.value&#125;</span>`</span>)<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h1><span id="解析器">解析器</span></h1>
+	</article>
+
+	 
+    <div class="kira-post-copyright">
+        <strong>Author：</strong>破酥 | C4iN<br>
+        <strong>Link：</strong><a href="https://c4in1.github.io/2024/08/30/MVVM/%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84MVVM-4/" title="https:&#x2F;&#x2F;c4in1.github.io&#x2F;2024&#x2F;08&#x2F;30&#x2F;MVVM&#x2F;实现一个简单的MVVM-4&#x2F;" target="_blank" rel="noopener">https:&#x2F;&#x2F;c4in1.github.io&#x2F;2024&#x2F;08&#x2F;30&#x2F;MVVM&#x2F;实现一个简单的MVVM-4&#x2F;</a><br>
+        
+            <strong>版权声明：</strong>本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/deed.zh" target="_blank">CC BY-NC-SA 3.0 CN</a> 协议进行许可
+        
+    </div>
+
+  
+	<div class="kira-post-nav">
+		<nav class="post-nav">
+			      
+			<!-- 先找到与当前文字相同的目录 -->
+			               
+			<!-- 在找到当前文章所在的 index -->
+			                
+			<!-- 上一篇文章 -->
+			<div class="old">
+				<span>上一章</span>
+				<a href="/2024/08/27/MVVM/%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84MVVM-3/"> 实现一个简单的MVVM-3</a>
+			</div>
+			                          
+		</nav>
+	</div>
+	
+	<div class="kira-post-meta kira-rainbow">
+		
+			<a class="kirafont icon-container-fill -link" href="/categories/MVVM/">MVVM</a>
+		
+		
+			<a class="kirafont icon-tag-fill -none-link" href="/tags/MVVM/" rel="tag">MVVM</a> <a class="kirafont icon-tag-fill -none-link" href="/tags/Vue/" rel="tag">Vue</a> <a class="kirafont icon-tag-fill -none-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a>
+		
+	</div>
+	
+	<div class="kira-post-footer">
+		
+
+		
+	<div class="giscus"></div>
+  
+    <script src="https://giscus.app/client.js"
+      data-repo="C4in1/BlogGitTalk"
+      data-repo-id="R_kgDOMgx61Q"
+      data-category="General"
+      data-category-id="DIC_kwDOMgx61c4Chec4"
+      data-mapping="pathname"
+      data-strict="0"
+      data-reactions-enabled="1"
+      data-emit-metadata="0"
+      data-input-position="top"
+      data-theme="light"
+      data-lang="en"
+      data-loading="lazy"
+      crossorigin="anonymous"
+      async  
+    ></script>
+  
+
+	</div>
+	
+</div>
+
+				</div>
+			</div>
+			<div class="kira-right-column">
+	<a onclick="document.querySelector('#kira-top-header').scrollIntoView({behavior: 'smooth'});" class="kira-backtotop" aria-label="回到顶部" title="回到顶部">
+		<button class="mdui-fab mdui-ripple">
+			<i class="kirafont icon-caret-up"></i>
+		</button>
+	</a>
+</div>
+
+		</div>
+	</body>
+</html>
