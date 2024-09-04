@@ -362,8 +362,8 @@
 		
 		<div class="kira-post-meta kira-rainbow" style="margin:10px 0!important;">
 			<a><i class="kirafont icon-calendar-fill"></i>2024年08月30日</a>
-			<a><i class="kirafont icon-edit-fill"></i>15.3k 字</a>
-			<a><i class="kirafont icon-time-circle-fill"></i>大概 71 分钟</a>
+			<a><i class="kirafont icon-edit-fill"></i>15.9k 字</a>
+			<a><i class="kirafont icon-time-circle-fill"></i>大概 73 分钟</a>
 		</div>
 		<p>这部分讲MVVM中编译器的实现。</p>
 <span id="more"></span>
@@ -775,6 +775,20 @@
 <li>分析模板，将其解析为模板 AST。</li>
 <li>将模板 AST 转换为用于描述渲染函数的 JavaScript AST。</li>
 <li>根据 JavaScript AST 生成渲染函数代码。</li>
+</ul>
+<p>我们使用<code>parse</code>来用有限状态自动机构造一个词法分析器，用<code>transform</code>进行转换，最后调用<code>generate</code>进行代码生成。</p>
+<p>对于解析器，我们需要了解文本模式，指的是解析器在工作时所进入的一些特殊状态。在解析模板构建 AST 的过程中，<code>parseChildren</code>函数是核心。每次调用<code>parseChildren</code>函数，就意味着新状态机的开启。对于命名字符引用，命名字符引用的解码方案可以总结为两种：当存在分号时执行完整匹配；当省略分号时执行最短匹配。对于数字字符引用，则需要按照 WHATWG 规范中定义的规则逐步实现。</p>
+<p>编译优化指的是通过编译的手段提取关键信息，并以此指导生成最优代码的过程。编译优化的核心在于，区分动态节点与静态节点。一个 Block 本质上也是一个虚拟节点，但与普通虚拟节点相比，会多出一个<code>dynamicChildren</code>数组。该数组用来收集所有动态子代节点，这利用了<code>createVNode</code>函数和<code>createBlock</code>函数的层层嵌套调用的特点，即以“由内向外”的方式执行。再配合一个用来临时存储动态节点的节点栈，即可完成动态子代节点的收集。</p>
+<p><code>v-if</code>、<code>v-for</code>等结构化指令会影响 DOM 层级结构，使之不稳定。这会间接导致基于<code>Block</code>树的比对算法失效。而解决方式很简单，只需要让带有<code> v-if</code>、<code>v-for</code>等指令的节点也作为 Block 角色即可。</p>
+<ul>
+<li><p>静态提升：能够减少更新时创建虚拟 DOM 带来的性能开销和内存占用。</p>
+</li>
+<li><p>预字符串化：在静态提升的基础上，对静态节点进行字符串化。这样做能够减少创建虚拟节点产生的性能开销以及内存占用。</p>
+</li>
+<li><p>缓存内联事件处理函数：避免造成不必要的组件更新。</p>
+</li>
+<li><p><code>v-once</code>指令：缓存全部或部分虚拟节点，能够避免组件更新时重新创建虚拟 DOM 带来的性能开销，也可以避免无用的 Diff 操作。</p>
+</li>
 </ul>
 
 	</article>
