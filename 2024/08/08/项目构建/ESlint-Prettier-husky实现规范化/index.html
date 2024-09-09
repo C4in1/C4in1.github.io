@@ -84,7 +84,7 @@
 		</a>
 	</div>
 	<div class="kira-count">
-		<div><span>文章</span>19</div>
+		<div><span>文章</span>20</div>
 		<div><span>标签</span>20</div>
 		<div><span>分类</span>8</div>
 	</div>
@@ -228,7 +228,7 @@
             <a class="category-list-link" href="/categories/leetcode刷题/">
               leetcode刷题
             </a>
-            <span class="category-list-count">1</span>
+            <span class="category-list-count">2</span>
           </li>
         
           <li class="category-list-item">
@@ -267,7 +267,7 @@
 			
 	<div class="kira-widget-wrap">
 		<div id="randomtagcloud" class="kira-widget tagcloud kira-rainbow">
-			<a href="/tags/AI-chat/" style="font-size: 10px;">AI-chat</a> <a href="/tags/ES6/" style="font-size: 10px;">ES6</a> <a href="/tags/Electron/" style="font-size: 10px;">Electron</a> <a href="/tags/MVVM/" style="font-size: 18px;">MVVM</a> <a href="/tags/TypeScript/" style="font-size: 16px;">TypeScript</a> <a href="/tags/Typescript/" style="font-size: 10px;">Typescript</a> <a href="/tags/Vitepress/" style="font-size: 12px;">Vitepress</a> <a href="/tags/Vue/" style="font-size: 18px;">Vue</a> <a href="/tags/Webpack/" style="font-size: 10px;">Webpack</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/html/" style="font-size: 10px;">html</a> <a href="/tags/leetcode/" style="font-size: 10px;">leetcode</a> <a href="/tags/theme-censored/" style="font-size: 12px;">theme-censored</a> <a href="/tags/vue3/" style="font-size: 14px;">vue3</a> <a href="/tags/%E4%BB%A3%E7%A0%81%E8%A7%84%E8%8C%83/" style="font-size: 10px;">代码规范</a> <a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 20px;">前端</a> <a href="/tags/%E7%97%9B%E8%8B%A6%E7%9A%84%E9%85%8D%E7%BD%AE%E9%97%AE%E9%A2%98/" style="font-size: 12px;">痛苦的配置问题</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 10px;">算法</a> <a href="/tags/%E9%9D%A2%E7%AD%8B/" style="font-size: 10px;">面筋</a> <a href="/tags/%E9%A1%B9%E7%9B%AE%E8%A7%84%E8%8C%83/" style="font-size: 10px;">项目规范</a>
+			<a href="/tags/AI-chat/" style="font-size: 10px;">AI-chat</a> <a href="/tags/ES6/" style="font-size: 10px;">ES6</a> <a href="/tags/Electron/" style="font-size: 10px;">Electron</a> <a href="/tags/MVVM/" style="font-size: 18px;">MVVM</a> <a href="/tags/TypeScript/" style="font-size: 16px;">TypeScript</a> <a href="/tags/Typescript/" style="font-size: 10px;">Typescript</a> <a href="/tags/Vitepress/" style="font-size: 12px;">Vitepress</a> <a href="/tags/Vue/" style="font-size: 18px;">Vue</a> <a href="/tags/Webpack/" style="font-size: 10px;">Webpack</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/html/" style="font-size: 10px;">html</a> <a href="/tags/leetcode/" style="font-size: 12px;">leetcode</a> <a href="/tags/theme-censored/" style="font-size: 12px;">theme-censored</a> <a href="/tags/vue3/" style="font-size: 14px;">vue3</a> <a href="/tags/%E4%BB%A3%E7%A0%81%E8%A7%84%E8%8C%83/" style="font-size: 10px;">代码规范</a> <a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 20px;">前端</a> <a href="/tags/%E7%97%9B%E8%8B%A6%E7%9A%84%E9%85%8D%E7%BD%AE%E9%97%AE%E9%A2%98/" style="font-size: 12px;">痛苦的配置问题</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 12px;">算法</a> <a href="/tags/%E9%9D%A2%E7%AD%8B/" style="font-size: 10px;">面筋</a> <a href="/tags/%E9%A1%B9%E7%9B%AE%E8%A7%84%E8%8C%83/" style="font-size: 10px;">项目规范</a>
 		</div>
 		
 	</div>
@@ -280,7 +280,7 @@
 			Archive
 		</h3>
 		<div class="kira-widget">
-			<ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/">2024</a><span class="archive-list-count">19</span></li></ul>
+			<ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/">2024</a><span class="archive-list-count">20</span></li></ul>
 		</div>
 	</div>
 
@@ -384,96 +384,85 @@
 		</div>
 		<p>本文介绍使用ESlint+Prettier+husky实现前端代码规范以及git提交规范</p>
 <span id="more"></span>
-
-<h1><span id="eslint-prettier-代码规范化">ESLint + Prettier 代码规范化</span></h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 安装eslint</span><br>npm i eslint -g<br><span class="hljs-comment"># 安装prettier</span><br>npm i prettier eslint-config-prettier -D<br><span class="hljs-comment"># 安装husky</span><br>npm i husky -D<br></code></pre></td></tr></table></figure>
-
+<h1><span id="eslint-prettier-代码规范化">ESLint + Prettier 代码规范化</span></h1>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 安装eslint</span><br>npm i eslint -g<br><span class="hljs-comment"># 安装prettier</span><br>npm i prettier eslint-config-prettier -D<br><span class="hljs-comment"># 安装husky</span><br>npm i husky -D<br></code></pre></td></tr></table></figure>
 <p>初始化eslint：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">eslint --init<br></code></pre></td></tr></table></figure>
-
 <p>接下来根据你的需要选择，完成后会生成<code>.eslintrc.js</code>文件。</p>
-<p>在ESLint &gt; 9.0.0版本中，直接使用<code>extends</code>属性会出现<code>Config (unnamed): Key &quot;extends&quot;: This appears to be in eslintrc format rather than flat config format.</code>。这是因为从 ESLint v9.0.0 开始，平面配置文件格式将成为默认的配置文件格式。新版反而简单了，直接import就可以了：</p>
+<p>在ESLint &gt;
+9.0.0版本中，直接使用<code>extends</code>属性会出现<code>Config (unnamed): Key "extends": This appears to be in eslintrc format rather than flat config format.</code>。这是因为从
+ESLint v9.0.0
+开始，平面配置文件格式将成为默认的配置文件格式。新版反而简单了，直接import就可以了：</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">import</span> globals <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;globals&quot;</span>;<br><span class="hljs-keyword">import</span> pluginJs <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@eslint/js&quot;</span>;<br><span class="hljs-keyword">import</span> tseslint <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;typescript-eslint&quot;</span>;<br><span class="hljs-keyword">import</span> pluginVue <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;eslint-plugin-vue&quot;</span>;<br><span class="hljs-keyword">import</span> eslintConfigPrettier <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;eslint-config-prettier&#x27;</span><br><br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> [<br>  &#123;<span class="hljs-attr">files</span>: [<span class="hljs-string">&quot;**/*.&#123;js,mjs,cjs,ts,vue&#125;&quot;</span>]&#125;,<br>  &#123;<span class="hljs-attr">languageOptions</span>: &#123; <span class="hljs-attr">globals</span>: globals.<span class="hljs-property">browser</span> &#125;&#125;,<br>  pluginJs.<span class="hljs-property">configs</span>.<span class="hljs-property">recommended</span>,<br>  ...tseslint.<span class="hljs-property">configs</span>.<span class="hljs-property">recommended</span>,<br>  ...pluginVue.<span class="hljs-property">configs</span>[<span class="hljs-string">&quot;flat/essential&quot;</span>],<br>  &#123;<span class="hljs-attr">files</span>: [<span class="hljs-string">&quot;**/*.vue&quot;</span>], <span class="hljs-attr">languageOptions</span>: &#123;<span class="hljs-attr">parserOptions</span>: &#123;<span class="hljs-attr">parser</span>: tseslint.<span class="hljs-property">parser</span>&#125;&#125;&#125;,<br>  eslintConfigPrettier<br><br>];<br></code></pre></td></tr></table></figure>
-
-<p>然后手动添加一个&#96;prettierrc文件配置prettier：</p>
+<p>然后手动添加一个`prettierrc文件配置prettier：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">&#123;<br>  &quot;printWidth&quot;: 160,<br>  &quot;tabWidth&quot;: 2,<br>  &quot;useTabs&quot;: false,<br>  &quot;singleQuote&quot;: true,<br>  &quot;semi&quot;: false,<br>  &quot;trailingComma&quot;: &quot;none&quot;,<br>  &quot;arrowParens&quot;: &quot;avoid&quot;,<br>  &quot;bracketSpacing&quot;: true,<br>  &quot;singleAttributePerLine&quot;: false,<br>  &quot;endOfLine&quot;: &quot;auto&quot;<br>&#125;<br></code></pre></td></tr></table></figure>
-
 <p>配置完成后，在<code>package.json</code>添加：</p>
 <figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs json"><span class="hljs-attr">&quot;scripts&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-attr">&quot;lint&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;eslint &lt;your code file path&gt;&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;prettier&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;prettier --write .&quot;</span><br><span class="hljs-punctuation">&#125;</span><br></code></pre></td></tr></table></figure>
-
 <p>然后使用命令来测试：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># eslint 检查</span><br>npm run lint<br><span class="hljs-comment"># prettier 自动格式化</span><br>npm run prettier<br></code></pre></td></tr></table></figure>
-
-<h1><span id="husky-commitlint-x2f-commitizen-git提交规范化">Husky + commitlint &#x2F; Commitizen Git提交规范化</span></h1><h2><span id="代码规范">代码规范</span></h2><p>安装husky：</p>
+<h1><span id="husky-commitlint-commitizen-git提交规范化">Husky + commitlint /
+Commitizen Git提交规范化</span></h1>
+<h2><span id="代码规范">代码规范</span></h2>
+<p>安装husky：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">npm install --save-dev husky<br></code></pre></td></tr></table></figure>
-
 <p>初始化：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">npx husky init<br></code></pre></td></tr></table></figure>
-
 <p>安装lint-staged，处理默认进行的是全量检查的耗时问题以及历史问题。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">npm i lint-staged -D<br></code></pre></td></tr></table></figure>
-
 <p>配置<code>package.json</code></p>
 <figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs json"><span class="hljs-punctuation">&#123;</span><br>  <span class="hljs-comment">// ... 省略 ...</span><br>  <span class="hljs-attr">&quot;lint-staged&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-attr">&quot; &lt;your code file path&gt;.&#123;js,ts,vue&#125;&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>  # 文件类型自选<br>      <span class="hljs-string">&quot;eslint --fix&quot;</span><br>    <span class="hljs-punctuation">]</span><br>  <span class="hljs-punctuation">&#125;</span><br><span class="hljs-punctuation">&#125;</span><br><br><span class="hljs-punctuation">&#123;</span><br>  <span class="hljs-attr">&quot;scripts&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-comment">// ... 省略 ...</span><br>    <span class="hljs-attr">&quot;lint-staged&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;lint-staged&quot;</span><br>  <span class="hljs-punctuation">&#125;</span><br><span class="hljs-punctuation">&#125;</span><br></code></pre></td></tr></table></figure>
-
-<p>修改 .husky&#x2F;pre-commit文件</p>
+<p>修改 .husky/pre-commit文件</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">npm run lint-staged<br></code></pre></td></tr></table></figure>
-
 <p>以上操作会在git提交前将代码规范化。接下来处理commit信息规范化。</p>
-<h2><span id="commit信息规范">commit信息规范</span></h2><p>首先来看commit信息规范化的格式。每次提交，Commit message 都包括三个部分：Header，Body 和 Footer，为了方便我们只保留Header，其他详情可以看参考连接。</p>
+<h2><span id="commit信息规范">commit信息规范</span></h2>
+<p>首先来看commit信息规范化的格式。每次提交，Commit message
+都包括三个部分：Header，Body 和
+Footer，为了方便我们只保留Header，其他详情可以看参考连接。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">&lt;type&gt;(&lt;scope&gt;): &lt;subject&gt;<br></code></pre></td></tr></table></figure>
-
 <ul>
 <li><p><code>type</code>表示提交类型，值有以下几种：</p>
 <ul>
-<li><p>feat - 新功能 feature</p>
-</li>
-<li><p>fix - 修复 bug</p>
-</li>
-<li><p>docs - 文档注释</p>
-</li>
-<li><p>style - 代码格式(不影响代码运行的变动)</p>
-</li>
-<li><p>refactor - 重构、优化(既不增加新功能，也不是修复bug)</p>
-</li>
-<li><p>perf - 性能优化</p>
-</li>
-<li><p>test - 增加测试</p>
-</li>
-<li><p>chore - 构建过程或辅助工具的变动</p>
-</li>
-<li><p>revert - 回退</p>
-</li>
-<li><p>build - 打包</p>
-</li>
-</ul>
-</li>
-<li><p><code>scope</code>用于说明 commit 影响的范围，比如数据层、控制层、视图层等等，视项目不同而不同。</p>
-</li>
-<li><p><code>subject</code>是 commit 目的的简短描述，不超过50个字符。</p>
+<li><p>feat - 新功能 feature</p></li>
+<li><p>fix - 修复 bug</p></li>
+<li><p>docs - 文档注释</p></li>
+<li><p>style - 代码格式(不影响代码运行的变动)</p></li>
+<li><p>refactor - 重构、优化(既不增加新功能，也不是修复bug)</p></li>
+<li><p>perf - 性能优化</p></li>
+<li><p>test - 增加测试</p></li>
+<li><p>chore - 构建过程或辅助工具的变动</p></li>
+<li><p>revert - 回退</p></li>
+<li><p>build - 打包</p></li>
+</ul></li>
+<li><p><code>scope</code>用于说明 commit
+影响的范围，比如数据层、控制层、视图层等等，视项目不同而不同。</p></li>
+<li><p><code>subject</code>是 commit
+目的的简短描述，不超过50个字符。</p>
 <ul>
 <li>以动词开头，使用第一人称现在时，比如<code>change</code>，而不是<code>changed</code>或<code>changes</code></li>
 <li>第一个字母小写</li>
 <li>结尾不加句号（<code>.</code>）</li>
+</ul></li>
 </ul>
-</li>
-</ul>
-<h3><span id="commitlint">commitlint</span></h3><p>首先是commitlint</p>
+<h3><span id="commitlint">commitlint</span></h3>
+<p>首先是commitlint</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">// commitlint<br>// 项目目录下安装<br>npm i commitlint --save-dev<br>npm i @commitlint/config-conventional --save-dev<br></code></pre></td></tr></table></figure>
-
 <p>新建对应配置文件<code>commitlint.config.js</code></p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-variable language_">module</span>.<span class="hljs-property">exports</span> = &#123;<br>  <span class="hljs-attr">extends</span>: [<span class="hljs-string">&#x27;@commitlint/config-conventional&#x27;</span>],<br>  <span class="hljs-attr">rules</span>: &#123;<br>    <span class="hljs-comment">// type 类型定义</span><br>    <span class="hljs-string">&#x27;type-enum&#x27;</span>: [<span class="hljs-number">2</span>, <span class="hljs-string">&#x27;always&#x27;</span>, [<br>      <span class="hljs-string">&quot;feat&quot;</span>, <span class="hljs-comment">// 新功能 feature</span><br>      <span class="hljs-string">&quot;fix&quot;</span>, <span class="hljs-comment">// 修复 bug</span><br>      <span class="hljs-string">&quot;docs&quot;</span>, <span class="hljs-comment">// 文档注释</span><br>      <span class="hljs-string">&quot;style&quot;</span>, <span class="hljs-comment">// 代码格式(不影响代码运行的变动)</span><br>      <span class="hljs-string">&quot;refactor&quot;</span>, <span class="hljs-comment">// 重构(既不增加新功能，也不是修复bug)</span><br>      <span class="hljs-string">&quot;perf&quot;</span>, <span class="hljs-comment">// 性能优化</span><br>      <span class="hljs-string">&quot;test&quot;</span>, <span class="hljs-comment">// 增加测试</span><br>      <span class="hljs-string">&quot;chore&quot;</span>, <span class="hljs-comment">// 构建过程或辅助工具的变动</span><br>      <span class="hljs-string">&quot;revert&quot;</span>, <span class="hljs-comment">// 回退</span><br>      <span class="hljs-string">&quot;build&quot;</span> <span class="hljs-comment">// 打包</span><br>    ]],<br>    <span class="hljs-comment">// subject 大小写不做校验</span><br>    <span class="hljs-comment">// 自动部署的BUILD ROBOT的commit信息大写，以作区别</span><br>    <span class="hljs-string">&#x27;subject-case&#x27;</span>: [<span class="hljs-number">0</span>]<br>  &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
-
-<h3><span id="commitizen">commitizen</span></h3><p>安装：</p>
+<h3><span id="commitizen">commitizen</span></h3>
+<p>安装：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash">// 全局安装，推荐<br>npm install commitizen -g<br>// 项目目录下安装<br>npm install commitizen --save-dev<br>commitizen init cz-customizable --save --save-exact<br></code></pre></td></tr></table></figure>
-
 <p>然后在<code>package.json</code>中根据你的项目情况添加配置</p>
 <figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs json"><span class="hljs-attr">&quot;config&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span><br>  <span class="hljs-attr">&quot;commitizen&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-attr">&quot;path&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;./node_modules/cz-customizable&quot;</span>  # 这里根据实际情况修改<br>  <span class="hljs-punctuation">&#125;</span><br><span class="hljs-punctuation">&#125;</span><br></code></pre></td></tr></table></figure>
-
-<p>在项目目录下，新建配置文件<code> .cz-config.js</code></p>
+<p>在项目目录下，新建配置文件<code>.cz-config.js</code></p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-meta">&#x27;use strict&#x27;</span>;<br><br><span class="hljs-variable language_">module</span>.<span class="hljs-property">exports</span> = &#123;<br>  <span class="hljs-attr">types</span>: [<br>    &#123;<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;feat&#x27;</span>,     <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;feat:     新功能&#x27;</span>&#125;,<br>    &#123;<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;fix&#x27;</span>,      <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;fix:      修复&#x27;</span>&#125;,<br>    &#123;<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;docs&#x27;</span>,     <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;docs:     文档变更&#x27;</span>&#125;,<br>    &#123;<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;style&#x27;</span>,    <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;style:    代码格式(不影响代码运行的变动)&#x27;</span>&#125;,<br>    &#123;<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;refactor&#x27;</span>, <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;refactor: 重构(既不是增加feature，也不是修复bug)&#x27;</span>&#125;,<br>    &#123;<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;perf&#x27;</span>,     <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;perf:     性能优化&#x27;</span>&#125;,<br>    &#123;<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;test&#x27;</span>,     <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;test:     增加测试&#x27;</span>&#125;,<br>    &#123;<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;chore&#x27;</span>,    <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;chore:    构建过程或辅助工具的变动&#x27;</span>&#125;,<br>    &#123;<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;revert&#x27;</span>,   <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;revert:   回退&#x27;</span>&#125;,<br>    &#123;<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;build&#x27;</span>,    <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;build:    打包&#x27;</span>&#125;<br>  ],<br>  <span class="hljs-comment">// override the messages, defaults are as follows</span><br>  <span class="hljs-attr">messages</span>: &#123;<br>    <span class="hljs-attr">type</span>: <span class="hljs-string">&#x27;请选择提交类型:&#x27;</span>,<br>    <span class="hljs-comment">// scope: &#x27;请输入文件修改范围(可选):&#x27;,</span><br>    <span class="hljs-comment">// used if allowCustomScopes is true</span><br>    <span class="hljs-comment">// customScope: &#x27;请输入修改范围(可选):&#x27;,</span><br>    <span class="hljs-attr">subject</span>: <span class="hljs-string">&#x27;请简要描述提交(必填):&#x27;</span>,<br>    <span class="hljs-comment">// body: &#x27;请输入详细描述(可选，待优化去除，跳过即可):&#x27;,</span><br>    <span class="hljs-comment">// // breaking: &#x27;List any BREAKING CHANGES (optional):\n&#x27;,</span><br>    <span class="hljs-comment">// footer: &#x27;请输入要关闭的issue(待优化去除，跳过即可):&#x27;,</span><br>    <span class="hljs-attr">confirmCommit</span>: <span class="hljs-string">&#x27;确认使用以上信息提交？(y/n/e/h)&#x27;</span><br>  &#125;,<br>  <span class="hljs-attr">allowCustomScopes</span>: <span class="hljs-literal">true</span>,<br>  <span class="hljs-comment">// allowBreakingChanges: [&#x27;feat&#x27;, &#x27;fix&#x27;],</span><br>  <span class="hljs-attr">skipQuestions</span>: [<span class="hljs-string">&#x27;body&#x27;</span>, <span class="hljs-string">&#x27;footer&#x27;</span>],<br>  <span class="hljs-comment">// limit subject length, commitlint默认是72</span><br>  <span class="hljs-attr">subjectLimit</span>: <span class="hljs-number">72</span><br>&#125;;<br><br></code></pre></td></tr></table></figure>
-
-<p>这里附上提交常用的emoji，更多见<a target="_blank" rel="noopener" href="https://blog.csdn.net/li1669852599/article/details/113336076">Git提交时的emoji表情使用指南_emoji符号大全 git-CSDN博客</a></p>
+<p>这里附上提交常用的emoji，更多见<a target="_blank" rel="noopener" href="https://blog.csdn.net/li1669852599/article/details/113336076">Git提交时的emoji表情使用指南_emoji符号大全
+git-CSDN博客</a></p>
 <table>
+<colgroup>
+<col style="width: 27%">
+<col style="width: 37%">
+<col style="width: 34%">
+</colgroup>
 <thead>
 <tr>
 <th>emoji</th>
@@ -481,10 +470,11 @@
 <th><strong>commit 说明</strong></th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>🎨 (调色板)</td>
 <td><code>:art:</code></td>
-<td>改进代码结构&#x2F;代码格式</td>
+<td>改进代码结构/代码格式</td>
 </tr>
 <tr>
 <td>⚡️ (闪电) 🐎 (赛马)</td>
@@ -569,7 +559,7 @@
 <tr>
 <td>🔖 (书签)</td>
 <td><code>:bookmark:</code></td>
-<td>发行&#x2F;版本标签</td>
+<td>发行/版本标签</td>
 </tr>
 <tr>
 <td>🚨 (警车灯)</td>
@@ -596,15 +586,22 @@
 <td><code>:arrow_up:</code></td>
 <td>升级依赖</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 <p>至此我们基本完成了前端项目规范。</p>
 <blockquote>
 <p>参考：</p>
-<p><a target="_blank" rel="noopener" href="https://juejin.cn/post/7079338086747865125">Vue3 + Vite + Ts 项目 配置代码格式化及校验 eslint + prettier + standard - 掘金 (juejin.cn)</a></p>
+<p><a target="_blank" rel="noopener" href="https://juejin.cn/post/7079338086747865125">Vue3 + Vite + Ts
+项目 配置代码格式化及校验 eslint + prettier + standard - 掘金
+(juejin.cn)</a></p>
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/u013344993/article/details/139967343">eslint版本9.0之后配置方法_eslint9-CSDN博客</a></p>
-<p><a target="_blank" rel="noopener" href="https://typicode.github.io/husky/zh/get-started.html">快速开始 | Husky (typicode.github.io)</a></p>
-<p><a target="_blank" rel="noopener" href="https://juejin.cn/post/6844903793033756680">超详细的Git提交规范引入指南 - 掘金 (juejin.cn)</a></p>
-<p><a target="_blank" rel="noopener" href="https://www.ruanyifeng.com/blog/2016/01/commit_message_change_log.html">Commit message 和 Change log 编写指南 - 阮一峰的网络日志 (ruanyifeng.com)</a></p>
+<p><a target="_blank" rel="noopener" href="https://typicode.github.io/husky/zh/get-started.html">快速开始 |
+Husky (typicode.github.io)</a></p>
+<p><a target="_blank" rel="noopener" href="https://juejin.cn/post/6844903793033756680">超详细的Git提交规范引入指南
+- 掘金 (juejin.cn)</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.ruanyifeng.com/blog/2016/01/commit_message_change_log.html">Commit
+message 和 Change log 编写指南 - 阮一峰的网络日志
+(ruanyifeng.com)</a></p>
 </blockquote>
 
 	</article>
@@ -621,7 +618,7 @@
   
 	<div class="kira-post-nav">
 		<nav class="post-nav">
-			                  
+			                              
 			<!-- 先找到与当前文字相同的目录 -->
 			   
 			<!-- 在找到当前文章所在的 index -->
@@ -631,7 +628,7 @@
 				<span>下一章</span>
 				<a href="/2024/08/09/%E9%A1%B9%E7%9B%AE%E6%9E%84%E5%BB%BA/Webpack%E6%9E%84%E5%BB%BAts%E9%A1%B9%E7%9B%AE/"> Webpack构建ts项目</a>
 			</div>
-			                             
+			                 
 		</nav>
 	</div>
 	
