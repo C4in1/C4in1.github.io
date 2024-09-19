@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html 
+	lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		
+<link rel="stylesheet" href="/css/layout.css">
+
+		
+		<title> express+vue前后端分离 -  C4iN&#39;s Caprice</title>
+		<!-- <link rel="stylesheet" href="https://unpkg.com/mdui@1.0.2/dist/css/mdui.min.css" /> -->
+		<!-- <script src="https://unpkg.com/mdui@1.0.2/dist/js/mdui.min.js"></script> -->
+		
+<link rel="stylesheet" href="/lib/mdui/mdui.min.css">
+
+		
+<script src="/lib/mdui/mdui.min.js"></script>
+
+		<!-- lazyload -->
+		
+<script src="/lib/lazysizes.js"></script>
+
+		<!-- smooth-scrolling -->
+		
+<script src="/lib/smooth-scrolling.js"></script>
+
+		<!-- highlight -->
+		
+<link rel="stylesheet" href="/lib/highlight/atom-one-dark.min.css">
+
+		
+<script src="/lib/highlight/highlight.min.js"></script>
+
+		<!-- 预置 kiraicon -->
+		
+<link rel="stylesheet" href="/lib/iconfont/iconfont.css">
+
+		
+		<link
+			rel="shortcut icon"
+			href="https://pic.imgdb.cn/item/6693875ad9c307b7e98b4288.gif"
+			type="image/gif"
+		/>
+		
+<link rel="stylesheet" href="/deps/css/APlayer.min.css">
+
+		
+		
+<script src="/deps/js/APlayer.min.js"></script>
+<script src="/deps/js/Meting.min.js"></script>
+
+	<meta name="generator" content="Hexo 6.3.0"></head>
+
+	<body>
+		<div
+			class="kira-background"
+			style="background-image: url('https://pic.imgdb.cn/item/66b458ffd9c307b7e9aadb03.png')"
+		></div>
+		<div class="kira-header">
+    <a
+        class="kira-drawer-button mdui-ripple"
+        title="导航栏"
+        onclick="document.querySelector('.kira-sidebar-modal').classList.add('show');document.querySelector('.kira-sidebar#sidebar').classList.add('show');"
+    >
+        <i class="kirafont icon-menu"></i>
+    </a>
+    <a href="/" title="C4iN&#39;s Caprice">
+        <img
+			src="https://pic.imgdb.cn/item/66b45933d9c307b7e9ab0715.png"
+			alt="破酥 | C4iN"
+		/>
+    </a>
+</div>
+		<div class="kira-body">
+			<div class="kira-sidebar" id="sidebar">
+	<div class="kira-avatar mdui-ripple">
+		<a target="_blank" rel="noopener" href="https://pic.imgdb.cn/item/66b45933d9c307b7e9ab0715.png" title="破酥 | C4iN">
+			<img
+				src="https://pic.imgdb.cn/item/66b45933d9c307b7e9ab0715.png"
+				alt="破酥 | C4iN"
+			/>
+		</a>
+	</div>
+	<div class="kira-count">
+		<div><span>文章</span>22</div>
+		<div><span>标签</span>22</div>
+		<div><span>分类</span>8</div>
+	</div>
+	<div class="kira-list">
+		
+		<a
+			class="kira-list-item mdui-ripple false"
+			href="/"
+			title="回到首页"
+		>
+			<i
+				class="kirafont
+					
+						icon-home
+					"
+			></i>
+			<div class="kira-list-item-content">
+				回到首页
+			</div>
+		</a>
+		
+		<a
+			class="kira-list-item mdui-ripple false"
+			href="/archive"
+			title="文章归档"
+		>
+			<i
+				class="kirafont
+					
+						icon-container
+					"
+			></i>
+			<div class="kira-list-item-content">
+				文章归档
+			</div>
+		</a>
+		
+		<a
+			class="kira-list-item mdui-ripple false"
+			href="/about"
+			title="关于本人"
+		>
+			<i
+				class="kirafont
+					
+						icon-user
+					"
+			></i>
+			<div class="kira-list-item-content">
+				关于本人
+			</div>
+		</a>
+		
+		<a
+			class="kira-list-item mdui-ripple false"
+			href="/friends"
+			title="我的朋友"
+		>
+			<i
+				class="kirafont
+					
+						icon-team
+					"
+			></i>
+			<div class="kira-list-item-content">
+				我的朋友
+			</div>
+		</a>
+		
+	</div>
+	<aside id="kira-sidebar">
+		
+			<div class="kira-widget-wrap">
+	<div class="kira-widget kira-social">
+		
+			<a
+				class="mdui-ripple"
+				href="tencent://AddContact/?fromId=45&fromSubId=1&subcmd=all&uin=2405544030&website=www.oicqzone.com"
+				target="_blank"
+				mdui-tooltip="{content: 'QQ'}"
+				style="color: rgb(49, 174, 255); background-color: rgba(49, 174, 255, .1);"
+			>
+				<i
+					class="kirafont
+					
+						icon-QQ
+					"
+				></i>
+			</a>
+		
+			<a
+				class="mdui-ripple"
+				href="https://github.com/CainHappyfish/"
+				target="_blank"
+				mdui-tooltip="{content: 'GitHub'}"
+				style="color: rgb(25, 23, 23); background-color: rgba(25, 23, 23, .15);"
+			>
+				<i
+					class="kirafont
+					
+						icon-github
+					"
+				></i>
+			</a>
+		
+	</div>
+</div>
+
+		
+			
+  <div class="kira-widget-wrap">
+    <h3 class="kira-widget-title">分类</h3>
+    <div class="kira-widget">
+      <ul class="category-list">
+        
+        
+
+        
+          <li class="category-list-item">
+            <a class="category-list-link" href="/categories/MVVM/">
+              MVVM
+            </a>
+            <span class="category-list-count">7</span>
+          </li>
+        
+          <li class="category-list-item">
+            <a class="category-list-link" href="/categories/TypeScript/">
+              TypeScript
+            </a>
+            <span class="category-list-count">2</span>
+          </li>
+        
+          <li class="category-list-item">
+            <a class="category-list-link" href="/categories/Vue/">
+              Vue
+            </a>
+            <span class="category-list-count">2</span>
+          </li>
+        
+          <li class="category-list-item">
+            <a class="category-list-link" href="/categories/leetcode刷题/">
+              leetcode刷题
+            </a>
+            <span class="category-list-count">2</span>
+          </li>
+        
+          <li class="category-list-item">
+            <a class="category-list-link" href="/categories/project/">
+              project
+            </a>
+            <span class="category-list-count">2</span>
+          </li>
+        
+          <li class="category-list-item">
+            <a class="category-list-link" href="/categories/vitepress/">
+              vitepress
+            </a>
+            <span class="category-list-count">2</span>
+          </li>
+        
+          <li class="category-list-item">
+            <a class="category-list-link" href="/categories/面筋/">
+              面筋
+            </a>
+            <span class="category-list-count">2</span>
+          </li>
+        
+          <li class="category-list-item">
+            <a class="category-list-link" href="/categories/项目构建/">
+              项目构建
+            </a>
+            <span class="category-list-count">3</span>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+		
+			
+	<div class="kira-widget-wrap">
+		<div id="randomtagcloud" class="kira-widget tagcloud kira-rainbow">
+			<a href="/tags/AI-chat/" style="font-size: 10px;">AI-chat</a> <a href="/tags/ES6/" style="font-size: 10px;">ES6</a> <a href="/tags/Electron/" style="font-size: 10px;">Electron</a> <a href="/tags/MVVM/" style="font-size: 18px;">MVVM</a> <a href="/tags/TypeScript/" style="font-size: 16px;">TypeScript</a> <a href="/tags/Typescript/" style="font-size: 10px;">Typescript</a> <a href="/tags/Vitepress/" style="font-size: 12px;">Vitepress</a> <a href="/tags/Vue/" style="font-size: 18px;">Vue</a> <a href="/tags/Webpack/" style="font-size: 10px;">Webpack</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/express/" style="font-size: 10px;">express</a> <a href="/tags/html/" style="font-size: 10px;">html</a> <a href="/tags/javascript/" style="font-size: 10px;">javascript</a> <a href="/tags/leetcode/" style="font-size: 12px;">leetcode</a> <a href="/tags/theme-censored/" style="font-size: 12px;">theme-censored</a> <a href="/tags/vue3/" style="font-size: 14px;">vue3</a> <a href="/tags/%E4%BB%A3%E7%A0%81%E8%A7%84%E8%8C%83/" style="font-size: 10px;">代码规范</a> <a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 20px;">前端</a> <a href="/tags/%E7%97%9B%E8%8B%A6%E7%9A%84%E9%85%8D%E7%BD%AE%E9%97%AE%E9%A2%98/" style="font-size: 12px;">痛苦的配置问题</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 12px;">算法</a> <a href="/tags/%E9%9D%A2%E7%AD%8B/" style="font-size: 12px;">面筋</a> <a href="/tags/%E9%A1%B9%E7%9B%AE%E8%A7%84%E8%8C%83/" style="font-size: 10px;">项目规范</a>
+		</div>
+		
+	</div>
+
+
+		
+			
+	<div class="kira-widget-wrap">
+		<h3 class="kira-widget-title">
+			Archive
+		</h3>
+		<div class="kira-widget">
+			<ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/">2024</a><span class="archive-list-count">22</span></li></ul>
+		</div>
+	</div>
+
+
+		
+	</aside>
+	<div class="kira-copyright">
+		&copy; 2024
+		<a href="/">破酥 | C4iN</a>
+		Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> &
+		<a href="https://github.com/ch1ny/kira-hexo/" target="_blank">Kira-Hexo</a>
+		<br />
+		
+		<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div><span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span></div><div><span id="busuanzi_container_site_uv">共接待访客<span id="busuanzi_value_site_uv"></span>位</span></div>
+	</div>
+</div>
+<div
+	class="kira-sidebar-modal"
+	id="sidebar-modal"
+	onclick="(function(self) {
+		self.classList.remove('show');
+		document.querySelector('.kira-sidebar.show#sidebar').classList.remove('show');
+	})(this)"
+></div>
+			<div class="kira-content">
+				<div id="kira-top-header"></div>
+				<div class="kira-main-content">
+					
+<link rel="stylesheet" href="/css/kira-image.css">
+
+
+<script src="/js/kira-image.js"></script>
+
+<div class="kira-image">
+    <div class="kira-image-modal">
+        <div class="kira-image-header">
+            <div class="kira-image-counter"></div>
+            <div class="kira-image-title"></div>
+            <div class="kira-image-operation">
+                <div class="kira-image-operation-button" id="kira-image-operation-button-zoom">
+                    <i class="kirafont icon-zoom-in"></i>
+                </div>
+                <div class="kira-image-operation-button" id="kira-image-operation-button-close">
+                    <i class="kirafont icon-close"></i>
+                </div>
+            </div>
+        </div>
+        <div class="kira-image-container">
+            <div class="kira-image-prev-button-panel">
+                <div class="kira-image-exchange-button">
+                    <i class="kirafont icon-left"></i>
+                </div>
+            </div>
+            <div class="kira-image-list">
+                <div class="kira-image-prev">
+                    <img />
+                </div>
+                <div class="kira-image-now">
+                    <img />
+                </div>
+                <div class="kira-image-next">
+                    <img />
+                </div>
+            </div>
+            <div class="kira-image-next-button-panel">
+                <div class="kira-image-exchange-button">
+                    <i class="kirafont icon-right"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+	
+<link rel="stylesheet" href="/css/kira-code-copy.css">
+
+	
+<script src="/js/kira-code-copy.js"></script>
+
+
+<div class="kira-post">
+	<article>
+		
+		<div class="kira-post-cover">
+			<img
+				data-src="https://ts1.cn.mm.bing.net/th/id/R-C.5193680c61d71d4a772ba86940564de7?rik=%2fdTEI80yPMDIFQ&riu=http%3a%2f%2fsoftsupplier.com%2fwp-content%2fuploads%2f2022%2f09%2fdinh-nghia-ve-vuejs.jpg&ehk=E5JHTvLXkIMHnKEAM2tRpb5nv0Alqb%2bMvCNwqYn3QMo%3d&risl=&pid=ImgRaw&r=0"
+				data-sizes="auto"
+				alt="express+vue前后端分离"
+				class="lazyload kira-post-cover-image disabled-kira-image"
+			/>
+			<h1>express+vue前后端分离</h1>
+		</div>
+		
+		<div class="kira-post-meta kira-rainbow" style="margin:10px 0!important;">
+			<a><i class="kirafont icon-calendar-fill"></i>2024年09月19日</a>
+			<a><i class="kirafont icon-edit-fill"></i>1.6k 字</a>
+			<a><i class="kirafont icon-time-circle-fill"></i>大概 7 分钟</a>
+		</div>
+		<p>本文介绍express和vue搭配的简单使用。</p>
+<span id="more"></span>
+<h1><span id="express">express</span></h1>
+<h2><span id="express安装">express安装</span></h2>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs typescript">npm install -D express<br>npm install -D express-generatoe<br></code></pre></td></tr></table></figure>
+<p>创建express项目：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">express &lt;项目名称&gt;<br></code></pre></td></tr></table></figure>
+<h2><span id="express项目结构">express项目结构</span></h2>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">├─bin				# 服务器默认脚本，用于启动服务<br>├─node_modules 		# 依赖包<br>├─public			# 静态文件<br>├─routes			# 路由文件<br>└─views				# 视图文件<br></code></pre></td></tr></table></figure>
+<h3><span id="appjs">app.js</span></h3>
+<p>app.js
+文件相当于项目启动的主入口文件，有一些公共方法和服务器配置等信息：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// http错误处理模块</span><br><span class="hljs-keyword">var</span> createError = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;http-errors&#x27;</span>);<br><span class="hljs-comment">// 引入Express</span><br><span class="hljs-keyword">var</span> express = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;express&#x27;</span>);<br><span class="hljs-comment">// 引入path</span><br><span class="hljs-keyword">var</span> path = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;path&#x27;</span>);<br><span class="hljs-comment">// 引入cookie处理</span><br><span class="hljs-keyword">var</span> cookieParser = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;cookie-parser&#x27;</span>);<br><span class="hljs-comment">//引入日志模块</span><br><span class="hljs-keyword">var</span> logger = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;morgan&#x27;</span>);<br><span class="hljs-comment">// 引入路由目录中的index.js文件</span><br><span class="hljs-keyword">var</span> indexRouter = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;./routes/index&#x27;</span>);<br><span class="hljs-comment">// 引入路由目录中的users.js文件</span><br><span class="hljs-keyword">var</span> usersRouter = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;./routes/users&#x27;</span>);<br><span class="hljs-comment">// 创建Express应用</span><br><span class="hljs-keyword">var</span> app = <span class="hljs-title function_">express</span>();<br><span class="hljs-comment">// 定义页面目录</span><br>app.<span class="hljs-title function_">set</span>(<span class="hljs-string">&#x27;views&#x27;</span>, path.<span class="hljs-title function_">join</span>(__dirname, <span class="hljs-string">&#x27;views&#x27;</span>));<br><span class="hljs-comment">// 定义页面模板引擎</span><br>app.<span class="hljs-title function_">set</span>(<span class="hljs-string">&#x27;view engine&#x27;</span>, <span class="hljs-string">&#x27;jade&#x27;</span>);<br><span class="hljs-comment">// 定义日志打印级别</span><br>app.<span class="hljs-title function_">use</span>(<span class="hljs-title function_">logger</span>(<span class="hljs-string">&#x27;dev&#x27;</span>));<br><span class="hljs-comment">// 定义JSON格式处理数据</span><br>app.<span class="hljs-title function_">use</span>(express.<span class="hljs-title function_">json</span>());<br><span class="hljs-comment">// 定义使用urlencode处理数据及querystring模块解析数据</span><br>app.<span class="hljs-title function_">use</span>(express.<span class="hljs-title function_">urlencoded</span>(&#123; <span class="hljs-attr">extended</span>: <span class="hljs-literal">false</span> &#125;));<br><span class="hljs-comment">// 定义cookie处理对象</span><br>app.<span class="hljs-title function_">use</span>(<span class="hljs-title function_">cookieParser</span>());<br><span class="hljs-comment">// 定义静态资源目录public</span><br>app.<span class="hljs-title function_">use</span>(express.<span class="hljs-title function_">static</span>(path.<span class="hljs-title function_">join</span>(__dirname, <span class="hljs-string">&#x27;public&#x27;</span>)));<br><span class="hljs-comment">// 定义指向index.js的路由</span><br>app.<span class="hljs-title function_">use</span>(<span class="hljs-string">&#x27;/&#x27;</span>, indexRouter);<br><span class="hljs-comment">// 定义指向users.js的路由</span><br>app.<span class="hljs-title function_">use</span>(<span class="hljs-string">&#x27;/users&#x27;</span>, usersRouter);<br><span class="hljs-comment">// 定义404错误处理</span><br>app.<span class="hljs-title function_">use</span>(<span class="hljs-keyword">function</span>(<span class="hljs-params">req, res, next</span>) &#123;<br>  <span class="hljs-title function_">next</span>(<span class="hljs-title function_">createError</span>(<span class="hljs-number">404</span>));<br>&#125;);<br><span class="hljs-comment">// 定义其他错误处理</span><br>app.<span class="hljs-title function_">use</span>(<span class="hljs-keyword">function</span>(<span class="hljs-params">err, req, res, next</span>) &#123;<br>  <span class="hljs-comment">// 设置locals，只在开发环境生效</span><br>  res.<span class="hljs-property">locals</span>.<span class="hljs-property">message</span> = err.<span class="hljs-property">message</span>;<br>  res.<span class="hljs-property">locals</span>.<span class="hljs-property">error</span> = req.<span class="hljs-property">app</span>.<span class="hljs-title function_">get</span>(<span class="hljs-string">&#x27;env&#x27;</span>) === <span class="hljs-string">&#x27;development&#x27;</span> ? err : &#123;&#125;;<br>  <span class="hljs-comment">// 返回错误http状态码</span><br>  res.<span class="hljs-title function_">status</span>(err.<span class="hljs-property">status</span> || <span class="hljs-number">500</span>);<br>  <span class="hljs-comment">// 渲染错误页面</span><br>  res.<span class="hljs-title function_">render</span>(<span class="hljs-string">&#x27;error&#x27;</span>);<br>&#125;);<br><br><span class="hljs-variable language_">module</span>.<span class="hljs-property">exports</span> = app;<br></code></pre></td></tr></table></figure>
+<h2><span id="express接口">express接口</span></h2>
+<p>我们使用路由方法来创建接口，第一个参数 “/”
+为路由地址，第二个参数为路由处理函数，是一个回调函数，该函数接受两个参数分别表示请求和响应。当路由方法和路由地址匹配到用户请求时，路由处理函数就会执行。</p>
+<p>路由方法根据基本 API 规则支持五种，分别如下：</p>
+<ul>
+<li><code>app.get()</code>：GET 请求。</li>
+<li><code>app.post()</code>：POST 请求。</li>
+<li><code>app.put()</code>：PUT 请求。</li>
+<li><code>app.delete()</code>：DELETE 请求。</li>
+<li><code>app.all()</code>：匹配所有请求。</li>
+</ul>
+<p><strong>GET 请求</strong>：用于请求数据，通常不携带消息体，数据通过
+URL 参数传递。GET 请求的安全性较低，因为参数暴露在 URL 中。</p>
+<p><strong>POST
+请求</strong>：用于发送数据，消息体中包含了用户提交的数据。相比 GET
+请求，POST 适合传输敏感数据或较大的数据量。</p>
+<p>对于每个接口，我们在routes文件夹中创建对应名称的js文件，比如<code>/test</code>对应<code>test.js</code>：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">var</span> express = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;express&#x27;</span>);<br><span class="hljs-keyword">var</span> router = express.<span class="hljs-title class_">Router</span>();<br><br>...<br><br><span class="hljs-variable language_">module</span>.<span class="hljs-property">exports</span> = router;<br></code></pre></td></tr></table></figure>
+<p>然后在 app.js 文件中添加：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">var</span> testRouter = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;./routes/test&#x27;</span>);<br>app.<span class="hljs-title function_">use</span>(<span class="hljs-string">&#x27;/test&#x27;</span>, testRouter);<br></code></pre></td></tr></table></figure>
+<h3><span id="get-请求">get 请求</span></h3>
+<p><code>app.get()</code>
+接受两个参数：第一个参数是请求的路径，第二个参数是处理该请求的回调函数。GET
+请求中通常会通过 URL 附带查询参数，这些参数可以通过
+<code>req.query</code> 获取。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs js">router.<span class="hljs-title function_">get</span>(<span class="hljs-string">&#x27;/&#x27;</span>, <span class="hljs-keyword">function</span> (<span class="hljs-params">req, res</span>) &#123;<br>    <span class="hljs-keyword">const</span> query = req.<span class="hljs-property">query</span><br>	<span class="hljs-comment">//调用res.send（）方法，把数据响应给客户端</span><br>	res.<span class="hljs-title function_">send</span>(&#123;<br>		<span class="hljs-attr">status</span>: <span class="hljs-number">200</span>,			<span class="hljs-comment">// 状态</span><br>		<span class="hljs-attr">msg</span>:<span class="hljs-string">&#x27;GET请求成功&#x27;</span>, 		  <span class="hljs-comment">// 状态描述</span><br>		<span class="hljs-attr">data</span>: query		  		 <span class="hljs-comment">// 需要响应给客户端的具体数据</span><br>	&#125;)<br>&#125;)<br></code></pre></td></tr></table></figure>
+<p>除了查询参数，GET 请求还可以通过路径参数传递数据。路径参数是 URL
+的一部分，可以通过 <code>req.params</code>
+获取。例如，我们可以通过修改路径来获取用户名：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs js">app.<span class="hljs-title function_">get</span>(<span class="hljs-string">&#x27;/user/:name&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> &#123;<br>  <span class="hljs-keyword">const</span> name = req.<span class="hljs-property">params</span>.<span class="hljs-property">name</span>;<br>  res.<span class="hljs-title function_">send</span>(<span class="hljs-string">`Hello, <span class="hljs-subst">$&#123;name&#125;</span>`</span>);<br>&#125;);<br></code></pre></td></tr></table></figure>
+<h3><span id="post-请求">post 请求</span></h3>
+<p>POST 请求通常用于将数据提交给服务器。我们可以通过
+<code>app.post()</code> 方法监听 POST
+请求。以下是一个简单的示例，处理用户的注册信息。POST
+请求的数据通常存放在请求体中，而不是通过 URL 传递。为了解析 POST
+请求体中的数据，Express 需要借助 <code>express.json()</code> 和
+<code>express.urlencoded()</code> 中间件。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs js">router.<span class="hljs-title function_">post</span>(<span class="hljs-string">&#x27;/&#x27;</span>, <span class="hljs-keyword">function</span> (<span class="hljs-params">req, res</span>) &#123;<br>	<span class="hljs-comment">//获取到客户端通过查询字符串，发送到服务器的数据</span><br>	res.<span class="hljs-title function_">send</span>(&#123;<br>		<span class="hljs-attr">status</span>:<span class="hljs-number">0</span>,			<span class="hljs-comment">//状态，0表示成功，1表示失败</span><br>		<span class="hljs-attr">msg</span>:<span class="hljs-string">&#x27;POST请求成功&#x27;</span>, <span class="hljs-comment">//状态描述</span><br>		<span class="hljs-attr">data</span>: req.<span class="hljs-property">body</span>  <span class="hljs-comment">// 需要响应给客户端的具体数据</span><br>	&#125;)<br>&#125;)<br></code></pre></td></tr></table></figure>
+<p>我们用 postman 进行测试：</p>
+<p><img src="https://pic.imgdb.cn/item/66ec3b96f21886ccc01cd6a5.png"></p>
+<p>如果客户端提交的数据是表单格式的（即
+<code>application/x-www-form-urlencoded</code>），我们可以使用
+<code>express.urlencoded()</code> 中间件来解析请求体。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs js">app.<span class="hljs-title function_">use</span>(express.<span class="hljs-title function_">urlencoded</span>(&#123; <span class="hljs-attr">extended</span>: <span class="hljs-literal">true</span> &#125;));<br><br>router.<span class="hljs-title function_">post</span>(<span class="hljs-string">&#x27;/&#x27;</span>, <span class="hljs-keyword">function</span> (<span class="hljs-params">req, res</span>) &#123;<br>	<span class="hljs-comment">//获取到客户端通过查询字符串，发送到服务器的数据</span><br>	res.<span class="hljs-title function_">send</span>(&#123;<br>		<span class="hljs-attr">status</span>:<span class="hljs-number">0</span>,			<span class="hljs-comment">//状态，0表示成功，1表示失败</span><br>		<span class="hljs-attr">msg</span>:<span class="hljs-string">&#x27;POST请求成功&#x27;</span>, <span class="hljs-comment">//状态描述</span><br>		<span class="hljs-attr">data</span>: req.<span class="hljs-property">body</span>  <span class="hljs-comment">// 需要响应给客户端的具体数据</span><br>	&#125;)<br>&#125;)<br></code></pre></td></tr></table></figure>
+<h2><span id="express中间件">express中间件</span></h2>
+<p>Express
+中的中间件是请求处理流水线的一部分，它们在请求到达路由之前，或者在响应发送给客户端之前执行。中间件可以对请求进行处理、修改，或者终止请求。常见的中间件用途包括：</p>
+<ul>
+<li>解析请求体</li>
+<li>设置 CORS 头</li>
+<li>处理身份验证和授权</li>
+</ul>
+<p>中间件可以全局应用于所有请求，或者仅针对特定路由应用，也可以将中间件限定在特定路由中使用。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// 全局使用</span><br>app.<span class="hljs-title function_">use</span>(express.<span class="hljs-title function_">json</span>());<br><br><span class="hljs-comment">// 特定路由</span><br>app.<span class="hljs-title function_">post</span>(<span class="hljs-string">&#x27;/register&#x27;</span>, express.<span class="hljs-title function_">json</span>(), <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> &#123;<br>  <span class="hljs-keyword">const</span> &#123; username, password &#125; = req.<span class="hljs-property">body</span>;<br>  res.<span class="hljs-title function_">send</span>(<span class="hljs-string">`User <span class="hljs-subst">$&#123;username&#125;</span> registered with password <span class="hljs-subst">$&#123;password&#125;</span>`</span>);<br>&#125;);<br></code></pre></td></tr></table></figure>
+<h1><span id="vue">Vue</span></h1>
+<p>我们使用 Axios 进行发送请求和处理响应。它是基于 Promise
+的，可以更方便地处理异步操作。</p>
+<blockquote>
+<p>参考：</p>
+<p><a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/1974131">《Node.js+Express+Vue项目实战》–
+1.安装和使用Express（笔记）-腾讯云开发者社区-腾讯云
+(tencent.com)</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/lph159/article/details/142359029">【Node.js】Express—监听
+GET 和 POST 请求及处理参数详解-CSDN博客</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/lph159/article/details/140549379">【Vue】深入了解
+Axios 在 Vue
+中的使用：从基本操作到高级用法的全面指南_vue如何使用axios详解-CSDN博客</a></p>
+</blockquote>
+
+	</article>
+
+	 
+    <div class="kira-post-copyright">
+        <strong>Author：</strong>破酥 | C4iN<br>
+        <strong>Link：</strong><a href="https://c4in1.github.io/2024/09/19/vue/express-vue%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB/" title="https:&#x2F;&#x2F;c4in1.github.io&#x2F;2024&#x2F;09&#x2F;19&#x2F;vue&#x2F;express-vue前后端分离&#x2F;" target="_blank" rel="noopener">https:&#x2F;&#x2F;c4in1.github.io&#x2F;2024&#x2F;09&#x2F;19&#x2F;vue&#x2F;express-vue前后端分离&#x2F;</a><br>
+        
+            <strong>版权声明：</strong>本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/deed.zh" target="_blank">CC BY-NC-SA 3.0 CN</a> 协议进行许可
+        
+    </div>
+
+  
+	<div class="kira-post-nav">
+		<nav class="post-nav">
+			              
+			<!-- 先找到与当前文字相同的目录 -->
+			      
+			<!-- 在找到当前文章所在的 index -->
+			    
+			<!-- 上一篇文章 -->
+			<div class="old">
+				<span>上一章</span>
+				<a href="/2024/08/02/vue/Vue3%E4%B8%AD%E7%9A%84DOM%E9%97%AE%E9%A2%98/"> Vue3中的响应式丢失问题</a>
+			</div>
+			                          
+		</nav>
+	</div>
+	
+	<div class="kira-post-meta kira-rainbow">
+		
+			<a class="kirafont icon-container-fill -link" href="/categories/Vue/">Vue</a>
+		
+		
+			<a class="kirafont icon-tag-fill -none-link" href="/tags/express/" rel="tag">express</a> <a class="kirafont icon-tag-fill -none-link" href="/tags/vue3/" rel="tag">vue3</a> <a class="kirafont icon-tag-fill -none-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a>
+		
+	</div>
+	
+	<div class="kira-post-footer">
+		
+
+		
+	<div class="giscus"></div>
+  
+    <script src="https://giscus.app/client.js"
+      data-repo="C4in1/BlogGitTalk"
+      data-repo-id="R_kgDOMgx61Q"
+      data-category="General"
+      data-category-id="DIC_kwDOMgx61c4Chec4"
+      data-mapping="pathname"
+      data-strict="0"
+      data-reactions-enabled="1"
+      data-emit-metadata="0"
+      data-input-position="top"
+      data-theme="light"
+      data-lang="en"
+      data-loading="lazy"
+      crossorigin="anonymous"
+      async  
+    ></script>
+  
+
+	</div>
+	
+</div>
+
+				</div>
+			</div>
+			<div class="kira-right-column">
+	<a onclick="document.querySelector('#kira-top-header').scrollIntoView({behavior: 'smooth'});" class="kira-backtotop" aria-label="回到顶部" title="回到顶部">
+		<button class="mdui-fab mdui-ripple">
+			<i class="kirafont icon-caret-up"></i>
+		</button>
+	</a>
+</div>
+
+		</div>
+	</body>
+</html>
